@@ -4,7 +4,7 @@ require 'acts_as_favoritor/version'
 
 Gem::Specification.new do |s|
     s.name        = 'acts_as_favoritor'
-    s.version     = ActsAsFollower::VERSION
+    s.version     = ActsAsFavoritor::VERSION
     s.authors     = ['Jonas Hübotter']
     s.email       = ['developer@slooob.com']
     s.homepage    = 'https://github.com/slooob/acts_as_favoritor'
@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
 
     s.add_dependency 'activerecord', '>= 4.0'
 
-    s.add_development_dependency 'sqlite3'
-    s.add_development_dependency 'shoulda_create'
-    s.add_development_dependency 'shoulda', '>= 3.5.0'
-    s.add_development_dependency 'factory_girl', '>= 4.2.0'
+    s.add_development_dependency 'sqlite3', '~> 1'
+    s.add_development_dependency 'shoulda_create', '~> 0'
+    s.add_development_dependency 'shoulda', '~> 3'
+    s.add_development_dependency 'factory_girl', '~> 4'
     s.add_development_dependency 'rails', '>= 4.0'
 end
