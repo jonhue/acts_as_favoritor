@@ -11,7 +11,12 @@
 * [Installation](#installation)
 * [Usage](#usage)
     * [Setup](#setup)
-    * [`acts_as_favoritor` methods](#)
+    * [`acts_as_favoritor` methods](#acts_as_favoritor-methods)
+    * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
+    * [`Favorite` model](#favorite-model)
+* [To Do List](#to-do-list)
+* [Contributors](#contributors)
+* [License](#license)
 
 ---
 

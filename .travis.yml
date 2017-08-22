@@ -1,4 +1,3 @@
 language: ruby
 rvm:
     - 2.3.3
-install: bundle install --without development --deployment --jobs=3 --retry=3
