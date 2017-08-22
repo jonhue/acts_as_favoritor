@@ -207,14 +207,16 @@ user.remove_favorite book, scope: [:watching]
 book.block user, scope: [:all] # applies to all scopes
 ```
 
-That's simple. When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys.
+That's simple!
+
+When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys:
 
 ```ruby
 user.favorited? book, scope: [:favorites, :watching] # => { favorites: true, watching: false }
 user.favorited? book, scope: [:all] # => true
 ```
 
-Scopes give you also some handy scopes for you to call on the `Favorite` model:
+`acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
 
 ```ruby
 # Returns all `Favorite` records where `scope` is `my_scope`
