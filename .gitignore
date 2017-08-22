@@ -4,5 +4,4 @@ rdoc
 memory
 *.gem
 .rvmrc
-Gemfile.lock
 log

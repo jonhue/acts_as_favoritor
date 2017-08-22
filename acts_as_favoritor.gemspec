@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
     s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
     s.require_paths = ['lib']
 
+    gem.required_ruby_version = '>= 2.0'
+
     s.add_dependency 'activerecord', '>= 4.0'
 
     s.add_development_dependency 'sqlite3', '~> 1'

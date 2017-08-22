@@ -1,4 +1,4 @@
-# acts_as_favoitor - Add Favorites to you Rails app
+# acts_as_favoritor - Add Favorites to you Rails app
 
 <img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" />
 
