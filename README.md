@@ -2,7 +2,7 @@
 
 <img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" />
 
-`acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to favorite any other model. This is accomplished through a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
+`acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes. That way you are able to differentiate followers, favorites, watchers and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
 
 ---
 
@@ -14,7 +14,7 @@
     * [`acts_as_favoritor` methods](#acts_as_favoritor-methods)
     * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
     * [`Favorite` model](#favorite-model)
-* [To Do List](#to-do-list)
+    * [Scopes](#scopes)
 * [Contributors](#contributors)
 * [License](#license)
 
@@ -94,13 +94,13 @@ user.favorited? book
 # Total number of favorites by `user`.
 user.favorite_count
 
-# Returnes `user`'s favorites that have not been blocked as an array of Favorite records.
+# Returnes `user`'s favorites that have not been blocked as an array of `Favorite` records.
 user.all_favorites
 
 # Returns all favorited objects of `user` as an array (unblocked). This can be a collection of different object types, eg: `User`, `Book`.
 user.all_favorited
 
-# Returns an array of Favorite records where the `favoritable_type` is `Book`.
+# Returns an array of `Favorite` records where the `favoritable_type` is `Book`.
 user.favorites_by_type 'Book'
 
 # Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, eg: `User`, `Book`.
@@ -173,14 +173,14 @@ These methods take an optional hash parameter of ActiveRecord options (`:limit`,
 
 ```ruby
 # Scopes
-## Returns all Favorite records where `blocked` is `false`.
+## Returns all `Favorite` records where `blocked` is `false`.
 Favorite.unblocked
-## Returns all Favorite records where `blocked` is `true`.
+## Returns all `Favorite` records where `blocked` is `true`.
 Favorite.blocked
-## Returns an ordered array of the latest create Favorite records.
+## Returns an ordered array of the latest create `Favorite` records.
 Favorite.descending
 
-# Returns all Favorite records in an array, which have been created in a specified timeframe. Default is 2 weeks.
+# Returns all `Favorite` records in an array, which have been created in a specified timeframe. Default is 2 weeks.
 Favorite.recent
 Favorite.recent 1.month.ago
 
@@ -191,11 +191,43 @@ Favorite.for_favoritor user
 Favorite.for_favoritable book
 ```
 
----
+### Scopes
 
-## To Do List
+Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorites'`), but he only receives notifications for those, he is watching (`'watching'`). Just like YouTube does it.
 
-* Allow Favorites to be scoped, supporting multiple sets of favorites between models.
+By default all of your favorites are scoped to `'favorites'`.
+
+You can create new scopes on the fly. Every single method takes `scope` as an optional parameter which requires an array containing your scopes as strings.
+
+So lets see how this works:
+
+```ruby
+user.favorite book, scope: [:favorites, :watching]
+user.remove_favorite book, scope: [:watching]
+book.block user, scope: [:all] # applies to all scopes
+```
+
+That's simple. When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys.
+
+```ruby
+user.favorited? book, scope: [:favorites, :watching] # => { favorites: true, watching: false }
+user.favorited? book, scope: [:all] # => true
+```
+
+Scopes give you also some handy scopes for you to call on the `Favorite` model:
+
+```ruby
+# Returns all `Favorite` records where `scope` is `my_scope`
+Favorite.send(my_scope + '_list')
+
+## Examples
+### Returns all `Favorite` records where `scope` is `favorites`
+Favorite.favorites_list
+### Returns all `Favorite` records where `scope` is `watching`
+Favorite.watching_list
+### Very unnecessary, but `all_list` returns literally all `Favorite` records
+Favorite.all_list
+```
 
 ---
 

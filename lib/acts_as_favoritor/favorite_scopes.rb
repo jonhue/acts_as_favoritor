@@ -1,6 +1,12 @@
 module ActsAsFavoritor #:nodoc:
     module FavoriteScopes
 
+        # <SCOPE>_list - returns favorite records of scope
+        Favorite.group_by(&:scope).each do |s|
+            scope s + '_list', where(scope: s)
+        end
+        scope :all_list, all
+
         # returns favorite records where favoritor is the record passed in.
         def for_favoritor favoritor
             where favoritor_id: favoritor.id, favoritor_type: parent_class_name(favoritor)

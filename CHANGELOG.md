@@ -2,6 +2,11 @@
 
 * nothing yet
 
+### 1.1.0 - 2017-08-22
+
+* features
+    * Allowing Favorites to be scoped, supporting multiple sets of favorites between models.
+
 ### 1.0.2 - 2017-08-22
 
 * minor improvements

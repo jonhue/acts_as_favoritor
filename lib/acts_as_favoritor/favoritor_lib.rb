@@ -39,5 +39,15 @@ module ActsAsFavoritor
             ActsAsFavoritor.custom_parent_classes + DEFAULT_PARENTS
         end
 
+        def validate_scopes method_name, options = {}
+            if options[:scope].size > 1
+                result = method multiple_scopes: true, options
+            else
+                options[:scope] = options[:scope][0]
+                result = method multiple_scopes: false, options
+            end
+            return result
+        end
+
     end
 end

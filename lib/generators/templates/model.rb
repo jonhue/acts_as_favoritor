@@ -3,8 +3,6 @@ class Favorite < ActiveRecord::Base
     extend ActsAsFavoritor::FavoritorLib
     extend ActsAsFavoritor::FavoriteScopes
 
-    serialize :scopes
-
     # NOTE: Favorites belong to the 'favoritable' and 'favoritor' interface
     belongs_to :favoritable, polymorphic: true
     belongs_to :favoritor, polymorphic: true
