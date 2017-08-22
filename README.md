@@ -40,14 +40,6 @@ This will create a Favorite model as well as a migration file.
 
 ## Usage
 
-### Helpers
-
-### SplitView
-
-## Guides
-
-## Components
-
 ---
 
 ## Contributors
