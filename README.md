@@ -30,7 +30,7 @@ gem 'amphtml', github: 'slooob/acts_as_favoritor'
 
 Now run the generator:
 
-    $ rails g acts_as_follower
+    $ rails g acts_as_favoritor
 
     $ rails db:migrate
 
