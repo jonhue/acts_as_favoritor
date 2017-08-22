@@ -1,6 +1,6 @@
 # acts_as_favoitor - Add Favorites to you Rails app
 
-<img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" /> [![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor) [![Code Climate](https://codeclimate.com/github/jonhue/acts_as_favoritor/badges/gpa.svg)](https://codeclimate.com/github/jonhue/acts_as_favoritor)
+<img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" />
 
 acts_as_favoritor is a Rubygem to allow any ActiveRecord model to favorite any other model. This is accomplished through a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
 
