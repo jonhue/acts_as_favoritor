@@ -1,5 +1,5 @@
-module ActsAsFollower
-    module FollowerLib
+module ActsAsFavoritor
+    module FavoritorLib
 
         private
 

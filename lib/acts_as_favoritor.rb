@@ -30,6 +30,6 @@ module ActsAsFavoritor
 
     setup
 
-    require 'favoritor/railtie' if defined?(Rails) && Rails::VERSION::MAJOR >= 3
-    
+    require 'acts_as_favoritor/railtie' if defined?(Rails)
+
 end

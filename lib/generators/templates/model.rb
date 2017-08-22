@@ -3,9 +3,9 @@ class Favorite < ActiveRecord::Base
     extend ActsAsFavoritor::FavoritorLib
     extend ActsAsFavoritor::FavoriteScopes
 
-    serialize :types
+    serialize :lists
 
-    # NOTE: Follows belong to the 'favoritable' and 'favoritor' interface
+    # NOTE: Favorites belong to the 'favoritable' and 'favoritor' interface
     belongs_to :favoritable, polymorphic: true
     belongs_to :favoritor, polymorphic: true
 

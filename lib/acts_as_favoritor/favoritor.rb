@@ -1,5 +1,5 @@
 module ActsAsFavoritor #:nodoc:
-    module Follower
+    module Favoritor
 
         def self.included base
             base.extend ClassMethods
@@ -15,12 +15,12 @@ module ActsAsFavoritor #:nodoc:
 
         module InstanceMethods
 
-            # Returns true if this instance is following the object passed as an argument.
+            # Returns true if this instance has favorited the object passed as an argument.
             def favorited? favoritable
                 0 < Favorite.unblocked.for_favoritor(self).for_favoritable(favoritable).count
             end
 
-            # Returns the number of objects this instance is following.
+            # Returns the number of objects this instance has favorited.
             def favorites_count
                 Favorite.unblocked.for_favoritor(self).count
             end
@@ -36,7 +36,7 @@ module ActsAsFavoritor #:nodoc:
 
             # Deletes the favorite record if it exists.
             def remove_favorite favoritable
-                if favorite = get_Favoritor favoritable
+                if favorite = get_Favoritor(favoritable)
                     favorite.destroy
                 end
             end
@@ -47,7 +47,7 @@ module ActsAsFavoritor #:nodoc:
             end
 
             # Returns the favorite records related to this instance by type.
-            def favorites_by_type favoritable_type, options={}
+            def favorites_by_type favoritable_type, options = {}
                 favorites_scope  = favorites_scoped.for_favoritable_type favoritable_type
                 favorites_scope = apply_options_to_scope favorites_scope, options
             end
@@ -60,7 +60,7 @@ module ActsAsFavoritor #:nodoc:
 
             # Returns the actual records which this instance has favorited.
             def all_favorited options = {}
-            all_favorites(options).collect{ |f| f.favoritable }
+                all_favorites(options).collect{ |f| f.favoritable }
             end
 
             # Returns the actual records of a particular type which this record has fovarited.
@@ -68,9 +68,9 @@ module ActsAsFavoritor #:nodoc:
                 favoritables = favoritable_type.constantize.
                 joins(:favorited).
                 where('favorites.blocked': false,
-                'favorites.favoritor_id': self.id,
-                'favorites.favoritor_type': parent_class_name(self),
-                'favorites.favoritable_type': favoritable_type)
+                    'favorites.favoritor_id': self.id,
+                    'favorites.favoritor_type': parent_class_name(self),
+                    'favorites.favoritable_type': favoritable_type)
                 if options.has_key? :limit
                     favoritables = favoritables.limit options[:limit]
                 end

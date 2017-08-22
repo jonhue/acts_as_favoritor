@@ -1,7 +1,7 @@
 require 'rails/generators'
 require 'rails/generators/migration'
 
-class ActsAsFollowerGenerator < Rails::Generators::Base
+class ActsAsFavoritorGenerator < Rails::Generators::Base
 
     include Rails::Generators::Migration
 
@@ -22,7 +22,7 @@ class ActsAsFollowerGenerator < Rails::Generators::Base
     end
 
     def create_model
-        template 'model.rb', 'app/models/follow.rb'
+        template 'model.rb', 'app/models/favorite.rb'
     end
 
 end

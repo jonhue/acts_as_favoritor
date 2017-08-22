@@ -121,11 +121,11 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_favoritor!
-  factory_girl (~> 4)
+  factory_girl (~> 4.8)
   rails (>= 4.0)
-  shoulda (~> 3)
-  shoulda_create (~> 0)
-  sqlite3 (~> 1)
+  shoulda (~> 3.5)
+  shoulda_create (~> 0.0)
+  sqlite3 (~> 1.3)
 
 BUNDLED WITH
    1.15.4

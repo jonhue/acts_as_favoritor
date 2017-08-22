@@ -25,9 +25,9 @@ module ActsAsFavoritor #:nodoc:
                 favorites = favoritor_type.constantize.
                 joins(:favorites).
                 where('favorites.blocked': false,
-                'favorites.followable_id': self.id,
-                'favorites.followable_type': parent_class_name(self),
-                'favorites.follower_type': favoritor_type)
+                'favorites.favoritable_id': self.id,
+                'favorites.favoritable_type': parent_class_name(self),
+                'favorites.favoritor_type': favoritor_type)
                 if options.has_key? :limit
                     favorites = favorites.limit options[:limit]
                 end
