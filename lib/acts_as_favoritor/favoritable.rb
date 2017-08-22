@@ -92,7 +92,7 @@ module ActsAsFavoritor #:nodoc:
             end
 
             def unblock favoritor
-                get_favorite_for(favoritor).try(:delete)
+                get_favorite_for(favoritor).update_attribute :blocked, false
             end
 
             def get_favorite_for favoritor

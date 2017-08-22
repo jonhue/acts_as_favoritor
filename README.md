@@ -1,14 +1,23 @@
-# acts_as_favoritor - Add Favorites to you Rails app
+# `acts_as_favoritor` - Add Favorites to you Rails app
 
 <img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" />
 
-acts_as_favoritor is a Rubygem to allow any ActiveRecord model to favorite any other model. This is accomplished through a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
+`acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to favorite any other model. This is accomplished through a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
+
+---
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+    * [Setup](#setup)
+    * [`acts_as_favoritor` methods](#)
 
 ---
 
 ## Installation
 
-acts_as_favoritor works with Rails 4.0 onwards. You can add it to your `Gemfile` with:
+`acts_as_favoritor` works with Rails 4.0 onwards. You can add it to your `Gemfile` with:
 
 ```ruby
 gem 'acts_as_favoritor'
@@ -39,6 +48,149 @@ This will create a Favorite model as well as a migration file.
 **Note:** Use `rake db:migrate` instead if you run Rails < 5.
 
 ## Usage
+
+### Setup
+
+Add `acts_as_favoritable` to the models you want to be able to get favorited:
+
+```ruby
+class User < ActiveRecord::Base
+    acts_as_favoritable
+end
+
+class Book < ActiveRecord::Base
+    acts_as_favoritable
+end
+```
+
+Specify which models can favorite other models by adding `acts_as_favoritor`:
+
+```ruby
+class User < ActiveRecord::Base
+    acts_as_favoritor
+end
+```
+
+### `acts_as_favoritor` methods
+
+```ruby
+book = Book.find 1
+user = User.find 1
+
+# `user` favorites `book`.
+user.favorite book
+
+# `user` removes `book` from favorites.
+user.remove_favorite book
+
+# Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
+user.favorited? book
+
+# Total number of favorites by `user`.
+user.favorite_count
+
+# Returnes `user`'s favorites that have not been blocked as an array of Favorite records.
+user.all_favorites
+
+# Returns all favorited objects of `user` as an array (unblocked). This can be a collection of different object types, eg: `User`, `Book`.
+user.all_favorited
+
+# Returns an array of Favorite records where the `favoritable_type` is `Book`.
+user.favorites_by_type 'Book'
+
+# Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, eg: `User`, `Book`.
+user.favorited_by_type 'Book'
+
+# Returns the exact same result as `user.favorited_by_type 'User'`.
+user.favorited_users
+
+# Total number of favorited books by `user`.
+user.favorited_by_type_count 'Book'
+
+# Returns the exact same result as `user.favorited_by_type_count 'Book'`.
+user.favorited_books_count
+
+# Returns the Arel scope for favorites.
+# This does not return the actual favorites, just the scope of favorited including the favoritables, essentially: `book.favorites.unblocked.includes(:favoritable)`.
+book.favorites_scoped
+```
+
+These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
+
+    favorites_by_type, all_favorites, all_favorited, favorited_by_type
+
+### `acts_as_favoritable` methods
+
+```ruby
+# Returns all favoritors of a model that `acts_as_favoritable`
+book.favoritors
+
+# Returns the Arel scope for favoritors. This does not return the actual favoritors, just the scope of favorited records including the favoritors, essentially:  `book.favorited.includes(:favoritors)`.
+book.favoritors_scoped
+
+# Total number of favoritors.
+book.favoritors_count
+
+# Returns an array of records with type `User` following `book`.
+book.favoritors_by_type 'User'
+
+# Returns the exact same as `book.favoritors_by_type 'User'`.
+book.user_favoritors
+
+# Total number of favoritors with type `User`.
+book.favoritors_by_type_count 'User'
+
+# Returns the exact same as `book.favoritors_by_type_count 'User'`.
+book.count_user_favoritors
+
+To see is a model that acts_as_followable is followed by a model that acts_as_follower use the following
+# Whether `book` has been favorited by `user`. Returns `true` or `false`.
+book.favorited_by? user
+
+# Block a favoritor
+book.block user
+
+# Unblock a favoritor
+book.unblock user
+
+# Returns an array including all blocked Favoritor records.
+book.blocks
+
+# Total number of `book`'s favoritors blocked.
+book.blocked_favoritors_count
+```
+
+These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
+
+    favoritors_by_type, favoritors, blocks
+
+### `Favorite` model
+
+```ruby
+# Scopes
+## Returns all Favorite records where `blocked` is `false`.
+Favorite.unblocked
+## Returns all Favorite records where `blocked` is `true`.
+Favorite.blocked
+## Returns an ordered array of the latest create Favorite records.
+Favorite.descending
+
+# Returns all Favorite records in an array, which have been created in a specified timeframe. Default is 2 weeks.
+Favorite.recent
+Favorite.recent 1.month.ago
+
+# Returns all favorites of `user`, including those who were blocked.
+Favorite.for_favoritor user
+
+# Returns all favoritors of `book`, including those who were blocked.
+Favorite.for_favoritable book
+```
+
+---
+
+## To Do List
+
+* Allow Favorites to be scoped, supporting multiple sets of favorites between models.
 
 ---
 
