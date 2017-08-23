@@ -4,7 +4,7 @@
 
 `acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
 
-You are able to differentiate followers, favorites, watchers and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
+You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.
 
 ---
 
@@ -132,8 +132,23 @@ user.favorited_books_count
 # This does not return the actual favorites, just the scope of favorited including the favoritables, essentially: `book.favorites.unblocked.includes(:favoritable)`.
 book.favorites_scoped
 
-# Whether `user` has been blocked by `book` as favoritor. Returns `true` or `false`.
-user.blocked_by? book
+# Block a favoritable
+user.block book
+
+# Unblock a favoritable
+user.unblock book
+
+# Whether `user` has blocked `book`. Returns `true` or `false`.
+user.blocked? book
+
+# Returns an array including all blocked Favoritable records.
+user.blocks
+
+# Total number of `user`'s favorites blocked.
+user.blocked_favoritables_count
+
+# Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
+user.favoritable_type book
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -181,6 +196,9 @@ book.blocks
 
 # Total number of `book`'s favoritors blocked.
 book.blocked_favoritors_count
+
+# Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
+book.favoritor_type user
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -211,7 +229,7 @@ Favorite.for_favoritable book
 
 ### Scopes
 
-Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorite'`), but he only receives notifications for those, he is watching (`'watch'`). Just like YouTube or GitHub do it.
+Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorite'`), but he only receives notifications for those, he is watching (`'watch'`). Just like YouTube or GitHub do it. Options are endless. You could also integrate a voting / star system similar to YouTube or GitHub
 
 By default all of your favorites are scoped to `'favorite'`.
 

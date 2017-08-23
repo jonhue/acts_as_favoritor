@@ -200,6 +200,36 @@ module ActsAsFavoritor #:nodoc:
                 end
             end
 
+            # Returns true if this instance has been favorited by the object passed as an argument.
+            # Returns nil if this instance has not been favorited by the object passed as an argument.
+            # Returns false if this instance has blocked the object passed as an argument.
+            def favoritor_type favoritor, options = {}
+                if options.has_key?(:multiple_scopes) == false
+                    options[:parameter] = favoritor
+                    validate_scopes __method__, options
+                elsif options[:multiple_scopes]
+                    results = {}
+                    options[:scope].each do |scope|
+                        if favorited.unblocked.send(scope + '_list').for_favoritor(favoritor).first.present?
+                            results[scope] = true
+                        elsif favorited.blocked.send(scope + '_list').for_favoritor(favoritor).first.present?
+                            results[scope] = false
+                        else
+                            results[scope] = nil
+                        end
+                    end
+                    return results
+                else
+                    if favorited.unblocked.send(options[:scope] + '_list').for_favoritor(favoritor).first.present?
+                        return true
+                    elsif favorited.blocked.send(options[:scope] + '_list').for_favoritor(favoritor).first.present?
+                        return false
+                    else
+                        return nil
+                    end
+                end
+            end
+
             def block favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor

@@ -37,7 +37,7 @@ module ActsAsFavoritor
         end
 
         def validate_scopes method, options = {}
-            options[:scope] = options[:scope] || ActsAsFavoritor.default_scope
+            options[:scope] = options[:scope] || [ActsAsFavoritor.default_scope]
             if options[:scope].size > 1
                 options[:multiple_scopes] = false # ?
             else
