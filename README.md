@@ -198,16 +198,16 @@ Favorite.for_favoritable book
 
 ### Scopes
 
-Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorites'`), but he only receives notifications for those, he is watching (`'watching'`). Just like YouTube does it.
+Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorite'`), but he only receives notifications for those, he is watching (`'watch'`). Just like YouTube does it.
 
-By default all of your favorites are scoped to `'favorites'`.
+By default all of your favorites are scoped to `'favorite'`.
 
 You can create new scopes on the fly. Every single method takes `scope` as an option which expexts an array containing your scopes as strings.
 
 So lets see how this works:
 
 ```ruby
-user.favorite book, scope: [:favorites, :watching]
+user.favorite book, scope: [:favorite, :watching]
 user.remove_favorite book, scope: [:watching]
 book.block user, scope: [:all] # applies to all scopes
 ```
@@ -217,7 +217,7 @@ That's simple!
 When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys:
 
 ```ruby
-user.favorited? book, scope: [:favorites, :watching] # => { favorites: true, watching: false }
+user.favorited? book, scope: [:favorite, :watching] # => { favorite: true, watching: false }
 user.favorited? book, scope: [:all] # => true
 ```
 

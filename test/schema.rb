@@ -5,7 +5,7 @@ ActiveRecord::Schema.define version: 0 do
         t.string   'favoritable_type', null: false
         t.integer  'favoritor_id', null: false
         t.string   'favoritor_type', null: false
-        t.string :scope, default: 'favorites', null: false
+        t.string :scope, default: 'favorite', null: false
         t.boolean  'blocked', default: false, null: false
         t.datetime 'created_at'
         t.datetime 'updated_at'
