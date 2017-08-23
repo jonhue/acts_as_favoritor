@@ -25,4 +25,8 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
         template 'model.rb', 'app/models/favorite.rb'
     end
 
+    def show_readme
+        readme 'README.md'
+    end
+
 end

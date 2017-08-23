@@ -233,7 +233,41 @@ Favorite.all_list
 
 ---
 
-## Contributors
+## Testing
+
+Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being used instead of fixtures. Tests are run using rake.
+
+1. Fork this repository
+2. Clone your forked git locally
+3. Install dependencies
+
+    $ bundle install
+
+4. Run tests
+
+    $ rake test
+
+### Coverage
+
+Test coverage can be calculated using Rcov. Make sure you have the [rcov gem](https://github.com/relevance/rcov) installed.
+
+In the acts_as_favoritor directory:
+
+```ruby
+# Add coverage to test/coverage directory.
+rake rcov:gen DB=sqlite3 # sqlite
+
+# Delete coverage directory.
+rake rcov:clobber
+```
+
+---
+
+## Contributing
+
+[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/tree/master/CONTRIBUTING.md)
+
+### Contributors
 
 Give the people some :heart: who are working on this project. Check them all at:
 
