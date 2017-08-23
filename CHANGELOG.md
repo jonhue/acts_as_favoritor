@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.1.2 - 2017-08-23
+
+* bugfixes
+    * migration hotfix
+
 ### 1.1.1 - 2017-08-23
 
 * notes
