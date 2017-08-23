@@ -2,7 +2,7 @@ module ActsAsFavoritor #:nodoc:
     module FavoriteScopes
 
         # send(scope + '_list') - returns favorite records of scope
-        Favorite.group(:scope).each do |s|
+        Favorite.all.group_by(&:scope).each do |s|
             Favorite.send(:define_method, "#{s}_list") do
                 where scope: s
             end
