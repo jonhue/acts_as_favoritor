@@ -166,6 +166,23 @@ module ActsAsFavoritor #:nodoc:
                 end
             end
 
+            # Returns true if the current instance has blocked the passed record
+            # Returns false if the current instance has not blocked the passed record
+            def blocked? favoritor, options = {}
+                if options.has_key?(:multiple_scopes) == false
+                    options[:parameter] = favoritor
+                    validate_scopes __method__, options
+                elsif options[:multiple_scopes]
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.blocked.send(scope + '_list').for_favoritor(favoritor).first.present?
+                    end
+                    return results
+                else
+                    return favorited.blocked.send(options[:scope] + '_list').for_favoritor(favoritor).first.present?
+                end
+            end
+
             # Returns true if the current instance is favorited by the passed record
             # Returns false if the current instance is blocked by the passed record or no favorite is found
             def favorited_by? favoritor, options = {}

@@ -131,6 +131,9 @@ user.favorited_books_count
 # Returns the Arel scope for favorites.
 # This does not return the actual favorites, just the scope of favorited including the favoritables, essentially: `book.favorites.unblocked.includes(:favoritable)`.
 book.favorites_scoped
+
+# Whether `user` has been blocked by `book` as favoritor. Returns `true` or `false`.
+user.blocked_by? book
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -161,7 +164,6 @@ book.favoritors_by_type_count 'User'
 # Returns the exact same as `book.favoritors_by_type_count 'User'`.
 book.count_user_favoritors
 
-To see is a model that acts_as_followable is followed by a model that acts_as_follower use the following
 # Whether `book` has been favorited by `user`. Returns `true` or `false`.
 book.favorited_by? user
 
@@ -170,6 +172,9 @@ book.block user
 
 # Unblock a favoritor
 book.unblock user
+
+# Whether `book` has blocked `user` as favoritor. Returns `true` or `false`.
+book.blocked? user
 
 # Returns an array including all blocked Favoritor records.
 book.blocks
@@ -206,7 +211,7 @@ Favorite.for_favoritable book
 
 ### Scopes
 
-Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorite'`), but he only receives notifications for those, he is watching (`'watch'`). Just like YouTube does it.
+Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [...] between any of your models. This way you can separate distinct functionalities in your app between user states. For example: A user sees all his favorited books in a dashboard (`'favorite'`), but he only receives notifications for those, he is watching (`'watch'`). Just like YouTube or GitHub do it.
 
 By default all of your favorites are scoped to `'favorite'`.
 

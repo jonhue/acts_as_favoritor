@@ -31,6 +31,22 @@ module ActsAsFavoritor #:nodoc:
                 end
             end
 
+            # Returns true if this instance has been blocked as favoritor of the object passed as an argument.
+            def blocked_by? favoritable, options = {}
+                if options.has_key?(:multiple_scopes) == false
+                    options[:parameter] = favoritable
+                    validate_scopes __method__, options
+                elsif options[:multiple_scopes]
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = 0 < Favorite.blocked.send(scope + '_list').for_favoritor(self).for_favoritable(favoritable).count
+                    end
+                    return results
+                else
+                    return 0 < Favorite.blocked.send(options[:scope] + '_list').for_favoritor(self).for_favoritable(favoritable).count
+                end
+            end
+
             # Returns the number of objects this instance has favorited.
             def favorites_count options = {}
                 if options.has_key?(:multiple_scopes) == false
@@ -141,7 +157,17 @@ module ActsAsFavoritor #:nodoc:
 
             # Returns the actual records which this instance has favorited.
             def all_favorited options = {}
-                return all_favorites(options).collect{ |f| f.favoritable }
+                if options.has_key?(:multiple_scopes) == false
+                    validate_scopes __method__, options
+                elsif options[:multiple_scopes]
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = all_favorites(options).collect{ |f| f.favoritable }
+                    end
+                    return results
+                else
+                    return all_favorites(options).collect{ |f| f.favoritable }
+                end
             end
 
             # Returns the actual records of a particular type which this record has fovarited.
