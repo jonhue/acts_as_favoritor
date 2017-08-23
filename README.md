@@ -109,13 +109,13 @@ user.favorites_count
 # Returnes `user`'s favorites that have not been blocked as an array of `Favorite` records.
 user.all_favorites
 
-# Returns all favorited objects of `user` as an array (unblocked). This can be a collection of different object types, eg: `User`, `Book`.
+# Returns all favorited objects of `user` as an array (unblocked). This can be a collection of different object types, e.g.: `User`, `Book`.
 user.all_favorited
 
 # Returns an array of `Favorite` records where the `favoritable_type` is `Book`.
 user.favorites_by_type 'Book'
 
-# Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, eg: `User`, `Book`.
+# Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, e.g.: `User`, `Book`.
 user.favorited_by_type 'Book'
 
 # Returns the exact same result as `user.favorited_by_type 'User'`.
