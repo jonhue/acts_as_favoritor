@@ -23,15 +23,3 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
     rdoc.options << '--line-numbers' << '--inline-source'
     rdoc.rdoc_files.include('README.rdoc', 'lib/**/*.rb')
 end
-
-namespace :rcov do
-    desc "Generate a coverage report in coverage/"
-    task :gen do
-        sh "rcov --output coverage test/*_test.rb --exclude 'gems/*'"
-    end
-
-    desc "Remove generated coverage files."
-    task :clobber do
-        sh "rm -rdf coverage"
-    end
-end

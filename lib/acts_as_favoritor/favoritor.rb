@@ -25,9 +25,9 @@ module ActsAsFavoritor #:nodoc:
                     options[:scope].each do |scope|
                         results[scope] = 0 < Favorite.unblocked.send(scope + '_list').for_favoritor(self).for_favoritable(favoritable).count
                     end
-                    results
+                    return results
                 else
-                    0 < Favorite.unblocked.send(options[:scope] + '_list').for_favoritor(self).for_favoritable(favoritable).count
+                    return 0 < Favorite.unblocked.send(options[:scope] + '_list').for_favoritor(self).for_favoritable(favoritable).count
                 end
             end
 
@@ -41,9 +41,9 @@ module ActsAsFavoritor #:nodoc:
                     options[:scope].each do |scope|
                         results[scope] = Favorite.unblocked.send(scope + '_list').for_favoritor(self).count
                     end
-                    results
+                    return results
                 else
-                    Favorite.unblocked.send(options[:scope] + '_list').for_favoritor(self).count
+                    return Favorite.unblocked.send(options[:scope] + '_list').for_favoritor(self).count
                 end
             end
 
@@ -61,11 +61,11 @@ module ActsAsFavoritor #:nodoc:
                             results[scope] = favorites.where(params).first_or_create!
                         end
                     end
-                    results
+                    return results
                 else
                     if self != favoritable && options[:scope] != 'all'
                         params = {favoritable_id: favoritable.id, favoritable_type: parent_class_name(favoritable), scope: options[:scope]}
-                        favorites.where(params).first_or_create!
+                        return favorites.where(params).first_or_create!
                     end
                 end
             end
@@ -82,10 +82,10 @@ module ActsAsFavoritor #:nodoc:
                             results[scope] = favorite.destroy
                         end
                     end
-                    results
+                    return results
                 else
                     if favorite = get_favorite(favoritable).send(options[:scope] + '_list')
-                        favorite.destroy
+                        return favorite.destroy
                     end
                 end
             end
@@ -99,9 +99,9 @@ module ActsAsFavoritor #:nodoc:
                     options[:scope].each do |scope|
                         results[scope] = favorites.unblocked.send(scope + '_list').includes :favoritable
                     end
-                    results
+                    return results
                 else
-                    favorites.unblocked.send(options[:scope] + '_list').includes :favoritable
+                    return favorites.unblocked.send(options[:scope] + '_list').includes :favoritable
                 end
             end
 
@@ -116,10 +116,10 @@ module ActsAsFavoritor #:nodoc:
                         favorites_scope = favorites_scoped(scope).for_favoritable_type favoritable_type
                         results[scope] = favorites_scope = apply_options_to_scope favorites_scope, options
                     end
-                    results
+                    return results
                 else
                     favorites_scope = favorites_scoped(options[:scope]).for_favoritable_type favoritable_type
-                    favorites_scope = apply_options_to_scope favorites_scope, options
+                    return favorites_scope = apply_options_to_scope(favorites_scope, options)
                 end
             end
 
@@ -133,16 +133,16 @@ module ActsAsFavoritor #:nodoc:
                         favorites_scope = favorites_scoped scope
                         results[scope] = favorites_scope = apply_options_to_scope favorites_scope, options
                     end
-                    results
+                    return results
                 else
                     favorites_scope = favorites_scoped options[:scope]
-                    favorites_scope = apply_options_to_scope favorites_scope, options
+                    return favorites_scope = apply_options_to_scope(favorites_scope, options)
                 end
             end
 
             # Returns the actual records which this instance has favorited.
             def all_favorited options = {}
-                all_favorites(options).collect{ |f| f.favoritable }
+                return all_favorites(options).collect{ |f| f.favoritable }
             end
 
             # Returns the actual records of a particular type which this record has fovarited.
@@ -166,7 +166,7 @@ module ActsAsFavoritor #:nodoc:
                         end
                         results[scope] = favoritables
                     end
-                    results
+                    return results
                 else
                     favoritables = favoritable_type.constantize.joins(:favorited).where('favorites.blocked': false,
                         'favorites.favoritor_id': id,
@@ -179,7 +179,7 @@ module ActsAsFavoritor #:nodoc:
                     if options.has_key? :includes
                         favoritables = favoritables.includes options[:includes]
                     end
-                    favoritables
+                    return favoritables
                 end
             end
 
@@ -192,9 +192,9 @@ module ActsAsFavoritor #:nodoc:
                     options[:scope].each do |scope|
                         results[scope] = favorites.unblocked.send(scope + '_list').for_favoritable_type(favoritable_type).count
                     end
-                    results
+                    return results
                 else
-                    favorites.unblocked.send(options[:scope] + '_list').for_favoritable_type(favoritable_type).count
+                    return favorites.unblocked.send(options[:scope] + '_list').for_favoritable_type(favoritable_type).count
                 end
             end
 
@@ -226,9 +226,9 @@ module ActsAsFavoritor #:nodoc:
                     options[:scope].each do |scope|
                         results[scope] = favorites.unblocked.send(scope + '_list').for_favoritable(favoritable).first
                     end
-                    results
+                    return results
                 else
-                    favorites.unblocked.send(options[:scope] + '_list').for_favoritable(favoritable).first
+                    return favorites.unblocked.send(options[:scope] + '_list').for_favoritable(favoritable).first
                 end
             end
 

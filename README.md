@@ -256,7 +256,7 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
 Test coverage can be calculated using SimpleCov. Make sure you have the [simplecov gem](https://github.com/colszowka/simplecov) installed.
 
-1. Uncomment simplecov in the Gemfile
+1. Uncomment SimpleCov in the Gemfile
 2. Uncomment the relevant section in `test/test_helper.rb`
 3. Run tests
 
