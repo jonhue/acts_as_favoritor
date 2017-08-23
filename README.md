@@ -52,11 +52,16 @@ Now run the generator:
 
     $ rails g acts_as_favoritor
 
+You can set your default scope by passing `--scope custom_scope`. Learn more about scopes [here](#scopes)
+You can skip the creation of a configuration file by passing `--skip_configuration`. Learn more about configuring `acts_as_favoritor` [here](#configuration)
+
+To wrap things up, migrate the changes into your database:
+
     $ rails db:migrate
 
-This will create a Favorite model as well as a migration file.
-
 **Note:** Use `rake db:migrate` instead if you run Rails < 5.
+
+This will create a Favorite model as well as a migration file.
 
 ## Usage
 
@@ -242,6 +247,8 @@ Favorite.all_list
 ## Configuration
 
 The installer creates a yaml config file for you (`config/acts_as_favoritor.yml`). Inside of that file you are able to adopt this gem to your specific needs.
+
+When you delete this file, all settings will rollback to their defaults. You can prevent the creation of this configuration file when running the generator by passing the option `--skip_configuration`.
 
 Currently supported Settings:
 

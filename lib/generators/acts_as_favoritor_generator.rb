@@ -8,6 +8,7 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
     source_root File.join File.dirname(__FILE__), 'templates'
     desc 'Install acts_as_favoritor'
     class_option :scope, desc: 'Specify your default scope. Learn more about scopes here: https://github.com/slooob/acts_as_favoritor#scopes', type: :string, default: 'favorite', aliases: '-s'
+    class_option :skip_configuration, desc: 'Skip the creation of the configuration file. Learn more about configuring acts_as_favoritor here: https://github.com/slooob/acts_as_favoritor#configuration', type: :boolean, default: false
 
     def self.next_migration_number dirname
         if ActiveRecord::Base.timestamped_migrations
@@ -26,7 +27,7 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
     end
 
     def create_configuration
-        template 'acts_as_favoritor.yml.erb', 'config/acts_as_favoritor.yml'
+        template 'acts_as_favoritor.yml.erb', 'config/acts_as_favoritor.yml' unless options[:skip_configuration]
     end
 
     def show_readme
