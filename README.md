@@ -20,6 +20,7 @@ You are able to differentiate followers, favorites, watchers and whatever else y
 * [Configuration](#configuration)
 * [Testing](#testing)
     * [Test Coverage](#test-coverage)
+* [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
 * [License](#license)
@@ -215,6 +216,8 @@ So lets see how this works:
 ```ruby
 user.favorite book, scope: [:favorite, :watching]
 user.remove_favorite book, scope: [:watching]
+second_user = User.find 2
+user.favorite second_user, scope: [:follow]
 book.block user, scope: [:all] # applies to all scopes
 ```
 
@@ -281,6 +284,12 @@ Test coverage can be calculated using SimpleCov. Make sure you have the [simplec
 3. Run tests
 
     `$ rake test`
+
+---
+
+## To Do
+
+* Adding magic methods for scopes, e.g.: `user.follow second_user` instead of `user.favorite second_user, scope: [:follow]`
 
 ---
 
