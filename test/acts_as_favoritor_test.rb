@@ -28,8 +28,8 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
 
         context 'favorited' do
             should 'return favorited_status' do
-                assert_equal true, @sam.favorited? @jon
-                assert_equal false, @jon.favorited? @sam
+                assert_equal true, @sam.favorited?(@jon)
+                assert_equal false, @jon.favorited?(@sam)
             end
 
             should 'return favorite_count' do

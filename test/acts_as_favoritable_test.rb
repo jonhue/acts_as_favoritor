@@ -82,8 +82,8 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
                 @jon.destroy
             end
 
-            should_change ('Favorite count', by: -1) { Favorite.count }
-            should_change ('@sam.all_favorited.size', by: -1) { @sam.all_favorited.size }
+            should_change('Favorite count', by: -1) { Favorite.count }
+            should_change('@sam.all_favorited.size', by: -1) { @sam.all_favorited.size }
         end
 
         context 'get favorite record' do

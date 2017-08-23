@@ -18,7 +18,7 @@ module ActsAsFavoritor #:nodoc:
             # Returns the number of favoritors a record has.
             def favoritors_count options = {}
                 if options.has_key?(:multiple_scopes) == false
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -34,7 +34,7 @@ module ActsAsFavoritor #:nodoc:
             def favoritors_by_type favoritor_type, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor_type
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -71,7 +71,7 @@ module ActsAsFavoritor #:nodoc:
             def favoritors_by_type_count favoritor_type, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor_type
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -103,7 +103,7 @@ module ActsAsFavoritor #:nodoc:
 
             def blocked_favoritors_count options = {}
                 if options.has_key?(:multiple_scopes) == false
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -118,7 +118,7 @@ module ActsAsFavoritor #:nodoc:
             # Returns the favorited records scoped
             def favoritors_scoped options = {}
                 if options.has_key?(:multiple_scopes) == false
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -132,7 +132,7 @@ module ActsAsFavoritor #:nodoc:
 
             def favoritors options = {}
                 if options.has_key?(:multiple_scopes) == false
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -150,7 +150,7 @@ module ActsAsFavoritor #:nodoc:
 
             def blocks options = {}
                 if options.has_key?(:multiple_scopes) == false
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -171,7 +171,7 @@ module ActsAsFavoritor #:nodoc:
             def favorited_by? favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -186,7 +186,7 @@ module ActsAsFavoritor #:nodoc:
             def block favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -201,7 +201,7 @@ module ActsAsFavoritor #:nodoc:
             def unblock favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -216,7 +216,7 @@ module ActsAsFavoritor #:nodoc:
             def get_favorite_for favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -233,7 +233,7 @@ module ActsAsFavoritor #:nodoc:
             def block_future_favorite favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
@@ -248,7 +248,7 @@ module ActsAsFavoritor #:nodoc:
             def block_existing_favorite favoritor, options = {}
                 if options.has_key?(:multiple_scopes) == false
                     options[:parameter] = favoritor
-                    results = validate_scopes __method__, options
+                    results = validate_scopes __method__, options: options
                 elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
