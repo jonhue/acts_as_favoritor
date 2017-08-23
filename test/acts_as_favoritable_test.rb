@@ -234,8 +234,8 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
             end
 
             should 'return the favoritors for given type' do
-                assert_equal @sam.favorites_by_type('Band').first.favoritable, @green_day.becomes(Band)
-                assert_equal @sam.favorites_by_type('Band').second.favoritable, @blink_182.becomes(Band)
+                assert_equal @sam.favorites_by_type('Band').first&.favoritable, @green_day.becomes(Band)
+                assert_equal @sam.favorites_by_type('Band').second&.favoritable, @blink_182.becomes(Band)
                 assert @green_day.favoritors_by_type('User').include?(@sam)
                 assert @blink_182.favoritors_by_type('User').include?(@sam)
             end

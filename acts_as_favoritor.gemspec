@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
     gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
     gem.require_paths = ['lib']
 
-    gem.required_ruby_version = '>= 2.0'
+    gem.required_ruby_version = '>= 2.3'
 
     gem.add_dependency 'activerecord', '>= 4.0'
 
