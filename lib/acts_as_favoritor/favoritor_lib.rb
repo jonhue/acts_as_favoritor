@@ -33,14 +33,11 @@ module ActsAsFavoritor
         end
 
         def parent_classes
-            return DEFAULT_PARENTS unless ActsAsFavoritor.custom_parent_classes
-
-            ActiveSupport::Deprecation.warn('Setting custom parent classes is deprecated and will be removed in future versions.')
-            ActsAsFavoritor.custom_parent_classes + DEFAULT_PARENTS
+            return DEFAULT_PARENTS
         end
 
         def validate_scopes method, options = {}
-            options[:scope] = [:favorites] unless options.has_key? :scope
+            options[:scope] = ['favorites'] unless options.has_key? :scope
             if options[:scope].size > 1
                 options[:multiple_scopes] = true
             else
@@ -48,11 +45,12 @@ module ActsAsFavoritor
                 options[:scope] = options[:scope][0]
             end
             if options.has_key? :parameter
-                result = method options[:parameter], options: options
+                parameter = options[:parameter]
+                options.delete :parameter
+                send method, parameter, options
             else
-                result = method options: options
+                send method, options
             end
-            result
         end
 
     end

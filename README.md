@@ -92,7 +92,7 @@ user.remove_favorite book
 user.favorited? book
 
 # Total number of favorites by `user`.
-user.favorite_count
+user.favorites_count
 
 # Returnes `user`'s favorites that have not been blocked as an array of `Favorite` records.
 user.all_favorites

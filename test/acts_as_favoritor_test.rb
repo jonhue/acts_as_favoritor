@@ -9,7 +9,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
 
         should 'be defined' do
             assert @sam.respond_to? :favorited?
-            assert @sam.respond_to? :favorite_count
+            assert @sam.respond_to? :favorites_count
             assert @sam.respond_to? :favorite
             assert @sam.respond_to? :remove_favorite
             assert @sam.respond_to? :favorites_by_type
@@ -32,9 +32,9 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
                 assert_equal false, @jon.favorited?(@sam)
             end
 
-            should 'return favorite_count' do
-                assert_equal 2, @sam.favorite_count
-                assert_equal 0, @jon.favorite_count
+            should 'return favorites_count' do
+                assert_equal 2, @sam.favorites_count
+                assert_equal 0, @jon.favorites_count
             end
         end
 
@@ -44,7 +44,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
             end
 
             should_change('Favorite count', by: 1) { Favorite.count }
-            should_change('@jon.favorite_count', by: 1) { @jon.favorite_count }
+            should_change('@jon.favorites_count', by: 1) { @jon.favorites_count }
 
             should "set the favoritor" do
                 assert_equal @jon, Favorite.last.favoritor
@@ -61,7 +61,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
             end
 
             should_not_change('Favorite count') { Favorite.count }
-            should_not_change('@jon.favorite_count') { @jon.favorite_count }
+            should_not_change('@jon.favorites_count') { @jon.favorites_count }
 
             should 'not set the favoritor' do
                 assert_not_equal @jon, Favorite.last.favoritor
@@ -78,7 +78,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
             end
 
             should_change('Favorite count', by: -1) { Favorite.count }
-            should_change('@sam.favorite_count', by: -1) { @sam.favorite_count }
+            should_change('@sam.favorites_count', by: -1) { @sam.favorites_count }
         end
 
         context 'favorites' do
@@ -194,7 +194,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
             end
 
             should_change('Favorite.count', by: -1) { Favorite.count }
-            should_change('@sam.favorite_count', by: -1) { @sam.favorite_count }
+            should_change('@sam.favorites_count', by: -1) { @sam.favorites_count }
         end
 
         context "blocked by favoritable" do
@@ -206,8 +206,8 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
                 assert_equal false, @sam.favorited?(@jon)
             end
 
-            should 'return favorite_count' do
-                assert_equal 1, @sam.favorite_count
+            should 'return favorites_count' do
+                assert_equal 1, @sam.favorites_count
             end
 
             should 'not return record of the blocked favorites' do
