@@ -93,13 +93,13 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        if favorite = get_favorite(favoritable)&.send(scope + '_list')
+                        if favorite = get_favorite(favoritable, scope: scope)
                             results[scope] = favorite.destroy
                         end
                     end
                     return results
                 else
-                    if favorite = get_favorite(favoritable)&.send(options[:scope] + '_list')
+                    if favorite = get_favorite(favoritable, scope: options[:scope])
                         return favorite.destroy
                     end
                 end
