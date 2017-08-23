@@ -4,6 +4,19 @@
 
 * nothing yet
 
+### 1.2.0 - 2017-08-24
+
+* features
+    * add `blocked?` method to `acts_as_favoritor` model
+    * add `blocked?` method to `acts_as_favoritable` model
+    * add `favoritable_type` method to `acts_as_favoritor` model
+    * add `favoritor_type` method to `acts_as_favoritable` model
+    * add `blocks` method to `acts_as_favoritor` model
+    * add `block` method to `acts_as_favoritor` model
+    * add `unblock` method to `acts_as_favoritor` model
+    * add `blocked_favoritables_count` method to `acts_as_favoritor` model
+* minor bugfixes
+
 ### 1.1.3 - 2017-08-23
 
 * bugfixes
