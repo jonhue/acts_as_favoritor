@@ -1,6 +1,10 @@
 # Configure Rails Envinronment
 ENV['RAILS_ENV'] = 'test'
 
+# # Test Coverage
+# require 'simplecov'
+# SimpleCov.start
+
 require File.expand_path '../dummy30/config/environment.rb', __FILE__
 require 'rails/test_help'
 

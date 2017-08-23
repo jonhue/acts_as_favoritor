@@ -8,7 +8,6 @@ Tell us what happens instead
 Show a way to reproduce
 
 ### System configuration
-Your system configuration
 
 **Ruby version**:
 

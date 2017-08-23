@@ -37,7 +37,7 @@ module ActsAsFavoritor
         end
 
         def validate_scopes method, options = {}
-            options[:scope] = ['favorites'] unless options.has_key? :scope
+            options[:scope] = options[:scope] || ['favorites']
             if options[:scope].size > 1
                 options[:multiple_scopes] = true
             else

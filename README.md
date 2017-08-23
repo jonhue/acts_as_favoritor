@@ -254,17 +254,13 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
 ### Test Coverage
 
-Test coverage can be calculated using Rcov. Make sure you have the [rcov gem](https://github.com/relevance/rcov) installed.
+Test coverage can be calculated using SimpleCov. Make sure you have the [simplecov gem](https://github.com/colszowka/simplecov) installed.
 
-In the acts_as_favoritor directory:
+1. Uncomment simplecov in the Gemfile
+2. Uncomment the relevant section in `test/test_helper.rb`
+3. Run tests
 
-```ruby
-# Add coverage to test/coverage directory.
-rake rcov:gen DB=sqlite3 # sqlite
-
-# Delete coverage directory.
-rake rcov:clobber
-```
+    `$ rake test`
 
 ---
 
@@ -276,7 +272,7 @@ We hope that you will consider contributing to `acts_as_favoritor`. Please read 
 
 ### Contributors
 
-Give the people some :heart: who are working on this project. Check them all at:
+Give the people some :heart: who are working on this project. See them all at:
 
 https://github.com/slooob/acts_as_favoritor/graphs/contributors
 
