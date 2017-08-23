@@ -13,6 +13,6 @@ class ActsAsFavoritorMigration < ActiveRecord::Migration<% if Rails::VERSION::MA
     end
 
     def self.down
-    drop_table :favorites
+        drop_table :favorites
     end
 end
