@@ -1,15 +1,20 @@
 module ActsAsFavoritor #:nodoc:
     module FavoriteScopes
 
-        # send(scope + '_list') - returns favorite records of scope
-        Favorite.all.group_by(&:scope).each do |s|
-            Favorite.send(:define_method, "#{s}_list") do
-                where scope: s
+        # Allows magic names on send(scope + '_list') - returns favorite records of certain scope
+        # e.g. favoritors == favoritors.send('favorite_list')
+        def method_missing m, *args
+            if m.to_s[/(.+)_list/]
+                where scope: $1.singularize.classify
+            else
+                super
             end
         end
-        def favorites_list
-            where scope: ActsAsFavoritor.default_scope
+
+        def respond_to? m, include_private = false
+            super || m.to_s[/(.+)_list/]
         end
+
         def all_list
             all
         end

@@ -230,7 +230,7 @@ Favorite.send(my_scope + '_list')
 
 ## Examples
 ### Returns all `Favorite` records where `scope` is `favorites`
-Favorite.favorites_list
+Favorite.favorite_list
 ### Returns all `Favorite` records where `scope` is `watching`
 Favorite.watching_list
 ### Very unnecessary, but `all_list` returns literally all `Favorite` records

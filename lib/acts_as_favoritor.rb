@@ -9,4 +9,6 @@ module ActsAsFavoritor
 
     require 'acts_as_favoritor/railtie' if defined?(Rails)
 
+    require 'acts_as_favoritor/configuration'
+
 end
