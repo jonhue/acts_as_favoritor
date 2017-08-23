@@ -15,7 +15,10 @@
     * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
     * [`Favorite` model](#favorite-model)
     * [Scopes](#scopes)
-* [Contributors](#contributors)
+* [Testing](#testing)
+    * [Test Coverage](#test-coverage)
+* [Contributing](#contributing)
+    * [Contributors](#contributors)
 * [License](#license)
 
 ---
@@ -247,7 +250,7 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
     $ rake test
 
-### Coverage
+### Test Coverage
 
 Test coverage can be calculated using Rcov. Make sure you have the [rcov gem](https://github.com/relevance/rcov) installed.
 
@@ -265,7 +268,7 @@ rake rcov:clobber
 
 ## Contributing
 
-[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/tree/master/CONTRIBUTING.md)
+[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/blob/master/CONTRIBUTING.md)
 
 ### Contributors
 
