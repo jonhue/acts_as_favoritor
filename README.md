@@ -270,7 +270,9 @@ rake rcov:clobber
 
 ## Contributing
 
-[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/blob/master/CONTRIBUTING.md)
+We hope that you will consider contributing to `acts_as_favoritor`. Please read this short overview for some information about how to get started:
+
+[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/slooob/acts_as_favoritor/blob/master/CODE_OF_CONDUCT.md)
 
 ### Contributors
 
