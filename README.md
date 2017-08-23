@@ -53,8 +53,9 @@ Now run the generator:
 
     $ rails g acts_as_favoritor
 
-You can set your default scope by passing `--scope custom_scope`. Learn more about scopes [here](#scopes)
-You can skip the creation of a configuration file by passing `--skip_configuration`. Learn more about configuring `acts_as_favoritor` [here](#configuration)
+You can set your default scope by passing `--scope custom_scope`. Learn more about scopes [here](#scopes).
+
+You can skip the creation of a configuration file by passing `--skip_configuration`. Learn more about configuring `acts_as_favoritor` [here](#configuration).
 
 To wrap things up, migrate the changes into your database:
 
