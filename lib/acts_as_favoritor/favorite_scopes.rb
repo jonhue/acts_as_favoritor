@@ -8,7 +8,7 @@ module ActsAsFavoritor #:nodoc:
             end
         end
         def favorites_list
-            where scope: 'favorite'
+            where scope: ActsAsFavoritor.default_scope
         end
         def all_list
             all

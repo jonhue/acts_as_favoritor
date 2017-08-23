@@ -17,6 +17,7 @@ You are able to differentiate followers, favorites, watchers and whatever else y
     * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
     * [`Favorite` model](#favorite-model)
     * [Scopes](#scopes)
+* [Configuration](#configuration)
 * [Testing](#testing)
     * [Test Coverage](#test-coverage)
 * [Contributing](#contributing)
@@ -235,6 +236,18 @@ Favorite.watching_list
 ### Very unnecessary, but `all_list` returns literally all `Favorite` records
 Favorite.all_list
 ```
+
+---
+
+## Configuration
+
+The installer creates a yaml config file for you (`config/acts_as_favoritor.yml`). Inside of that file you are able to adopt this gem to your specific needs.
+
+Currently supported Settings:
+
+**default_scope:** Specify your default scope. Learn more about scopes here: https://github.com/slooob/acts_as_favoritor#scopes
+
+If you have an idea for a new setting, propose it by creating a new [issue](https://github.com/slooob/acts_as_favoritor/issues).
 
 ---
 
