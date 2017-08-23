@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.1.3 - 2017-08-23
+
+* bugfixes
+    * `fix NoMethodError: undefined method 'each' for <SCOPE>:String`
+
 ### 1.1.2 - 2017-08-23
 
 * bugfixes
