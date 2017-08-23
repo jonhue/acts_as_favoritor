@@ -44,7 +44,7 @@ Or install it yourself as:
 If you always want to be up to date fetch the latest from GitHub in your `Gemfile`:
 
 ```ruby
-gem 'amphtml', github: 'slooob/acts_as_favoritor'
+gem 'acts_as_favoritor', github: 'slooob/acts_as_favoritor'
 ```
 
 Now run the generator:
