@@ -39,12 +39,17 @@ module ActsAsFavoritor
             ActsAsFavoritor.custom_parent_classes + DEFAULT_PARENTS
         end
 
-        def validate_scopes method_name, options = {}
+        def validate_scopes method, options = {}
             if options[:scope].size > 1
-                result = method multiple_scopes: true, options
+                options[:multiple_scopes] = true
             else
+                options[:multiple_scopes] = false
                 options[:scope] = options[:scope][0]
-                result = method multiple_scopes: false, options
+            end
+            if options.has_key? :parameter
+                result = method options[:parameter], options: options
+            else
+                result = method options: options
             end
             result
         end
