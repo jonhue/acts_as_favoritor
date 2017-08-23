@@ -1,6 +1,16 @@
 module ActsAsFavoritor #:nodoc:
     module FavoriteScopes
 
+        # send(scope + '_list') - returns favorite records of scope
+        Favorite.group(:scope).each do |s|
+            Favorite.send(:define_method, "self.#{s}_list") do
+                where scope: s
+            end
+        end
+        def self.all_list
+            all
+        end
+
         # returns favorite records where favoritor is the record passed in.
         def for_favoritor favoritor
             where favoritor_id: favoritor.id, favoritor_type: parent_class_name(favoritor)
