@@ -17,9 +17,9 @@ module ActsAsFavoritor #:nodoc:
 
             # Returns the number of favoritors a record has.
             def favoritors_count options = {}
-                if options[:multiple_scopes].nil?
-                    results = validate_scopes __method__, options[:scope]
-                elsif options[:multiple_scopes]
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
                     results = {}
                     options[:scope].each do |scope|
                         results[scope] = favorited.unblocked.send(scope + '_list').count
@@ -32,28 +32,55 @@ module ActsAsFavoritor #:nodoc:
 
             # Returns the favoritors by a given type
             def favoritors_by_type favoritor_type, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorites = favoritor_type.constantize.joins(:favorites).where('favorites.blocked': false,
+                options[:favoritor_type] = favoritor_type
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        favorites = options[:favoritor_type].constantize.joins(:favorites).where('favorites.blocked': false,
+                            'favorites.favoritable_id': id,
+                            'favorites.favoritable_type': parent_class_name(self),
+                            'favorites.favoritor_type': options[:favoritor_type],
+                            'favorites.scope': scope)
+                        if options.has_key? :limit
+                            favorites = favorites.limit options[:limit]
+                        end
+                        if options.has_key? :includes
+                            favorites = favorites.includes options[:includes]
+                        end
+                        results[scope] = favorites
+                    end
+                else
+                    favorites = options[:favoritor_type].constantize.joins(:favorites).where('favorites.blocked': false,
                         'favorites.favoritable_id': id,
                         'favorites.favoritable_type': parent_class_name(self),
-                        'favorites.favoritor_type': favoritor_type,
-                        'favorites.scope': scope)
+                        'favorites.favoritor_type': options[:favoritor_type],
+                        'favorites.scope': options[:scope])
                     if options.has_key? :limit
                         favorites = favorites.limit options[:limit]
                     end
                     if options.has_key? :includes
                         favorites = favorites.includes options[:includes]
                     end
-                    favorites
+                    results = favorites
                 end
+                results
             end
 
             def favoritors_by_type_count favoritor_type, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorited.unblocked.send(scope + '_list').for_favoritor_type(favoritor_type).count
+                options[:favoritor_type] = favoritor_type
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.unblocked.send(scope + '_list').for_favoritor_type(options[:favoritor_type]).count
+                    end
+                else
+                    results = favorited.unblocked.send(options[:scope] + '_list').for_favoritor_type(options[:favoritor_type]).count
                 end
+                results
             end
 
             # Allows magic names on favoritors_by_type
@@ -75,82 +102,162 @@ module ActsAsFavoritor #:nodoc:
             end
 
             def blocked_favoritors_count options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorited.blocked.send(scope + '_list').count
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.blocked.send(scope + '_list').count
+                    end
+                else
+                    results = favorited.blocked.send(options[:scope] + '_list').count
                 end
+                results
             end
 
             # Returns the favorited records scoped
             def favoritors_scoped options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorited.send(scope + '_list').includes :favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.send(scope + '_list').includes :favoritor
+                    end
+                else
+                    results = favorited.send(options[:scope] + '_list').includes :favoritor
                 end
+                results
             end
 
             def favoritors options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favoritors_scope = favoritors_scoped(scope).unblocked
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        favoritors_scope = favoritors_scoped(scope).unblocked
+                        favoritors_scope = apply_options_to_scope favoritors_scope, options
+                        results[scope] = favoritors_scope.to_a.collect{ |f| f.favoritor }
+                    end
+                else
+                    favoritors_scope = favoritors_scoped(options[:scope]).unblocked
                     favoritors_scope = apply_options_to_scope favoritors_scope, options
-                    favoritors_scope.to_a.collect{ |f| f.favoritor }
+                    results = favoritors_scope.to_a.collect{ |f| f.favoritor }
                 end
+                results
             end
 
             def blocks options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    blocked_favoritors_scope = favoritors_scoped(scope).blocked
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        blocked_favoritors_scope = favoritors_scoped(scope).blocked
+                        blocked_favoritors_scope = apply_options_to_scope blocked_favoritors_scope, options
+                        results[scope] = blocked_favoritors_scope.to_a.collect{ |f| f.favoritor }
+                    end
+                else
+                    blocked_favoritors_scope = favoritors_scoped(options[:scope]).blocked
                     blocked_favoritors_scope = apply_options_to_scope blocked_favoritors_scope, options
-                    blocked_favoritors_scope.to_a.collect{ |f| f.favoritor }
+                    results = blocked_favoritors_scope.to_a.collect{ |f| f.favoritor }
                 end
+                results
             end
 
             # Returns true if the current instance is favorited by the passed record
             # Returns false if the current instance is blocked by the passed record or no favorite is found
             def favorited_by? favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorited.unblocked.send(scope + '_list').for_favoritor(favoritor).first.present?
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.unblocked.send(scope + '_list').for_favoritor(options[:favoritor]).first.present?
+                    end
+                else
+                    results = favorited.unblocked.send(options[:scope] + '_list').for_favoritor(options[:favoritor]).first.present?
                 end
+                results
             end
 
             def block favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    get_favorite_for(favoritor, scope: scope) ? block_existing_favorite(favoritor, scope: scope) : block_future_favorite(favoritor, scope: scope)
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = get_favorite_for(options[:favoritor], scope: scope) ? block_existing_favorite(options[:favoritor], scope: scope) : block_future_favorite(options[:favoritor], scope: scope)
+                    end
+                else
+                    results = get_favorite_for(options[:favoritor], scope: options[:scope]) ? block_existing_favorite(options[:favoritor], scope: options[:scope]) : block_future_favorite(options[:favoritor], scope: options[:scope])
                 end
+                results
             end
 
             def unblock favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    get_favorite_for(favoritor, scope: scope).update_attribute :blocked, false
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = get_favorite_for(options[:favoritor], scope: scope).update_attribute :blocked, false
+                    end
+                else
+                    results = get_favorite_for(options[:favoritor], scope: options[:scope]).update_attribute :blocked, false
                 end
+                results
             end
 
             def get_favorite_for favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    favorited.send(scope + '_list').for_favoritor(favoritor).first
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = favorited.send(scope + '_list').for_favoritor(options[:favoritor]).first
+                    end
+                else
+                    results = favorited.send(options[:scope] + '_list').for_favoritor(options[:favoritor]).first
                 end
+                results
             end
 
             private
 
             def block_future_favorite favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    Favorite.create favoritable: self, favoritor: favoritor, blocked: true, scope: scope
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = Favorite.create favoritable: self, favoritor: options[:favoritor], blocked: true, scope: scope
+                    end
+                else
+                    results = Favorite.create favoritable: self, favoritor: options[:favoritor], blocked: true, scope: options[:scope]
                 end
+                results
             end
 
             def block_existing_favorite favoritor, options = {}
-                scopes = options[:scope] || [:favorites]
-                scopes.each do |scope|
-                    get_favorite_for(favoritor, scope: scope).block!
+                options[:favoritor] = favoritor
+                if options.has_key?(:multiple_scopes) == false
+                    results = validate_scopes __method__, options
+                elsif options.has_key?(:multiple_scopes) && options[:multiple_scopes] == true
+                    results = {}
+                    options[:scope].each do |scope|
+                        results[scope] = get_favorite_for(options[:favoritor], scope: scope).block!
+                    end
+                else
+                    results = get_favorite_for(options[:favoritor], scope: options[:scope]).block!
                 end
+                results
             end
 
         end

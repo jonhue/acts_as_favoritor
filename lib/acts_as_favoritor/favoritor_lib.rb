@@ -46,7 +46,7 @@ module ActsAsFavoritor
                 options[:scope] = options[:scope][0]
                 result = method multiple_scopes: false, options
             end
-            return result
+            result
         end
 
     end
