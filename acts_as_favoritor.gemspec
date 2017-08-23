@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
     gem.authors     = ['Jonas Hübotter']
     gem.email       = ['developer@slooob.com']
     gem.homepage    = 'https://github.com/slooob/acts_as_favoritor'
-    gem.summary     = 'A Rubygem to add Favorite functionality for ActiveRecord models'
+    gem.summary     = 'A Rubygem to add Favorite, Follow, etc. functionality to ActiveRecord models'
     gem.description = 'acts_as_favoritor is a Rubygem to allow any ActiveRecord model to favorite any other model. This is accomplished through a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.'
     gem.license     = 'MIT'
 
