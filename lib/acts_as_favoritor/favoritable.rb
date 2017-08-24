@@ -136,13 +136,13 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        favoritors_scope = favoritors_scoped(scope: scope).unblocked
+                        favoritors_scope = favoritors_scoped(scope: scope, multiple_scopes: false).unblocked
                         favoritors_scope = apply_options_to_scope favoritors_scope, options
                         results[scope] = favoritors_scope.to_a.collect{ |f| f.favoritor }
                     end
                     return results
                 else
-                    favoritors_scope = favoritors_scoped(scope: options[:scope]).unblocked
+                    favoritors_scope = favoritors_scoped(scope: options[:scope], multiple_scopes: false).unblocked
                     favoritors_scope = apply_options_to_scope favoritors_scope, options
                     return favoritors_scope.to_a.collect{ |f| f.favoritor }
                 end
@@ -154,13 +154,13 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        blocked_favoritors_scope = favoritors_scoped(scope: scope).blocked
+                        blocked_favoritors_scope = favoritors_scoped(scope: scope, multiple_scopes: false).blocked
                         blocked_favoritors_scope = apply_options_to_scope blocked_favoritors_scope, options
                         results[scope] = blocked_favoritors_scope.to_a.collect{ |f| f.favoritor }
                     end
                     return results
                 else
-                    blocked_favoritors_scope = favoritors_scoped(scope: options[:scope]).blocked
+                    blocked_favoritors_scope = favoritors_scoped(scope: options[:scope], multiple_scopes: false).blocked
                     blocked_favoritors_scope = apply_options_to_scope blocked_favoritors_scope, options
                     return blocked_favoritors_scope.to_a.collect{ |f| f.favoritor }
                 end
@@ -237,11 +237,11 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        results[scope] = get_favorite_for(favoritor, scope: scope) ? block_existing_favorite(favoritor, scope: scope) : block_future_favorite(favoritor, scope: scope)
+                        results[scope] = get_favorite_for(favoritor, scope: scope, multiple_scopes: false) ? block_existing_favorite(favoritor, scope: scope, multiple_scopes: false) : block_future_favorite(favoritor, scope: scope, multiple_scopes: false)
                     end
                     return results
                 else
-                    return get_favorite_for(favoritor, scope: options[:scope]) ? block_existing_favorite(favoritor, scope: options[:scope]) : block_future_favorite(favoritor, scope: options[:scope])
+                    return get_favorite_for(favoritor, scope: options[:scope], multiple_scopes: false) ? block_existing_favorite(favoritor, scope: options[:scope], multiple_scopes: false) : block_future_favorite(favoritor, scope: options[:scope], multiple_scopes: false)
                 end
             end
 
@@ -252,16 +252,16 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        results[scope] = get_favorite_for(favoritor, scope: scope)&.update_attribute :blocked, false
+                        results[scope] = get_favorite_for(favoritor, scope: scope, multiple_scopes: false)&.update_attribute :blocked, false
                     end
                     return results
                 else
-                    return get_favorite_for(favoritor, scope: options[:scope])&.update_attribute :blocked, false
+                    return get_favorite_for(favoritor, scope: options[:scope], multiple_scopes: false)&.update_attribute :blocked, false
                 end
             end
 
             def get_favorite_for favoritor, options = {}
-                if options.has_key?(:multiple_scopes) == false
+                if options.has_key?(:multiple_scopes) == false &&
                     options[:parameter] = favoritor
                     validate_scopes __method__, options
                 elsif options[:multiple_scopes]
@@ -299,11 +299,11 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        results[scope] = get_favorite_for(favoritor, scope: scope).block!
+                        results[scope] = get_favorite_for(favoritor, scope: scope, multiple_scopes: false).block!
                     end
                     return results
                 else
-                    return get_favorite_for(favoritor, scope: options[:scope]).block!
+                    return get_favorite_for(favoritor, scope: options[:scope], multiple_scopes: false).block!
                 end
             end
 
