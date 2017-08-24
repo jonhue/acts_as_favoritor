@@ -1,21 +1,23 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
-require 'acts_as_favoritor/version'
+require File.expand_path(File.join('..', 'lib', 'acts_as_favoritor', 'version'), __FILE__)
 
 Gem::Specification.new do |gem|
-    gem.name        = 'acts_as_favoritor'
-    gem.version     = ActsAsFavoritor::VERSION
-    gem.authors     = ['Jonas Hübotter']
-    gem.email       = ['developer@slooob.com']
-    gem.homepage    = 'https://github.com/slooob/acts_as_favoritor'
-    gem.summary     = 'A Rubygem to add Favorite, Follow, Vote, etc. functionality to ActiveRecord models'
-    gem.description = 'acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes. You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.'
-    gem.license     = 'MIT'
+    gem.name                  = 'acts_as_favoritor'
+    gem.version               = ActsAsFavoritor::VERSION
+    gem.platform              = Gem::Platform::RUBY
+    gem.summary               = 'A Rubygem to add Favorite, Follow, Vote, etc. functionality to ActiveRecord models'
+    gem.description           = 'acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes. You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records.'
+    gem.authors               = ['Jonas Hübotter']
+    gem.email                 = 'developer@slooob.com'
+    gem.homepage              = 'https://github.com/slooob/acts_as_favoritor'
+    gem.license               = 'MIT'
 
-    gem.files         = `git ls-files`.split("\n")
-    gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-    gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-    gem.require_paths = ['lib']
+    gem.files                 = `git ls-files`.split("\n")
+    gem.require_paths         = ['lib']
+    gem.bindir                = 'bin'
+    gem.executables           = ['acts_as_favoritor']
+
+    gem.post_install_message  = IO.read('INSTALL.md')
 
     gem.required_ruby_version = '>= 2.3'
 

@@ -19,8 +19,7 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
     end
 
     def create_migration_file
-        @rails_version = Rails::VERSION::STRING[0..2].to_f
-        migration_template 'migration.rb.erb', 'db/migrate/acts_as_favoritor_migration.rb'
+        migration_template 'migration.rb.erb', 'db/migrate/acts_as_favoritor_migration.rb', migration_version: migration_version
     end
 
     def create_model

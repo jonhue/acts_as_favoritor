@@ -1,4 +1,4 @@
-class ActsAsFavoritorMigration < ActiveRecord::Migration<% if Rails::VERSION::MAJOR >= 5 %>[<%= @rails_version %>]<% end %>
+class ActsAsFavoritorMigration < ActiveRecord::Migration<%= migration_version %>
     def self.up
         create_table :favorites, force: true do |t|
             t.references :favoritable, polymorphic: true, null: false
