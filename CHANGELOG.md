@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.2.2 - 2017-08-24
+
+* bugfixes
+    * `acts_as_favoritor` generator hotfix
+
 ### 1.2.1 - 2017-08-24
 
 * enhancements
