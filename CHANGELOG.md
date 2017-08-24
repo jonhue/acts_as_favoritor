@@ -4,6 +4,13 @@
 
 * nothing yet
 
+### 1.2.1 - 2017-08-24
+
+* enhancements
+    * improve migration template
+    * add installer readme
+* minor bugfixes
+
 ### 1.2.0 - 2017-08-24
 
 * features

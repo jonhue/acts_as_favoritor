@@ -14,8 +14,6 @@ Gem::Specification.new do |gem|
 
     gem.files                 = `git ls-files`.split("\n")
     gem.require_paths         = ['lib']
-    gem.bindir                = 'bin'
-    gem.executables           = ['acts_as_favoritor']
 
     gem.post_install_message  = IO.read('INSTALL.md')
 
