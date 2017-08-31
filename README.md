@@ -281,14 +281,14 @@ For that you need to add some database columns:
 *acts_as_favoritor*
 
 ```ruby
-add_column :users, :favoritor_cache, :text, default: {}.to_yaml, null: false
+add_column :users, :favoritor_cache, :text
 ```
 
 *acts_as_favoritable*
 
 ```ruby
-add_column :users, :favoritable_cache, :text, default: {}.to_yaml, null: false
-add_column :books, :favoritable_cache, :text, default: {}.to_yaml, null: false
+add_column :users, :favoritable_cache, :text
+add_column :books, :favoritable_cache, :text
 ```
 
 Caches are stored as hashes with scopes as keys:
