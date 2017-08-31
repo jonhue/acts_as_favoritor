@@ -346,7 +346,6 @@ Test coverage can be calculated using SimpleCov. Make sure you have the [simplec
 ## To Do
 
 * Adding magic methods for scopes, e.g.: `user.follow second_user` instead of `user.favorite second_user, scope: [:follow]`
-* Allow for caching of counters in the database table of `acts_as_favoritable`.
 
 ---
 

@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.2 - 2017-08-31
+
+* features
+    * add caching functionality to `acts_as_favoritor` & `acts_as_favoritable` model
+
 ### 1.2.2 - 2017-08-24
 
 * bugfixes
