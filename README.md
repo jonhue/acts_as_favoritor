@@ -1,6 +1,6 @@
 # `acts_as_favoritor` - Add Favorites to your Rails app
 
-<img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" />
+<img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" /> [![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor)
 
 `acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
 
@@ -17,6 +17,7 @@ You are able to differentiate followers, favorites, watchers, votes and whatever
     * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
     * [`Favorite` model](#favorite-model)
     * [Scopes](#scopes)
+    * [Caching](#caching)
 * [Configuration](#configuration)
 * [Testing](#testing)
     * [Test Coverage](#test-coverage)
@@ -54,6 +55,8 @@ Now run the generator:
     $ rails g acts_as_favoritor
 
 You can set your default scope by passing `--scope custom_scope`. Learn more about scopes [here](#scopes).
+
+If you specify `--cache true`, `acts_as_favoritor` will be using cache. Learn more about caching [here](#caching).
 
 You can skip the creation of a configuration file by passing `--skip_configuration`. Learn more about configuring `acts_as_favoritor` [here](#configuration).
 
@@ -268,6 +271,35 @@ Favorite.watching_list
 ### Very unnecessary, but `all_list` returns literally all `Favorite` records
 Favorite.all_list
 ```
+
+### Caching
+
+When you set the option `cache` in `config/acts_as_favoritor` to true, you are able to cache the amount of favorites/favoritables an instance has regarding a scope.
+
+For that you need to add some database columns:
+
+*acts_as_favoritor*
+
+```ruby
+add_column :users, :favoritor_cache, :text, default: {}.to_yaml, null: false
+```
+
+*acts_as_favoritable*
+
+```ruby
+add_column :users, :favoritable_cache, :text, default: {}.to_yaml, null: false
+add_column :books, :favoritable_cache, :text, default: {}.to_yaml, null: false
+```
+
+Caches are stored as hashes with scopes as keys:
+
+```ruby
+user.favoritor_cache # => { favorite: 1 }
+second_user.favoritable_cache # => { follow: 1 }
+book.favoritable_cache # => { favorite: 1 }
+```
+
+**Note:** Only scopes who have favorites are included.
 
 ---
 

@@ -10,6 +10,8 @@ module ActsAsFavoritor #:nodoc:
                 has_many :favorites, as: :favoritor, dependent: :destroy
                 include ActsAsFavoritor::Favoritor::InstanceMethods
                 include ActsAsFavoritor::FavoritorLib
+
+                serialize :favoritor_cache, Hash if ActsAsFavoritor.cache
             end
         end
 
@@ -101,6 +103,12 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
+                        if ActsAsFavoritor.cache
+                            self.favoritor_cache[scope] = self.favoritor_cache[scope] + 1 || 1
+                            self.save!
+                            favoritable.favoritable_cache[scope] = favoritable.favoritable_cache[scope] + 1 || 1
+                            favoritable.save!
+                        end
                         if self != favoritable && scope != 'all'
                             params = {favoritable_id: favoritable.id, favoritable_type: parent_class_name(favoritable), scope: scope}
                             results[scope] = favorites.where(params).first_or_create!
@@ -108,6 +116,12 @@ module ActsAsFavoritor #:nodoc:
                     end
                     return results
                 else
+                    if ActsAsFavoritor.cache
+                        self.favoritor_cache[options[:scope]] = self.favoritor_cache[options[:scope]] + 1 || 1
+                        self.save!
+                        favoritable.favoritable_cache[options[:scope]] = favoritable.favoritable_cache[options[:scope]] + 1 || 1
+                        favoritable.save!
+                    end
                     if self != favoritable && options[:scope] != 'all'
                         params = {favoritable_id: favoritable.id, favoritable_type: parent_class_name(favoritable), scope: options[:scope]}
                         return favorites.where(params).first_or_create!
@@ -123,12 +137,28 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
+                        if ActsAsFavoritor.cache
+                            self.favoritor_cache[scope] = self.favoritor_cache[scope] - 1
+                            self.favoritor_cache.delete(scope) unless self.favoritor_cache[scope] > 0
+                            self.save!
+                            favoritable.favoritable_cache[scope] = favoritable.favoritable_cache[scope] - 1
+                            favoritable.favoritable_cache.delete(scope) unless favoritable.favoritable_cache[scope] > 0
+                            favoritable.save!
+                        end
                         if favorite = get_favorite(favoritable, scope: scope, multiple_scopes: false)
                             results[scope] = favorite.destroy
                         end
                     end
                     return results
                 else
+                    if ActsAsFavoritor.cache
+                        self.favoritor_cache[options[:scope]] = self.favoritor_cache[options[:scope]] - 1
+                        self.favoritor_cache.delete(options[:scope]) unless self.favoritor_cache[options[:scope]] > 0
+                        self.save!
+                        favoritable.favoritable_cache[options[:scope]] = favoritable.favoritable_cache[options[:scope]] - 1
+                        favoritable.favoritable_cache.delete(options[:scope]) unless favoritable.favoritable_cache[options[:scope]] > 0
+                        favoritable.save!
+                    end
                     if favorite = get_favorite(favoritable, scope: options[:scope], multiple_scopes: false)
                         return favorite.destroy
                     end

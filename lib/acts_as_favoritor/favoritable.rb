@@ -10,6 +10,8 @@ module ActsAsFavoritor #:nodoc:
                 has_many :favorited, as: :favoritable, dependent: :destroy, class_name: 'Favorite'
                 include ActsAsFavoritor::Favoritable::InstanceMethods
                 include ActsAsFavoritor::FavoritorLib
+
+                serialize :favoritable_cache, Hash if ActsAsFavoritor.cache
             end
         end
 

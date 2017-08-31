@@ -9,6 +9,15 @@ module ActsAsFavoritor
         end
     end
 
+    def self.cache
+        config = get_config
+        if config&.key :cache
+            config[:cache]
+        else
+            false
+        end
+    end
+
 
     private
 

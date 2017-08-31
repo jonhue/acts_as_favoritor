@@ -14,12 +14,3 @@ Rake::TestTask.new(:test) do |t|
     t.pattern = 'test/**/*_test.rb'
     t.verbose = true
 end
-
-desc 'Generate documentation for the acts_as_favoritor gem.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-    rdoc.rdoc_dir = 'rdoc'
-    rdoc.title    = 'Acts As Favoritor'
-    rdoc.main     = 'README.rdoc'
-    rdoc.options << '--line-numbers' << '--inline-source'
-    rdoc.rdoc_files.include('README.rdoc', 'lib/**/*.rb')
-end
