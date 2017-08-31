@@ -311,9 +311,9 @@ When you delete this file, all settings will rollback to their defaults. You can
 
 Currently supported Settings:
 
-**default_scope:** Specify your default scope. Learn more about scopes here: https://github.com/slooob/acts_as_favoritor#scopes
+**default_scope:** Specify your default scope. Learn more about scopes [here](#scopes).
 
-**cache:** Whether `acts_as_favoritor` uses cache or not. Learn more about caching here: https://github.com/slooob/acts_as_favoritor#caching
+**cache:** Whether `acts_as_favoritor` uses cache or not. Learn more about caching [here](#caching).
 
 If you have an idea for a new setting, propose it by creating a new [issue](https://github.com/slooob/acts_as_favoritor/issues).
 
