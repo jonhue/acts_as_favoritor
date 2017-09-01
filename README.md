@@ -281,14 +281,14 @@ For that you need to add some database columns:
 *acts_as_favoritor*
 
 ```ruby
-add_column :users, :favoritor_cache, :text, default: {}.to_yaml, null: false
+add_column :users, :favoritor_cache, :text
 ```
 
 *acts_as_favoritable*
 
 ```ruby
-add_column :users, :favoritable_cache, :text, default: {}.to_yaml, null: false
-add_column :books, :favoritable_cache, :text, default: {}.to_yaml, null: false
+add_column :users, :favoritable_cache, :text
+add_column :books, :favoritable_cache, :text
 ```
 
 Caches are stored as hashes with scopes as keys:
@@ -311,7 +311,9 @@ When you delete this file, all settings will rollback to their defaults. You can
 
 Currently supported Settings:
 
-**default_scope:** Specify your default scope. Learn more about scopes here: https://github.com/slooob/acts_as_favoritor#scopes
+**default_scope:** Specify your default scope. Learn more about scopes [here](#scopes).
+
+**cache:** Whether `acts_as_favoritor` uses cache or not. Learn more about caching [here](#caching).
 
 If you have an idea for a new setting, propose it by creating a new [issue](https://github.com/slooob/acts_as_favoritor/issues).
 
