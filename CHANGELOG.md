@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.4.0 - 2017-09-01
+
+* features
+    * update caching functionality to include `score` & `total`
+
 ### 1.3.2 - 2017-08-31
 
 * features

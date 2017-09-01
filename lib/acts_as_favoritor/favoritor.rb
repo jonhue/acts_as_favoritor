@@ -104,9 +104,11 @@ module ActsAsFavoritor #:nodoc:
                     results = {}
                     options[:scope].each do |scope|
                         if ActsAsFavoritor.cache
-                            self.favoritor_cache[scope] = self.favoritor_cache[scope] + 1 || 1
+                            self.favoritor_score[scope] = self.favoritor_score[scope] + 1 || 1
+                            self.favoritor_total[scope] = self.favoritor_total[scope] + 1 || 1
                             self.save!
-                            favoritable.favoritable_cache[scope] = favoritable.favoritable_cache[scope] + 1 || 1
+                            favoritable.favoritable_score[scope] = favoritable.favoritable_score[scope] + 1 || 1
+                            favoritable.favoritable_total[scope] = favoritable.favoritable_total[scope] + 1 || 1
                             favoritable.save!
                         end
                         if self != favoritable && scope != 'all'
@@ -117,9 +119,11 @@ module ActsAsFavoritor #:nodoc:
                     return results
                 else
                     if ActsAsFavoritor.cache
-                        self.favoritor_cache[options[:scope]] = self.favoritor_cache[options[:scope]] + 1 || 1
+                        self.favoritor_score[options[:scope]] = self.favoritor_score[options[:scope]] + 1 || 1
+                        self.favoritor_total[options[:scope]] = self.favoritor_total[options[:scope]] + 1 || 1
                         self.save!
-                        favoritable.favoritable_cache[options[:scope]] = favoritable.favoritable_cache[options[:scope]] + 1 || 1
+                        favoritable.favoritable_score[options[:scope]] = favoritable.favoritable_score[options[:scope]] + 1 || 1
+                        favoritable.favoritable_total[options[:scope]] = favoritable.favoritable_total[options[:scope]] + 1 || 1
                         favoritable.save!
                     end
                     if self != favoritable && options[:scope] != 'all'
@@ -138,11 +142,11 @@ module ActsAsFavoritor #:nodoc:
                     results = {}
                     options[:scope].each do |scope|
                         if ActsAsFavoritor.cache
-                            self.favoritor_cache[scope] = self.favoritor_cache[scope] - 1
-                            self.favoritor_cache.delete(scope) unless self.favoritor_cache[scope] > 0
+                            self.favoritor_score[scope] = self.favoritor_score[scope] - 1
+                            self.favoritor_score.delete(scope) unless self.favoritor_score[scope] > 0
                             self.save!
-                            favoritable.favoritable_cache[scope] = favoritable.favoritable_cache[scope] - 1
-                            favoritable.favoritable_cache.delete(scope) unless favoritable.favoritable_cache[scope] > 0
+                            favoritable.favoritable_score[scope] = favoritable.favoritable_score[scope] - 1
+                            favoritable.favoritable_score.delete(scope) unless favoritable.favoritable_score[scope] > 0
                             favoritable.save!
                         end
                         if favorite = get_favorite(favoritable, scope: scope, multiple_scopes: false)
@@ -152,11 +156,11 @@ module ActsAsFavoritor #:nodoc:
                     return results
                 else
                     if ActsAsFavoritor.cache
-                        self.favoritor_cache[options[:scope]] = self.favoritor_cache[options[:scope]] - 1
-                        self.favoritor_cache.delete(options[:scope]) unless self.favoritor_cache[options[:scope]] > 0
+                        self.favoritor_score[options[:scope]] = self.favoritor_score[options[:scope]] - 1
+                        self.favoritor_score.delete(options[:scope]) unless self.favoritor_score[options[:scope]] > 0
                         self.save!
-                        favoritable.favoritable_cache[options[:scope]] = favoritable.favoritable_cache[options[:scope]] - 1
-                        favoritable.favoritable_cache.delete(options[:scope]) unless favoritable.favoritable_cache[options[:scope]] > 0
+                        favoritable.favoritable_score[options[:scope]] = favoritable.favoritable_score[options[:scope]] - 1
+                        favoritable.favoritable_score.delete(options[:scope]) unless favoritable.favoritable_score[options[:scope]] > 0
                         favoritable.save!
                     end
                     if favorite = get_favorite(favoritable, scope: options[:scope], multiple_scopes: false)
