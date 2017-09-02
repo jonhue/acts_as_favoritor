@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.5.0 - 2017-09-02
+
+* features
+    * access scope specific caches through methods
+
 ### 1.4.0 - 2017-09-01
 
 * features

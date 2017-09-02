@@ -301,6 +301,16 @@ book.favoritable_cache # => { favorite: 1 }
 
 **Note:** Only scopes who have favorites are included.
 
+`acts_as_favoritor` makes it even simpler to access cached values:
+
+```ruby
+user.favoritor_favorite_cache # => 1
+second_user.favoritable_follow_cache # => 1
+book.favoritable_favorite_cache # => 1
+```
+
+**Note:** These methods are available for every scope you are using.
+
 ---
 
 ## Configuration

@@ -94,6 +94,10 @@ module ActsAsFavoritor #:nodoc:
                     favoritors_by_type_count $1.singularize.classify
                 elsif m.to_s[/(.+)_favoritors/]
                     favoritors_by_type $1.singularize.classify
+                elsif m.to_s[/favoritable_(.+)_score/]
+                    favoritable_score[$1.singularize.classify] if ActsAsFavoritor.cache
+                elsif m.to_s[/favoritable_(.+)_total/]
+                    favoritable_total[$1.singularize.classify] if ActsAsFavoritor.cache
                 else
                     super
                 end
