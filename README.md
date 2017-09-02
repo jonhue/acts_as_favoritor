@@ -281,22 +281,26 @@ For that you need to add some database columns:
 *acts_as_favoritor*
 
 ```ruby
-add_column :users, :favoritor_cache, :text
+add_column :users, :favoritor_score, :text
+add_column :users, :favoritor_total, :text
 ```
 
 *acts_as_favoritable*
 
 ```ruby
-add_column :users, :favoritable_cache, :text
-add_column :books, :favoritable_cache, :text
+add_column :users, :favoritable_score, :text
+add_column :users, :favoritable_total, :text
+add_column :books, :favoritable_score, :text
+add_column :books, :favoritable_total, :text
 ```
 
 Caches are stored as hashes with scopes as keys:
 
 ```ruby
-user.favoritor_cache # => { favorite: 1 }
-second_user.favoritable_cache # => { follow: 1 }
-book.favoritable_cache # => { favorite: 1 }
+user.favoritor_score # => { favorite: 1 }
+user.favoritor_total # => { favorite: 1, watching: 1 }
+second_user.favoritable_score # => { follow: 1 }
+book.favoritable_score # => { favorite: 1 }
 ```
 
 **Note:** Only scopes who have favorites are included.
