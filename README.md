@@ -59,8 +59,6 @@ To wrap things up, migrate the changes into your database:
 
     $ rails db:migrate
 
-This will create a Favorite model as well as a migration file.
-
 ## Usage
 
 ### Setup
@@ -312,7 +310,7 @@ book.favoritable_favorite_cache # => 1
 
 ## Configuration
 
-You can configure devise-onesignal by passing a block to `configure`. This can be done in `config/initializers/devise-onesignal.rb`:
+You can configure acts_as_favoritor by passing a block to `configure`. This can be done in `config/initializers/acts_as_favoritor.rb`:
 
 ```ruby
 ActsAsFavoritor.configure do |config|
