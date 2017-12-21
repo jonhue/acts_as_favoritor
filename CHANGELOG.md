@@ -4,6 +4,12 @@
 
 * nothing yet
 
+### 2.0.0 - 2017-12-21
+
+* features
+    * configuration by passing a block to `configure`
+    * generator generates initializer instead of yaml file
+
 ### 1.5.0 - 2017-09-02
 
 * features

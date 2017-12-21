@@ -11,7 +11,7 @@ module ActsAsFavoritor #:nodoc:
                 include ActsAsFavoritor::Favoritor::InstanceMethods
                 include ActsAsFavoritor::FavoritorLib
 
-                serialize :favoritor_cache, Hash if ActsAsFavoritor.cache
+                serialize :favoritor_cache, Hash if ActsAsFavoritor.configuration.cache
             end
         end
 
@@ -103,7 +103,7 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        if ActsAsFavoritor.cache
+                        if ActsAsFavoritor.configuration.cache
                             self.favoritor_score[scope] = self.favoritor_score[scope] + 1 || 1
                             self.favoritor_total[scope] = self.favoritor_total[scope] + 1 || 1
                             self.save!
@@ -118,7 +118,7 @@ module ActsAsFavoritor #:nodoc:
                     end
                     return results
                 else
-                    if ActsAsFavoritor.cache
+                    if ActsAsFavoritor.configuration.cache
                         self.favoritor_score[options[:scope]] = self.favoritor_score[options[:scope]] + 1 || 1
                         self.favoritor_total[options[:scope]] = self.favoritor_total[options[:scope]] + 1 || 1
                         self.save!
@@ -141,7 +141,7 @@ module ActsAsFavoritor #:nodoc:
                 elsif options[:multiple_scopes]
                     results = {}
                     options[:scope].each do |scope|
-                        if ActsAsFavoritor.cache
+                        if ActsAsFavoritor.configuration.cache
                             self.favoritor_score[scope] = self.favoritor_score[scope] - 1
                             self.favoritor_score.delete(scope) unless self.favoritor_score[scope] > 0
                             self.save!
@@ -155,7 +155,7 @@ module ActsAsFavoritor #:nodoc:
                     end
                     return results
                 else
-                    if ActsAsFavoritor.cache
+                    if ActsAsFavoritor.configuration.cache
                         self.favoritor_score[options[:scope]] = self.favoritor_score[options[:scope]] - 1
                         self.favoritor_score.delete(options[:scope]) unless self.favoritor_score[options[:scope]] > 0
                         self.save!
@@ -297,9 +297,9 @@ module ActsAsFavoritor #:nodoc:
                 elsif m.to_s[/favorited_(.+)/]
                     favorited_by_type $1.singularize.classify
                 elsif m.to_s[/favoritor_(.+)_score/]
-                    favoritor_score[$1.singularize.classify] if ActsAsFavoritor.cache
+                    favoritor_score[$1.singularize.classify] if ActsAsFavoritor.configuration.cache
                 elsif m.to_s[/favoritor_(.+)_total/]
-                    favoritor_total[$1.singularize.classify] if ActsAsFavoritor.cache
+                    favoritor_total[$1.singularize.classify] if ActsAsFavoritor.configuration.cache
                 else
                     super
                 end

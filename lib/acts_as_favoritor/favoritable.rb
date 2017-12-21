@@ -11,7 +11,7 @@ module ActsAsFavoritor #:nodoc:
                 include ActsAsFavoritor::Favoritable::InstanceMethods
                 include ActsAsFavoritor::FavoritorLib
 
-                serialize :favoritable_cache, Hash if ActsAsFavoritor.cache
+                serialize :favoritable_cache, Hash if ActsAsFavoritor.configuration.cache
             end
         end
 
@@ -95,9 +95,9 @@ module ActsAsFavoritor #:nodoc:
                 elsif m.to_s[/(.+)_favoritors/]
                     favoritors_by_type $1.singularize.classify
                 elsif m.to_s[/favoritable_(.+)_score/]
-                    favoritable_score[$1.singularize.classify] if ActsAsFavoritor.cache
+                    favoritable_score[$1.singularize.classify] if ActsAsFavoritor.configuration.cache
                 elsif m.to_s[/favoritable_(.+)_total/]
-                    favoritable_total[$1.singularize.classify] if ActsAsFavoritor.cache
+                    favoritable_total[$1.singularize.classify] if ActsAsFavoritor.configuration.cache
                 else
                     super
                 end

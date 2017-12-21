@@ -16,6 +16,6 @@ CHANGELOG files by reviewers, please add the CHANGELOG entry at the top of the f
 
 Finally, if your pull request affects documentation or any non-code
 changes, guidelines for those changes are [available
-here](https://github.com/slooob/acts_as_favoritor/blob/master/CONTRIBUTING.md)
+here](https://github.com/jonhue/acts_as_favoritor/blob/master/CONTRIBUTING.md)
 
-Thanks for contributing to `acts_as_favoritor`!
+Thanks for contributing to acts_as_favoritor!

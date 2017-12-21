@@ -1,8 +1,8 @@
-# `acts_as_favoritor` - Add Favorites to your Rails app
+# acts_as_favoritor
 
-<img src="https://travis-ci.org/slooob/acts_as_favoritor.svg?branch=master" /> [![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor)
+[![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor) <img src="https://travis-ci.org/jonhue/acts_as_favoritor.svg?branch=master" />
 
-`acts_as_favoritor` is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
+acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
 
 You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records as well as caching.
 
@@ -24,13 +24,14 @@ You are able to differentiate followers, favorites, watchers, votes and whatever
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
+    * [Semantic versioning](#semantic-versioning)
 * [License](#license)
 
 ---
 
 ## Installation
 
-`acts_as_favoritor` works with Rails 4.0 onwards. You can add it to your `Gemfile` with:
+acts_as_favoritor works with Rails 5.0 onwards. You can add it to your `Gemfile` with:
 
 ```ruby
 gem 'acts_as_favoritor'
@@ -47,24 +48,16 @@ Or install it yourself as:
 If you always want to be up to date fetch the latest from GitHub in your `Gemfile`:
 
 ```ruby
-gem 'acts_as_favoritor', github: 'slooob/acts_as_favoritor'
+gem 'acts_as_favoritor', github: 'jonhue/acts_as_favoritor'
 ```
 
 Now run the generator:
 
     $ rails g acts_as_favoritor
 
-You can set your default scope by passing `--scope custom_scope`. Learn more about scopes [here](#scopes).
-
-If you specify `--cache true`, `acts_as_favoritor` will be using cache. Learn more about caching [here](#caching).
-
-You can skip the creation of a configuration file by passing `--skip_configuration`. Learn more about configuring `acts_as_favoritor` [here](#configuration).
-
 To wrap things up, migrate the changes into your database:
 
     $ rails db:migrate
-
-**Note:** Use `rake db:migrate` instead if you run Rails < 5.
 
 This will create a Favorite model as well as a migration file.
 
@@ -274,7 +267,7 @@ Favorite.all_list
 
 ### Caching
 
-When you set the option `cache` in `config/acts_as_favoritor` to true, you are able to cache the amount of favorites/favoritables an instance has regarding a scope.
+When you set the option `cache` in `config/initializers/acts_as_favoritor.rb` to true, you are able to cache the amount of favorites/favoritables an instance has regarding a scope.
 
 For that you need to add some database columns:
 
@@ -319,17 +312,17 @@ book.favoritable_favorite_cache # => 1
 
 ## Configuration
 
-The installer creates a yaml config file for you (`config/acts_as_favoritor.yml`). Inside of that file you are able to adopt this gem to your specific needs.
+You can configure devise-onesignal by passing a block to `configure`. This can be done in `config/initializers/devise-onesignal.rb`:
 
-When you delete this file, all settings will rollback to their defaults. You can prevent the creation of this configuration file when running the generator by passing the option `--skip_configuration`.
+```ruby
+ActsAsFavoritor.configure do |config|
+    config.default_scope = 'follow'
+end
+```
 
-Currently supported Settings:
+**`default_scope`** Specify your default scope. Takes a string. Defaults to `'favorite'`. Learn more about scopes [here](#scopes).
 
-**default_scope:** Specify your default scope. Learn more about scopes [here](#scopes).
-
-**cache:** Whether `acts_as_favoritor` uses cache or not. Learn more about caching [here](#caching).
-
-If you have an idea for a new setting, propose it by creating a new [issue](https://github.com/slooob/acts_as_favoritor/issues).
+**`cache`** Whether `acts_as_favoritor` uses caching or not. Takes a boolean. Defaults to `false`. Learn more about caching [here](#caching).
 
 ---
 
@@ -361,21 +354,27 @@ Test coverage can be calculated using SimpleCov. Make sure you have the [simplec
 
 ## To Do
 
-* Adding magic methods for scopes, e.g.: `user.follow second_user` instead of `user.favorite second_user, scope: [:follow]`
+[Here](https://github.com/jonhue/acts_as_favoritor/projects/1) is the full list of current projects.
+
+To propose your ideas, initiate the discussion by adding a [new issue](https://github.com/jonhue/acts_as_favoritor/issues/new).
 
 ---
 
 ## Contributing
 
-We hope that you will consider contributing to `acts_as_favoritor`. Please read this short overview for some information about how to get started:
+We hope that you will consider contributing to acts_as_favoritor. Please read this short overview for some information about how to get started:
 
-[Learn more about contributing to this repository](https://github.com/slooob/acts_as_favoritor/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/slooob/acts_as_favoritor/blob/master/CODE_OF_CONDUCT.md)
+[Learn more about contributing to this repository](https://github.com/jonhue/acts_as_favoritor/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/jonhue/acts_as_favoritor/blob/master/CODE_OF_CONDUCT.md)
 
 ### Contributors
 
 Give the people some :heart: who are working on this project. See them all at:
 
-https://github.com/slooob/acts_as_favoritor/graphs/contributors
+https://github.com/jonhue/acts_as_favoritor/graphs/contributors
+
+### Semantic Versioning
+
+acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org.
 
 ## License
 
