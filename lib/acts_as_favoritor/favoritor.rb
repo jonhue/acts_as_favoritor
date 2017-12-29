@@ -1,4 +1,4 @@
-module ActsAsFavoritor #:nodoc:
+module ActsAsFavoritor
     module Favoritor
 
         def self.included base

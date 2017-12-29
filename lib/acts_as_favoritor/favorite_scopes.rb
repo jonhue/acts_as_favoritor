@@ -1,4 +1,4 @@
-module ActsAsFavoritor #:nodoc:
+module ActsAsFavoritor
     module FavoriteScopes
 
         # Allows magic names on send(scope + '_list') - returns favorite records of certain scope

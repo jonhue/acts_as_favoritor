@@ -2,16 +2,7 @@ require 'acts_as_favoritor/version'
 
 module ActsAsFavoritor
 
-    autoload :Configuration, 'acts_as_favoritor/configuration'
-
-    class << self
-        attr_accessor :configuration
-    end
-
-    def self.configure
-        self.configuration ||= Configuration.new
-        yield configuration
-    end
+    require 'acts_as_favoritor/configuration'
 
     autoload :Favoritor, 'acts_as_favoritor/favoritor'
     autoload :Favoritable, 'acts_as_favoritor/favoritable'
