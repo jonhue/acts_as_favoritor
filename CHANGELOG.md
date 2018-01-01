@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 2.0.1 - 2018-01-01
+
+* bugfixes
+    * fixed error when generating files (without configuration becoming initialized)
+
 ### 2.0.0 - 2017-12-21
 
 * features

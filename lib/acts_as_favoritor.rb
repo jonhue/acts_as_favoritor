@@ -9,6 +9,6 @@ module ActsAsFavoritor
     autoload :FavoritorLib, 'acts_as_favoritor/favoritor_lib'
     autoload :FavoriteScopes, 'acts_as_favoritor/favorite_scopes'
 
-    require 'acts_as_favoritor/railtie' if defined?(Rails)
+    require 'acts_as_favoritor/railtie' if defined?(Rails::Railtie)
 
 end

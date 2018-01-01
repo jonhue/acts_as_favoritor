@@ -1,4 +1,4 @@
-require 'rails'
+require 'rails/railtie'
 
 module ActsAsFavoritor
     class Railtie < Rails::Railtie
