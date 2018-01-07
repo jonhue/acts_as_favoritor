@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
     gem.summary               = 'A Rubygem to add Favorite, Follow, Vote, etc. functionality to ActiveRecord models'
     gem.description           = 'acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes. You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records as well as caching.'
     gem.authors               = 'Jonas Hübotter'
-    gem.email                 = 'jonas.huebotter@gmail.com'
+    gem.email                 = 'me@jonhue.me'
     gem.homepage              = 'https://github.com/jonhue/acts_as_favoritor'
     gem.license               = 'MIT'
 
