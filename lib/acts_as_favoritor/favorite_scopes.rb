@@ -5,7 +5,7 @@ module ActsAsFavoritor
         # e.g. favoritors == favoritors.send('favorite_list')
         def method_missing m, *args
             if m.to_s[/(.+)_list/]
-                where scope: $1.singularize.classify
+                where scope: $1.singularize
             else
                 super
             end

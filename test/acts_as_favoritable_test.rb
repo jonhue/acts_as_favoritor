@@ -171,8 +171,8 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
                 @jon.unblock @sam
             end
 
-            should 'not include the unblocked user in the list of favoritors' do
-                assert_equal [], @jon.favoritors
+            should 'include the unblocked user in the list of favoritors' do
+                assert_equal [@sam], @jon.favoritors
             end
 
             should 'remove him from the blocked favoritors' do
