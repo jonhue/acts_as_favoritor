@@ -200,6 +200,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
         context "blocked by favoritable" do
             setup do
                 @jon.block @sam
+                @user_favorite = Favorite.where('favoritor_id = ? and favoritor_type = "User" and favoritable_id = ? and favoritable_type = "User"', @sam.id, @jon.id).first
             end
 
             should 'return favorited_status' do
