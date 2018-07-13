@@ -1,8 +1,3 @@
-test/debug.log
-coverage
-rdoc
-memory
-*.gem
-.rvmrc
-Gemfile.lock
-log
+/*.gem
+
+/**/*.log

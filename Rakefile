@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
 require 'rake'
 require 'rake/testtask'
-require 'rdoc/task'
 
 desc 'Default: run unit tests.'
 task default: :test
 
-desc 'Test the acts_as_favoritor gem.'
+desc 'Test acts_as_favoriter gem.'
 Rake::TestTask.new(:test) do |t|
-    t.libs << 'lib'
-    t.pattern = 'test/**/*_test.rb'
-    t.verbose = true
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end

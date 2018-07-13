@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - vendor/**/*
+  TargetRubyVersion: 2.5
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*_test.rb
+
+Style/Documentation:
+  Enabled: false
