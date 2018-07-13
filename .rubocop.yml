@@ -6,6 +6,10 @@ AllCops:
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*_test.rb
+
 Metrics/BlockLength:
   Exclude:
     - test/**/*_test.rb

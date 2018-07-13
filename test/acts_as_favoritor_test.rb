@@ -47,16 +47,16 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
       should_change('Favorite count', by: 1) { Favorite.count }
       should_change('@jon.favorites_count', by: 1) { @jon.favorites_count }
 
-      should "set the favoritor" do
+      should 'set the favoritor' do
         assert_equal @jon, Favorite.last.favoritor
       end
 
-      should "set the favoritable" do
+      should 'set the favoritable' do
         assert_equal @sam, Favorite.last.favoritable
       end
     end
 
-    context "favorite yourself" do
+    context 'favorite yourself' do
       setup do
         @jon.favorite @jon
       end
@@ -84,8 +84,18 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
 
     context 'favorites' do
       setup do
-        @band_favorite = Favorite.where('favoritor_id = ? and favoritor_type = "User" and favoritable_id = ? and favoritable_type = "Band"', @sam.id, @oasis.id).first
-        @user_favorite = Favorite.where('favoritor_id = ? and favoritor_type = "User" and favoritable_id = ? and favoritable_type = "User"', @sam.id, @jon.id).first
+        @band_favorite = Favorite.where(
+          'favoritor_id = ? and favoritor_type = "User" and '\
+          'favoritable_id = ? and favoritable_type = "Band"',
+          @sam.id,
+          @oasis.id
+        ).first
+        @user_favorite = Favorite.where(
+          'favoritor_id = ? and favoritor_type = "User" and '\
+          'favoritable_id = ? and favoritable_type = "User"',
+          @sam.id,
+          @jon.id
+        ).first
       end
 
       context 'favorites_by_type' do
@@ -174,7 +184,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
       end
 
       should 'raise on no method' do
-        assert_raises (NoMethodError) { @sam.foobar }
+        assert_raises(NoMethodError) { @sam.foobar }
       end
     end
 
@@ -185,7 +195,7 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
       end
 
       should 'return false when called with a nonexistent method' do
-        assert (not @sam.respond_to?(:foobar))
+        assert !@sam.respond_to?(:foobar)
       end
     end
 
@@ -198,10 +208,15 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
       should_change('@sam.favorites_count', by: -1) { @sam.favorites_count }
     end
 
-    context "blocked by favoritable" do
+    context 'blocked by favoritable' do
       setup do
         @jon.block @sam
-        @user_favorite = Favorite.where('favoritor_id = ? and favoritor_type = "User" and favoritable_id = ? and favoritable_type = "User"', @sam.id, @jon.id).first
+        @user_favorite = Favorite.where(
+          'favoritor_id = ? and favoritor_type = "User" and '\
+          'favoritable_id = ? and favoritable_type = "User"',
+          @sam.id,
+          @jon.id
+        ).first
       end
 
       should 'return favorited_status' do

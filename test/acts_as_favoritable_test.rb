@@ -22,7 +22,7 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
       @oasis = FactoryBot.create :oasis
       @metallica = FactoryBot.create :metallica
       @green_day = FactoryBot.create :green_day
-      @blink_182 = FactoryBot.create :blink_182
+      @blink = FactoryBot.create :blink_182
       @sam.favorite @jon
     end
 
@@ -84,7 +84,9 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
       end
 
       should_change('Favorite count', by: -1) { Favorite.count }
-      should_change('@sam.all_favorited.size', by: -1) { @sam.all_favorited.size }
+      should_change('@sam.all_favorited.size', by: -1) do
+        @sam.all_favorited.size
+      end
     end
 
     context 'get favorite record' do
@@ -231,14 +233,20 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
     context 'favoritors_with_sti' do
       setup do
         @sam.favorite @green_day
-        @sam.favorite @blink_182
+        @sam.favorite @blink
       end
 
       should 'return the favoritors for given type' do
-        assert_equal @sam.favorites_by_type('Band').first&.favoritable, @green_day.becomes(Band)
-        assert_equal @sam.favorites_by_type('Band').second&.favoritable, @blink_182.becomes(Band)
+        assert_equal(
+          @sam.favorites_by_type('Band').first&.favoritable,
+          @green_day.becomes(Band)
+        )
+        assert_equal(
+          @sam.favorites_by_type('Band').second&.favoritable,
+          @blink.becomes(Band)
+        )
         assert @green_day.favoritors_by_type('User').include?(@sam)
-        assert @blink_182.favoritors_by_type('User').include?(@sam)
+        assert @blink.favoritors_by_type('User').include?(@sam)
       end
     end
 
@@ -276,7 +284,7 @@ class ActsAsFavoritableTest < ActiveSupport::TestCase
       end
 
       should 'return false when called with a nonexistent method' do
-        assert (not @oasis.respond_to?(:foobar))
+        assert !@oasis.respond_to?(:foobar)
       end
     end
   end
