@@ -8,6 +8,6 @@ class Favorite < ActiveRecord::Base
   belongs_to :favoritor, polymorphic: true
 
   def block!
-    self.update_attributes blocked: true
+    update(blocked: true)
   end
 end
