@@ -11,7 +11,10 @@ module ActsAsFavoritor
                 include ActsAsFavoritor::Favoritor::InstanceMethods
                 include ActsAsFavoritor::FavoritorLib
 
-                serialize :favoritor_cache, Hash if ActsAsFavoritor.configuration&.cache
+                if ActsAsFavoritor.configuration&.cache
+                  serialize :favoritor_score, Hash
+                  serialize :favoritor_total, Hash
+                end
             end
         end
 
