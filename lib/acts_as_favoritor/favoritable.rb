@@ -12,8 +12,8 @@ module ActsAsFavoritor
                 include ActsAsFavoritor::FavoritorLib
 
                 if ActsAsFavoritor.configuration.cache
-                  serialize :favoritable_score, Hash
-                  serialize :favoritable_total, Hash
+                    serialize :favoritable_score, Hash
+                    serialize :favoritable_total, Hash
                 end
             end
         end
