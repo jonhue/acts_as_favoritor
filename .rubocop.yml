@@ -8,7 +8,7 @@ Gemspec/RequiredRubyVersion:
 
 # Remove this
 Metrics/AbcSize:
-  Max: 20
+  Max: 74
 
 Metrics/BlockLength:
   Exclude:
@@ -19,8 +19,23 @@ Metrics/ClassLength:
     - test/**/*_test.rb
 
 # Remove this
+Metrics/CyclomaticComplexity:
+  Max: 17
+
+# Remove this
 Metrics/MethodLength:
-  Max: 30
+  Max: 47
+
+# Remove this
+Metrics/ModuleLength:
+  Max: 500
+
+# Remove this
+Metrics/PerceivedComplexity:
+  Max: 18
 
 Style/Documentation:
+  Enabled: false
+
+Style/PerlBackrefs:
   Enabled: false

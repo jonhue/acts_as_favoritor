@@ -5,6 +5,7 @@ require File.expand_path(
   __FILE__
 )
 
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |gem|
   gem.name                  = 'acts_as_favoritor'
   gem.version               = ActsAsFavoritor::VERSION
@@ -41,3 +42,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'shoulda_create'
   gem.add_development_dependency 'sqlite3'
 end
+# rubocop:enable Metrics/BlockLength
