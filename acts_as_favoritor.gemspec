@@ -31,7 +31,7 @@ Gem::Specification.new do |gem|
   gem.files                 = Dir['README.md', 'LICENSE', 'lib/**/*']
   gem.require_paths         = ['lib']
 
-  gem.required_ruby_version = '>= 2.2.2'
+  gem.required_ruby_version = '>= 2.3'
 
   gem.add_dependency 'activerecord', '~> 5.2'
 
