@@ -12,8 +12,8 @@ module ActsAsFavoritor
                 include ActsAsFavoritor::FavoritorLib
 
                 if ActsAsFavoritor.configuration&.cache
-                  serialize :favoritor_score, Hash
-                  serialize :favoritor_total, Hash
+                    serialize :favoritor_score, Hash
+                    serialize :favoritor_total, Hash
                 end
             end
         end
@@ -107,11 +107,11 @@ module ActsAsFavoritor
                     results = {}
                     options[:scope].each do |scope|
                         if ActsAsFavoritor.configuration.cache
-                            self.favoritor_score[scope] = self.favoritor_score[scope] + 1 || 1
-                            self.favoritor_total[scope] = self.favoritor_total[scope] + 1 || 1
+                            self.favoritor_score[scope] = (self.favoritor_score[scope] || 0) + 1
+                            self.favoritor_total[scope] = (self.favoritor_total[scope] || 0) + 1
                             self.save!
-                            favoritable.favoritable_score[scope] = favoritable.favoritable_score[scope] + 1 || 1
-                            favoritable.favoritable_total[scope] = favoritable.favoritable_total[scope] + 1 || 1
+                            favoritable.favoritable_score[scope] = (favoritable.favoritable_score[scope] || 0) + 1
+                            favoritable.favoritable_total[scope] = (favoritable.favoritable_total[scope] || 0) + 1
                             favoritable.save!
                         end
                         if self != favoritable && scope != 'all'
@@ -122,11 +122,11 @@ module ActsAsFavoritor
                     return results
                 else
                     if ActsAsFavoritor.configuration.cache
-                        self.favoritor_score[options[:scope]] = self.favoritor_score[options[:scope]] + 1 || 1
-                        self.favoritor_total[options[:scope]] = self.favoritor_total[options[:scope]] + 1 || 1
+                        self.favoritor_score[options[:scope]] = (self.favoritor_score[options[:scope]] || 0) + 1
+                        self.favoritor_total[options[:scope]] = (self.favoritor_total[options[:scope]] || 0) + 1
                         self.save!
-                        favoritable.favoritable_score[options[:scope]] = favoritable.favoritable_score[options[:scope]] + 1 || 1
-                        favoritable.favoritable_total[options[:scope]] = favoritable.favoritable_total[options[:scope]] + 1 || 1
+                        favoritable.favoritable_score[options[:scope]] = (favoritable.favoritable_score[options[:scope]] || 0) + 1
+                        favoritable.favoritable_total[options[:scope]] = (favoritable.favoritable_total[options[:scope]] || 0) + 1
                         favoritable.save!
                     end
                     if self != favoritable && options[:scope] != 'all'
