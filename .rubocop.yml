@@ -6,13 +6,21 @@ AllCops:
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
-Metrics/ClassLength:
-  Exclude:
-    - test/**/*_test.rb
+# Remove this
+Metrics/AbcSize:
+  Max: 20
 
 Metrics/BlockLength:
   Exclude:
     - test/**/*_test.rb
+
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*_test.rb
+
+# Remove this
+Metrics/MethodLength:
+  Max: 30
 
 Style/Documentation:
   Enabled: false

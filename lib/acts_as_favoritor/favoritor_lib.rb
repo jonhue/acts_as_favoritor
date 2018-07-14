@@ -38,9 +38,9 @@ module ActsAsFavoritor
       if options.key? :parameter
         parameter = options[:parameter]
         options.delete :parameter
-        send method, parameter, options
+        send(method, parameter, options)
       else
-        send method, options
+        send(method, options)
       end
     end
   end
