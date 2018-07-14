@@ -1,6 +1,6 @@
 # acts_as_favoritor
 
-[![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor) <img src="https://travis-ci.org/jonhue/acts_as_favoritor.svg?branch=master" />
+[![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor) ![Travis](https://travis-ci.org/jonhue/acts_as_favoritor.svg?branch=master)
 
 acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
 
@@ -12,20 +12,17 @@ You are able to differentiate followers, favorites, watchers, votes and whatever
 
 * [Installation](#installation)
 * [Usage](#usage)
-    * [Setup](#setup)
-    * [`acts_as_favoritor` methods](#acts_as_favoritor-methods)
-    * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
-    * [`Favorite` model](#favorite-model)
-    * [Scopes](#scopes)
-    * [Caching](#caching)
+  * [Setup](#setup)
+  * [`acts_as_favoritor` methods](#acts_as_favoritor-methods)
+  * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
+  * [`Favorite` model](#favorite-model)
+  * [Scopes](#scopes)
+  * [Caching](#caching)
 * [Configuration](#configuration)
 * [Testing](#testing)
-    * [Test Coverage](#test-coverage)
-* [To Do](#to-do)
+* [To do](#to-do)
 * [Contributing](#contributing)
-    * [Contributors](#contributors)
-    * [Semantic versioning](#semantic-versioning)
-* [License](#license)
+  * [Semantic versioning](#semantic-versioning)
 
 ---
 
@@ -67,11 +64,11 @@ Add `acts_as_favoritable` to the models you want to be able to get favorited:
 
 ```ruby
 class User < ActiveRecord::Base
-    acts_as_favoritable
+  acts_as_favoritable
 end
 
 class Book < ActiveRecord::Base
-    acts_as_favoritable
+  acts_as_favoritable
 end
 ```
 
@@ -79,7 +76,7 @@ Specify which models can favorite other models by adding `acts_as_favoritor`:
 
 ```ruby
 class User < ActiveRecord::Base
-    acts_as_favoritor
+  acts_as_favoritor
 end
 ```
 
@@ -314,7 +311,7 @@ You can configure acts_as_favoritor by passing a block to `configure`. This can 
 
 ```ruby
 ActsAsFavoritor.configure do |config|
-    config.default_scope = 'follow'
+  config.default_scope = 'follow'
 end
 ```
 
@@ -338,21 +335,15 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
     `$ rake test`
 
-### Test Coverage
+5. Run RuboCop
 
-Test coverage can be calculated using SimpleCov. Make sure you have the [simplecov gem](https://github.com/colszowka/simplecov) installed.
-
-1. Uncomment SimpleCov in the Gemfile
-2. Uncomment the relevant section in `test/test_helper.rb`
-3. Run tests
-
-    `$ rake test`
+    `$ bundle exec rubocop`
 
 ---
 
-## To Do
+## To do
 
-[Here](https://github.com/jonhue/acts_as_favoritor/projects/1) is the full list of current projects.
+We use [GitHub projects](https://github.com/jonhue/acts_as_favoritor/projects/1) to coordinate the work on this project.
 
 To propose your ideas, initiate the discussion by adding a [new issue](https://github.com/jonhue/acts_as_favoritor/issues/new).
 
@@ -362,38 +353,8 @@ To propose your ideas, initiate the discussion by adding a [new issue](https://g
 
 We hope that you will consider contributing to acts_as_favoritor. Please read this short overview for some information about how to get started:
 
-[Learn more about contributing to this repository](https://github.com/jonhue/acts_as_favoritor/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/jonhue/acts_as_favoritor/blob/master/CODE_OF_CONDUCT.md)
-
-### Contributors
-
-Give the people some :heart: who are working on this project. See them all at:
-
-https://github.com/jonhue/acts_as_favoritor/graphs/contributors
+[Learn more about contributing to this repository](CONTRIBUTING.md), [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ### Semantic Versioning
 
 acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org.
-
-## License
-
-MIT License
-
-Copyright (c) 2017 Jonas Hübotter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
