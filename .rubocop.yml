@@ -6,9 +6,8 @@ AllCops:
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
-# Remove this
 Metrics/AbcSize:
-  Max: 74
+  Enabled: false
 
 Metrics/BlockLength:
   Exclude:
@@ -18,19 +17,15 @@ Metrics/ClassLength:
   Exclude:
     - test/**/*_test.rb
 
-# Remove this
 Metrics/CyclomaticComplexity:
-  Max: 17
+  Enabled: false
 
-# Remove this
 Metrics/MethodLength:
-  Max: 47
+  Enabled: false
 
-# Remove this
 Metrics/ModuleLength:
-  Max: 500
+  Enabled: false
 
-# Remove this
 Metrics/PerceivedComplexity:
   Max: 18
 
