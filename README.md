@@ -83,17 +83,17 @@ end
 ### `acts_as_favoritor` methods
 
 ```ruby
-book = Book.find 1
-user = User.find 1
+book = Book.find(1)
+user = User.find(1)
 
 # `user` favorites `book`.
-user.favorite book
+user.favorite(book)
 
 # `user` removes `book` from favorites.
-user.remove_favorite book
+user.remove_favorite(book)
 
 # Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
-user.favorited? book
+user.favorited?(book)
 
 # Total number of favorites by `user`.
 user.favorites_count
@@ -105,16 +105,16 @@ user.all_favorites
 user.all_favorited
 
 # Returns an array of `Favorite` records where the `favoritable_type` is `Book`.
-user.favorites_by_type 'Book'
+user.favorites_by_type('Book')
 
 # Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, e.g.: `User`, `Book`.
-user.favorited_by_type 'Book'
+user.favorited_by_type('Book')
 
 # Returns the exact same result as `user.favorited_by_type 'User'`.
 user.favorited_users
 
 # Total number of favorited books by `user`.
-user.favorited_by_type_count 'Book'
+user.favorited_by_type_count('Book')
 
 # Returns the exact same result as `user.favorited_by_type_count 'Book'`.
 user.favorited_books_count
@@ -124,13 +124,13 @@ user.favorited_books_count
 book.favorites_scoped
 
 # Block a favoritable
-user.block book
+user.block(book)
 
 # Unblock a favoritable
-user.unblock book
+user.unblock(book)
 
 # Whether `user` has blocked `book`. Returns `true` or `false`.
-user.blocked? book
+user.blocked?(book)
 
 # Returns an array including all blocked Favoritable records.
 user.blocks
@@ -139,7 +139,7 @@ user.blocks
 user.blocked_favoritables_count
 
 # Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
-user.favoritable_type book
+user.favoritable_type(book)
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -159,28 +159,28 @@ book.favoritors_scoped
 book.favoritors_count
 
 # Returns an array of records with type `User` following `book`.
-book.favoritors_by_type 'User'
+book.favoritors_by_type('User')
 
 # Returns the exact same as `book.favoritors_by_type 'User'`.
 book.user_favoritors
 
 # Total number of favoritors with type `User`.
-book.favoritors_by_type_count 'User'
+book.favoritors_by_type_count('User')
 
 # Returns the exact same as `book.favoritors_by_type_count 'User'`.
 book.count_user_favoritors
 
 # Whether `book` has been favorited by `user`. Returns `true` or `false`.
-book.favorited_by? user
+book.favorited_by?(user)
 
 # Block a favoritor
-book.block user
+book.block(user)
 
 # Unblock a favoritor
-book.unblock user
+book.unblock(user)
 
 # Whether `book` has blocked `user` as favoritor. Returns `true` or `false`.
-book.blocked? user
+book.blocked?(user)
 
 # Returns an array including all blocked Favoritor records.
 book.blocks
@@ -189,7 +189,7 @@ book.blocks
 book.blocked_favoritors_count
 
 # Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
-book.favoritor_type user
+book.favoritor_type(user)
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -209,13 +209,13 @@ Favorite.descending
 
 # Returns all `Favorite` records in an array, which have been created in a specified timeframe. Default is 2 weeks.
 Favorite.recent
-Favorite.recent 1.month.ago
+Favorite.recent(1.month.ago)
 
 # Returns all favorites of `user`, including those who were blocked.
-Favorite.for_favoritor user
+Favorite.for_favoritor(user)
 
 # Returns all favoritors of `book`, including those who were blocked.
-Favorite.for_favoritable book
+Favorite.for_favoritable(book)
 ```
 
 ### Scopes
@@ -229,11 +229,11 @@ You can create new scopes on the fly. Every single method takes `scope` as an op
 So lets see how this works:
 
 ```ruby
-user.favorite book, scope: [:favorite, :watching]
-user.remove_favorite book, scope: [:watching]
-second_user = User.find 2
-user.favorite second_user, scope: [:follow]
-book.block user, scope: [:all] # applies to all scopes
+user.favorite(book, scope: [:favorite, :watching])
+user.remove_favorite(book, scope: [:watching])
+second_user = User.find(2)
+user.favorite(second_user, scope: [:follow])
+book.block(user, scope: [:all]) # applies to all scopes
 ```
 
 That's simple!
@@ -241,8 +241,8 @@ That's simple!
 When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys:
 
 ```ruby
-user.favorited? book, scope: [:favorite, :watching] # => { favorite: true, watching: false }
-user.favorited? book, scope: [:all] # => true
+user.favorited?(book, scope: [:favorite, :watching]) # => { favorite: true, watching: false }
+user.favorited?(book, scope: [:all]) # => true
 ```
 
 `acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
@@ -333,7 +333,7 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
 4. Run tests
 
-    `$ rake test`
+    `$ bundle exec rake test`
 
 5. Run RuboCop
 
