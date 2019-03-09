@@ -35,8 +35,9 @@ module ActsAsFavoritor
           end
           results
         else
-          Favorite.unblocked.send(options[:scope].to_s + '_list').for_favoritor(self)
-                  .for_favoritable(favoritable).count.positive?
+          Favorite.unblocked.send(options[:scope].to_s + '_list')
+                  .for_favoritor(self).for_favoritable(favoritable)
+                  .count.positive?
         end
       end
 
