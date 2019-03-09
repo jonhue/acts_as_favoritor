@@ -75,7 +75,16 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
 
     context 'remove_favorite' do
       setup do
-        @sam.remove_favorite @jon
+        @sam.remove_favorite(@jon)
+      end
+
+      should_change('Favorite count', by: -1) { Favorite.count }
+      should_change('@sam.favorites_count', by: -1) { @sam.favorites_count }
+    end
+
+    context 'remove_favorite with scope' do
+      setup do
+        @sam.remove_favorite(@jon, scope: [:favorite])
       end
 
       should_change('Favorite count', by: -1) { Favorite.count }
@@ -221,6 +230,10 @@ class ActsAsFavoritorTest < ActiveSupport::TestCase
 
       should 'return favorited_status' do
         assert_equal false, @sam.favorited?(@jon)
+      end
+
+      should 'return favorited_status with scope' do
+        assert_equal false, @sam.favorited?(@jon, scope: [:favorite])
       end
 
       should 'return favorites_count' do
