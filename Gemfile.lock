@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_favoritor (2.1.0)
+    acts_as_favoritor (2.1.1)
       activerecord (~> 5.2)
 
 GEM
@@ -155,4 +155,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
