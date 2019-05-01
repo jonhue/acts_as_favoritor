@@ -11,6 +11,7 @@ module ActsAsFavoritor
       unless parent_classes.include? obj.class.superclass
         return obj.class.base_class.name
       end
+
       obj.class.name
     end
 

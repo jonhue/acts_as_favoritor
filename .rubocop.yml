@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   Exclude:
     - vendor/**/*
@@ -6,10 +8,6 @@ AllCops:
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
-# Remove this
-Metrics/AbcSize:
-  Max: 74
-
 Metrics/BlockLength:
   Exclude:
     - test/**/*_test.rb
@@ -17,22 +15,6 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - test/**/*_test.rb
-
-# Remove this
-Metrics/CyclomaticComplexity:
-  Max: 17
-
-# Remove this
-Metrics/MethodLength:
-  Max: 47
-
-# Remove this
-Metrics/ModuleLength:
-  Max: 500
-
-# Remove this
-Metrics/PerceivedComplexity:
-  Max: 18
 
 Style/Documentation:
   Enabled: false
