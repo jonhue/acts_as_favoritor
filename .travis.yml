@@ -7,5 +7,5 @@ before_install:
   - gem update --system
   - gem install bundler
 script:
-  - rake test
+  - bundle exec rake test
   - bundle exec rubocop
