@@ -13,6 +13,7 @@ module ActsAsFavoritor
         include ActsAsFavoritor::FavoritorLib
 
         return unless ActsAsFavoritor.configuration&.cache
+
         serialize :favoritor_score, Hash
         serialize :favoritor_total, Hash
       end
@@ -132,6 +133,7 @@ module ActsAsFavoritor
               favoritable.save!
             end
             next unless self != favoritable && scope != 'all'
+
             params = {
               favoritable_id: favoritable.id,
               favoritable_type: parent_class_name(favoritable),

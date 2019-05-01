@@ -13,7 +13,8 @@ module ActsAsFavoritor
         include ActsAsFavoritor::Favoritable::InstanceMethods
         include ActsAsFavoritor::FavoritorLib
 
-        return unless ActsAsFavoritor.configuration.cache
+        return unless ActsAsFavoritor.configuration&.cache
+
         serialize :favoritable_score, Hash
         serialize :favoritable_total, Hash
       end
