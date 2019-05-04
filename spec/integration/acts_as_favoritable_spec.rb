@@ -15,25 +15,19 @@ RSpec.describe 'acts_as_favoritable' do
     end
 
     it 'responds to instance methods' do
-      expect(sam).to respond_to(:favoritors_count)
       expect(sam).to respond_to(:favoritors)
+      expect(sam).to respond_to(:favorited_by_type)
       expect(sam).to respond_to(:favorited_by?)
-    end
-
-    describe 'favoritors_count' do
-      it 'returns the number of objects that favorited an instance' do
-        expect { jon.favorite(bob) }.to change(bob, :favoritors_count).by(1)
-      end
+      expect(sam).to respond_to(:block)
+      expect(sam).to respond_to(:unblock)
+      expect(sam).to respond_to(:blocked?)
+      expect(sam).to respond_to(:blocks)
     end
 
     describe 'favoritors' do
       it 'returns favorited objects' do
         expect(jon.favoritors).to eq [sam]
         expect(sam.favoritors).to eq [jon, bob]
-      end
-
-      it 'accepts AR options' do
-        expect(jon.favoritors(limit: 0)).to eq []
       end
     end
 
@@ -51,10 +45,6 @@ RSpec.describe 'acts_as_favoritable' do
     describe 'favoritors_by_type' do
       it 'only returns favoritors of a given type' do
         expect(sam.favoritors_by_type('User')).to eq [jon, bob]
-      end
-
-      it 'accepts AR options' do
-        expect(jon.favoritors_by_type('User', limit: 0)).to eq []
       end
     end
 
@@ -82,50 +72,37 @@ RSpec.describe 'acts_as_favoritable' do
         expect(sam.user_favoritors).to eq [jon, bob]
         expect(bob.user_favoritors).to eq []
       end
-
-      it 'count_*_favoritors returns favoritors' do
-        expect(jon.count_user_favoritors).to eq 1
-        expect(sam.count_user_favoritors).to eq 2
-        expect(bob.count_user_favoritors).to eq 0
-      end
     end
   end
 
   context 'with scopes' do
     before do
-      jon.favorite(sam, scope: [:favorite, :friend])
-      bob.favorite(sam, scope: [:friend])
-      sam.favorite(jon, scope: [:favorite])
-    end
-
-    describe 'favoritors_count' do
-      it 'returns the number of objects by scope that favorited an instance' do
-        expect { jon.favorite(bob, scope: [:favorite]) }
-          .to change { bob.favoritors_count(scope: [:favorite]) }.by(1)
-      end
+      jon.favorite(sam, scopes: [:favorite, :friend])
+      bob.favorite(sam, scopes: [:friend])
+      sam.favorite(jon, scopes: [:favorite])
     end
 
     describe 'favoritors' do
       it 'returns favorited objects by scope' do
-        expect(jon.favoritors(scope: [:favorite])).to eq [sam]
-        expect(sam.favoritors(scope: [:favorite])).to eq [jon]
+        expect(jon.favoritors(scopes: [:favorite])).to eq [sam]
+        expect(sam.favoritors(scopes: [:favorite])).to eq [jon]
       end
     end
 
     describe 'favorited_by?' do
       it 'returns true when an instance was favorited by the given object' do
-        expect(sam.favorited_by?(jon, scope: [:favorite])).to eq true
+        expect(sam.favorited_by?(jon, scopes: [:favorite])).to eq true
       end
 
       it 'returns false when an instance was not favorited ' \
          'by the given object' do
-        expect(sam.favorited_by?(bob, scope: [:favorite])).to eq false
+        expect(sam.favorited_by?(bob, scopes: [:favorite])).to eq false
       end
     end
 
     describe 'favoritors_by_type' do
       it 'only returns favoritors of a given type by scope' do
-        expect(sam.favoritors_by_type('User', scope: [:favorite])).to eq [jon]
+        expect(sam.favoritors_by_type('User', scopes: [:favorite])).to eq [jon]
       end
     end
   end
@@ -135,12 +112,12 @@ RSpec.describe 'acts_as_favoritable' do
 
     it 'cascades when destroying the favoritor' do
       expect { jon.destroy }.to change(Favorite, :count).by(-1)
-        .and change(sam, :favoritors_count).by(-1)
+        .and change { sam.favoritors.size }.by(-1)
     end
 
     it 'cascades when destroying the favoritable' do
       expect { sam.destroy }.to change(Favorite, :count).by(-1)
-        .and change(sam, :favoritors_count).by(-1)
+        .and change { sam.favoritors.size }.by(-1)
     end
   end
 end
