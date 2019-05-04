@@ -2,19 +2,6 @@
 
 module ActsAsFavoritor
   module FavoritorLib
-    private
-
-    DEFAULT_PARENTS = [ApplicationRecord, ActiveRecord::Base].freeze
-
-    # Retrieves the parent class name if using STI.
-    def parent_class_name(obj)
-      unless DEFAULT_PARENTS.include? obj.class.superclass
-        return obj.class.base_class.name
-      end
-
-      obj.class.name
-    end
-
     def build_result_for_scopes(scopes)
       return if scopes.empty?
 
@@ -25,6 +12,8 @@ module ActsAsFavoritor
 
       result
     end
+
+    private
 
     def sanitized_scopes(scopes)
       scopes.map(&:to_sym)

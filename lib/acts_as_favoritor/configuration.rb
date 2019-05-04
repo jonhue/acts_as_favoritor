@@ -11,12 +11,15 @@ module ActsAsFavoritor
   end
 
   class Configuration
+    DEFAULT_SCOPE = :favorite
+    DEFAULT_CACHE = false
+
     attr_accessor :default_scope
     attr_accessor :cache
 
     def initialize
-      @default_scope = 'favorite'
-      @cache = false
+      @default_scope = DEFAULT_SCOPE
+      @cache         = DEFAULT_CACHE
     end
   end
 end
