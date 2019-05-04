@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Favorite < ActiveRecord::Base
+class Favorite < ApplicationRecord
   extend ActsAsFavoritor::FavoritorLib
   extend ActsAsFavoritor::FavoriteScopes
 

@@ -1,23 +1,38 @@
 inherit_from: .rubocop_todo.yml
 
+require: rubocop-rspec
+
 AllCops:
   Exclude:
+    - spec/support/rails_app/db/schema.rb
     - vendor/**/*
   TargetRubyVersion: 2.5
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - spec/**/*_spec.rb
+
 Metrics/BlockLength:
   Exclude:
-    - test/**/*_test.rb
+    - spec/**/*_spec.rb
 
-Metrics/ClassLength:
-  Exclude:
-    - test/**/*_test.rb
+RSpec/ExampleLength:
+  Max: 8
+
+RSpec/MultipleExpectations:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
 
 Style/PerlBackrefs:
   Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets
