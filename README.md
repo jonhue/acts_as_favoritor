@@ -95,9 +95,6 @@ user.remove_favorite(book)
 # Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
 user.favorited?(book)
 
-# Total number of favorites by `user`.
-user.favorites_count
-
 # Returnes `user`'s favorites that have not been blocked as an array of `Favorite` records.
 user.all_favorites
 
@@ -113,16 +110,6 @@ user.favorited_by_type('Book')
 # Returns the exact same result as `user.favorited_by_type 'User'`.
 user.favorited_users
 
-# Total number of favorited books by `user`.
-user.favorited_by_type_count('Book')
-
-# Returns the exact same result as `user.favorited_by_type_count 'Book'`.
-user.favorited_books_count
-
-# Returns the Arel scope for favorites.
-# This does not return the actual favorites, just the scope of favorited including the favoritables, essentially: `book.favorites.unblocked.includes(:favoritable)`.
-book.favorites_scoped
-
 # Block a favoritable
 user.block(book)
 
@@ -134,12 +121,6 @@ user.blocked?(book)
 
 # Returns an array including all blocked Favoritable records.
 user.blocks
-
-# Total number of `user`'s favorites blocked.
-user.blocked_favoritables_count
-
-# Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
-user.favoritable_type(book)
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -152,23 +133,11 @@ These methods take an optional hash parameter of ActiveRecord options (`:limit`,
 # Returns all favoritors of a model that `acts_as_favoritable`
 book.favoritors
 
-# Returns the Arel scope for favoritors. This does not return the actual favoritors, just the scope of favorited records including the favoritors, essentially:  `book.favorited.includes(:favoritors)`.
-book.favoritors_scoped
-
-# Total number of favoritors.
-book.favoritors_count
-
 # Returns an array of records with type `User` following `book`.
 book.favoritors_by_type('User')
 
 # Returns the exact same as `book.favoritors_by_type 'User'`.
 book.user_favoritors
-
-# Total number of favoritors with type `User`.
-book.favoritors_by_type_count('User')
-
-# Returns the exact same as `book.favoritors_by_type_count 'User'`.
-book.count_user_favoritors
 
 # Whether `book` has been favorited by `user`. Returns `true` or `false`.
 book.favorited_by?(user)
@@ -184,12 +153,6 @@ book.blocked?(user)
 
 # Returns an array including all blocked Favoritor records.
 book.blocks
-
-# Total number of `book`'s favoritors blocked.
-book.blocked_favoritors_count
-
-# Whether `user` has favorited, not favorited or blocked `book`. Returns `true`, `nil` or `false`.
-book.favoritor_type(user)
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -229,11 +192,11 @@ You can create new scopes on the fly. Every single method takes `scope` as an op
 So lets see how this works:
 
 ```ruby
-user.favorite(book, scope: [:favorite, :watching])
-user.remove_favorite(book, scope: [:watching])
+user.favorite(book, scopes: [:favorite, :watching])
+user.remove_favorite(book, scopes: [:watching])
 second_user = User.find(2)
-user.favorite(second_user, scope: [:follow])
-book.block(user, scope: [:all]) # applies to all scopes
+user.favorite(second_user, scopes: [:follow])
+book.block(user, scopes: [:all]) # applies to all scopes
 ```
 
 That's simple!
@@ -241,15 +204,15 @@ That's simple!
 When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys:
 
 ```ruby
-user.favorited?(book, scope: [:favorite, :watching]) # => { favorite: true, watching: false }
-user.favorited?(book, scope: [:all]) # => true
+user.favorited?(book, scopes: [:favorite, :watching]) # => { favorite: true, watching: false }
+user.favorited?(book, scopes: [:all]) # => true
 ```
 
 `acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
 
 ```ruby
 # Returns all `Favorite` records where `scope` is `my_scope`
-Favorite.send(my_scope + '_list')
+Favorite.send("#{my_scope}_list")
 
 ## Examples
 ### Returns all `Favorite` records where `scope` is `favorites`
@@ -333,7 +296,7 @@ Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being us
 
 4. Run tests
 
-    `$ bundle exec rake test`
+    `$ bundle exec rspec`
 
 5. Run RuboCop
 
