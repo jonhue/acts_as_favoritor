@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_favoritor (2.1.2)
+    acts_as_favoritor (3.0.0)
       activerecord (>= 5.0)
 
 GEM
