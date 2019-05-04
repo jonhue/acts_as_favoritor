@@ -28,11 +28,12 @@ module ActsAsFavoritor
         elsif options[:multiple_scopes]
           results = {}
           options[:scope].each do |scope|
-            results[scope] = favorited.unblocked.send(scope + '_list').count
+            results[scope] = favorited.unblocked.send(scope.to_s + '_list')
+                                      .count
           end
           results
         else
-          favorited.unblocked.send(options[:scope] + '_list').count
+          favorited.unblocked.send(options[:scope].to_s + '_list').count
         end
       end
 
@@ -139,12 +140,12 @@ module ActsAsFavoritor
         elsif options[:multiple_scopes]
           results = {}
           options[:scope].each do |scope|
-            results[scope] = favorited.send(scope + '_list')
+            results[scope] = favorited.send(scope.to_s + '_list')
                                       .includes(:favoritor)
           end
           results
         else
-          favorited.send(options[:scope] + '_list').includes(:favoritor)
+          favorited.send(options[:scope].to_s + '_list').includes(:favoritor)
         end
       end
 
@@ -229,12 +230,12 @@ module ActsAsFavoritor
         elsif options[:multiple_scopes]
           results = {}
           options[:scope].each do |scope|
-            results[scope] = favorited.unblocked.send(scope + '_list')
+            results[scope] = favorited.unblocked.send(scope.to_s + '_list')
                                       .for_favoritor(favoritor).first.present?
           end
           results
         else
-          favorited.unblocked.send(options[:scope] + '_list')
+          favorited.unblocked.send(options[:scope].to_s + '_list')
                    .for_favoritor(favoritor).first.present?
         end
       end
