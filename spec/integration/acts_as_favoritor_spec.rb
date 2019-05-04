@@ -2,7 +2,7 @@
 
 require_relative '../rails_helper'
 
-RSpec.describe(ActsAsFavoritor) do
+RSpec.describe 'acts_as_favoritor' do
   let(:sam)       { create :sam }
   let(:jon)       { create :jon }
   let(:beethoven) { create :beethoven }
@@ -104,15 +104,6 @@ RSpec.describe(ActsAsFavoritor) do
 
       it 'accepts AR options' do
         expect(jon.all_favorited(limit: 0)).to eq []
-      end
-    end
-
-    describe 'block/unblock' do
-      it 'a favoritable cannot be favorited when the favoritor was blocked' do
-        expect { sam.block(jon) }.to change { jon.favorited?(sam) }
-          .from(true).to(false)
-        expect { sam.unblock(jon) }.to change { jon.favorited?(sam) }
-          .from(false).to(true)
       end
     end
 
@@ -230,7 +221,7 @@ RSpec.describe(ActsAsFavoritor) do
 
     it 'cascades when destroying the favoritor' do
       expect { jon.destroy }.to change(Favorite, :count).by(-1)
-        .and change(sam, :favorites_count).by(-1)
+        .and change(jon, :favorites_count).by(-1)
     end
 
     it 'cascades when destroying the favoritable' do

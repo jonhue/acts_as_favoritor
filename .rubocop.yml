@@ -19,6 +19,10 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
 
+RSpec/DescribeClass:
+  Exclude:
+    - spec/integration/**/*_spec.rb
+
 RSpec/ExampleLength:
   Max: 8
 
