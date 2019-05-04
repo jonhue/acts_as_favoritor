@@ -1,6 +1,0 @@
-# frozen_string_literal: true
-
-require File.expand_path('../config/application', __dir__)
-require 'rake'
-
-Dummy::Application.load_tasks
