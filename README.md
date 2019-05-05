@@ -259,11 +259,11 @@ You can configure acts_as_favoritor by passing a block to `configure`. This can 
 
 ```ruby
 ActsAsFavoritor.configure do |config|
-  config.default_scope = 'follow'
+  config.default_scope = :follow
 end
 ```
 
-**`default_scope`** Specify your default scope. Takes a string. Defaults to `'favorite'`. Learn more about scopes [here](#scopes).
+**`default_scope`** Specify your default scope. Takes a string. Defaults to `:favorite`. Learn more about scopes [here](#scopes).
 
 **`cache`** Whether `acts_as_favoritor` uses caching or not. Takes a boolean. Defaults to `false`. Learn more about caching [here](#caching).
 
