@@ -90,7 +90,7 @@ user = User.find(1)
 user.favorite(book)
 
 # `user` removes `book` from favorites.
-user.remove_favorite(book)
+user.unfavorite(book)
 
 # Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
 user.favorited?(book)
@@ -110,17 +110,11 @@ user.favorited_by_type('Book')
 # Returns the exact same result as `user.favorited_by_type 'User'`.
 user.favorited_users
 
-# Block a favoritable
-user.block(book)
+# Whether `user` has been blocked by `book`. Returns `true` or `false`.
+user.blocked_by?(book)
 
-# Unblock a favoritable
-user.unblock(book)
-
-# Whether `user` has blocked `book`. Returns `true` or `false`.
-user.blocked?(book)
-
-# Returns an array including all blocked Favoritable records.
-user.blocks
+# Returns an array including all blocked Favorite records.
+user.blocked_by
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -152,7 +146,7 @@ book.unblock(user)
 book.blocked?(user)
 
 # Returns an array including all blocked Favoritor records.
-book.blocks
+book.blocked
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -162,17 +156,11 @@ These methods take an optional hash parameter of ActiveRecord options (`:limit`,
 ### `Favorite` model
 
 ```ruby
-# Scopes
-## Returns all `Favorite` records where `blocked` is `false`.
+# Returns all `Favorite` records where `blocked` is `false`.
 Favorite.unblocked
-## Returns all `Favorite` records where `blocked` is `true`.
-Favorite.blocked
-## Returns an ordered array of the latest create `Favorite` records.
-Favorite.descending
 
-# Returns all `Favorite` records in an array, which have been created in a specified timeframe. Default is 2 weeks.
-Favorite.recent
-Favorite.recent(1.month.ago)
+# Returns all `Favorite` records where `blocked` is `true`.
+Favorite.blocked
 
 # Returns all favorites of `user`, including those who were blocked.
 Favorite.for_favoritor(user)
@@ -193,10 +181,9 @@ So lets see how this works:
 
 ```ruby
 user.favorite(book, scopes: [:favorite, :watching])
-user.remove_favorite(book, scopes: [:watching])
+user.unfavorite(book, scopes: [:watching])
 second_user = User.find(2)
 user.favorite(second_user, scopes: [:follow])
-book.block(user, scopes: [:all]) # applies to all scopes
 ```
 
 That's simple!
@@ -205,7 +192,7 @@ When you call a method which returns something while specifying multiple scopes,
 
 ```ruby
 user.favorited?(book, scopes: [:favorite, :watching]) # => { favorite: true, watching: false }
-user.favorited?(book, scopes: [:all]) # => true
+user.favorited?(book, scopes: [:favorite]) # => true
 ```
 
 `acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
@@ -219,8 +206,6 @@ Favorite.send("#{my_scope}_list")
 Favorite.favorite_list
 ### Returns all `Favorite` records where `scope` is `watching`
 Favorite.watching_list
-### Very unnecessary, but `all_list` returns literally all `Favorite` records
-Favorite.all_list
 ```
 
 ### Caching

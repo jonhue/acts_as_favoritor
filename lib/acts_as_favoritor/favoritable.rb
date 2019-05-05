@@ -16,8 +16,8 @@ module ActsAsFavoritor
         has_many :favorited, as: :favoritable, dependent: :destroy,
                              class_name: 'Favorite'
 
+        extend ActsAsFavoritor::FavoritorLib
         include ActsAsFavoritor::Favoritable::InstanceMethods
-        include ActsAsFavoritor::FavoritorLib
       end
     end
 
@@ -45,7 +45,7 @@ module ActsAsFavoritor
       end
 
       def favoritors(scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
+        self.class.build_result_for_scopes scopes do |scope|
           favorited.includes(:favoritor).unblocked.send("#{scope}_list")
                    .map(&:favoritor)
         end
@@ -54,7 +54,7 @@ module ActsAsFavoritor
       def favoritors_by_type(favoritor_type,
                              scopes: [ActsAsFavoritor.configuration
                                                      .default_scope])
-        build_result_for_scopes scopes do |scope|
+        self.class.build_result_for_scopes scopes do |scope|
           favorited.unblocked.send("#{scope}_list")
                    .for_favoritor_type(favoritor_type).map(&:favoritor)
         end
@@ -62,7 +62,7 @@ module ActsAsFavoritor
 
       def favorited_by?(favoritor,
                         scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
+        self.class.build_result_for_scopes scopes do |scope|
           favorited.unblocked.send("#{scope}_list").for_favoritor(favoritor)
                    .first.present?
         end
@@ -70,8 +70,8 @@ module ActsAsFavoritor
 
       def block(favoritor,
                 scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
-          get_favorite_for(favoritor, scope).block! || Favorite.create(
+        self.class.build_result_for_scopes scopes do |scope|
+          get_favorite_for(favoritor, scope)&.block! || Favorite.create(
             favoritable: self,
             favoritor: favoritor,
             blocked: true,
@@ -82,21 +82,21 @@ module ActsAsFavoritor
 
       def unblock(favoritor,
                   scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
+        self.class.build_result_for_scopes scopes do |scope|
           get_favorite_for(favoritor, scope)&.update(blocked: false)
         end
       end
 
       def blocked?(favoritor,
                    scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
+        self.class.build_result_for_scopes scopes do |scope|
           favorited.blocked.send("#{scope}_list").for_favoritor(favoritor).first
                    .present?
         end
       end
 
-      def blocks(scopes: [ActsAsFavoritor.configuration.default_scope])
-        build_result_for_scopes scopes do |scope|
+      def blocked(scopes: [ActsAsFavoritor.configuration.default_scope])
+        self.class.build_result_for_scopes scopes do |scope|
           favorited.includes(:favoritor).blocked.send("#{scope}_list")
                    .map(&:favoritor)
         end
