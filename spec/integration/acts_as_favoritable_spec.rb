@@ -21,7 +21,7 @@ RSpec.describe 'acts_as_favoritable' do
       expect(sam).to respond_to(:block)
       expect(sam).to respond_to(:unblock)
       expect(sam).to respond_to(:blocked?)
-      expect(sam).to respond_to(:blocks)
+      expect(sam).to respond_to(:blocked)
     end
 
     describe 'favoritors' do
@@ -50,9 +50,11 @@ RSpec.describe 'acts_as_favoritable' do
 
     describe 'block/unblock' do
       it 'a favoritable cannot be favorited when the favoritor was blocked' do
-        expect { sam.block(jon) }.to change { jon.favorited?(sam) }
+        expect { sam.block(jon) }
+          .to  change { jon.favorited?(sam) }
           .from(true).to(false)
-        expect { sam.unblock(jon) }.to change { jon.favorited?(sam) }
+        expect { sam.unblock(jon) }
+          .to  change { jon.favorited?(sam) }
           .from(false).to(true)
       end
     end
@@ -111,12 +113,14 @@ RSpec.describe 'acts_as_favoritable' do
     before { jon.favorite(sam) }
 
     it 'cascades when destroying the favoritor' do
-      expect { jon.destroy }.to change(Favorite, :count).by(-1)
+      expect { jon.destroy }
+        .to  change(Favorite, :count).by(-1)
         .and change { sam.favoritors.size }.by(-1)
     end
 
     it 'cascades when destroying the favoritable' do
-      expect { sam.destroy }.to change(Favorite, :count).by(-1)
+      expect { sam.destroy }
+        .to  change(Favorite, :count).by(-1)
         .and change { sam.favoritors.size }.by(-1)
     end
   end

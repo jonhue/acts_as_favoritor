@@ -71,7 +71,7 @@ module ActsAsFavoritor
       def block(favoritor,
                 scopes: [ActsAsFavoritor.configuration.default_scope])
         self.class.build_result_for_scopes scopes do |scope|
-          get_favorite_for(favoritor, scope).block! || Favorite.create(
+          get_favorite_for(favoritor, scope)&.block! || Favorite.create(
             favoritable: self,
             favoritor: favoritor,
             blocked: true,
@@ -95,7 +95,7 @@ module ActsAsFavoritor
         end
       end
 
-      def blocks(scopes: [ActsAsFavoritor.configuration.default_scope])
+      def blocked(scopes: [ActsAsFavoritor.configuration.default_scope])
         self.class.build_result_for_scopes scopes do |scope|
           favorited.includes(:favoritor).blocked.send("#{scope}_list")
                    .map(&:favoritor)

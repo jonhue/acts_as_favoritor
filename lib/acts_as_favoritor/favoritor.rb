@@ -131,7 +131,7 @@ module ActsAsFavoritor
         end
       end
 
-      def blocks(scopes: [ActsAsFavoritor.configuration.default_scope])
+      def blocked(scopes: [ActsAsFavoritor.configuration.default_scope])
         self.class.build_result_for_scopes scopes do |scope|
           favorites.includes(:favoritable).blocked.send("#{scope}_list")
                    .map(&:favoritable)

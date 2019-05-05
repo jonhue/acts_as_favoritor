@@ -27,12 +27,13 @@ RSpec.describe 'acts_as_favoritor' do
       expect(sam).to respond_to(:block)
       expect(sam).to respond_to(:unblock)
       expect(sam).to respond_to(:blocked?)
-      expect(sam).to respond_to(:blocks)
+      expect(sam).to respond_to(:blocked)
     end
 
     describe 'favorite' do
       it 'allows favoriting objects' do
-        expect { jon.favorite(beethoven) }.to change(Favorite, :count).by(1)
+        expect { jon.favorite(beethoven) }
+          .to  change(Favorite, :count).by(1)
           .and change { jon.all_favorites.size }.by(1)
           .and change { jon.favorited?(beethoven) }.from(false).to(true)
       end
@@ -46,7 +47,8 @@ RSpec.describe 'acts_as_favoritor' do
 
     describe 'remove_favorite' do
       it 'allows removing favorites' do
-        expect { jon.remove_favorite(sam) }.to change(Favorite, :count).by(-1)
+        expect { jon.remove_favorite(sam) }
+          .to  change(Favorite, :count).by(-1)
           .and change { jon.all_favorites.size }.by(-1)
           .and change { jon.favorited?(sam) }.from(true).to(false)
       end
@@ -115,10 +117,10 @@ RSpec.describe 'acts_as_favoritor' do
     describe 'favorite' do
       it 'allows favoriting objects with scope' do
         expect { jon.favorite(beethoven, scopes: [:friend]) }
-          .to change(Favorite, :count).by(1)
+          .to  change(Favorite, :count).by(1)
           .and change { jon.all_favorites(scopes: [:friend]).size }.by(1)
           .and change { jon.favorited?(beethoven, scopes: [:friend]) }
-          .from(false).to(true)
+            .from(false).to(true)
 
         expect(jon.favorited?(beethoven, scopes: [:favorite])).to eq false
       end
@@ -127,10 +129,10 @@ RSpec.describe 'acts_as_favoritor' do
     describe 'remove_favorite' do
       it 'allows removing favorites by scope' do
         expect { jon.remove_favorite(sam, scopes: [:favorite]) }
-          .to change(Favorite, :count).by(-1)
+          .to  change(Favorite, :count).by(-1)
           .and change { jon.all_favorites(scopes: [:favorite]).size }.by(-1)
           .and change { jon.favorited?(sam, scopes: [:favorite]) }
-          .from(true).to(false)
+            .from(true).to(false)
 
         expect(jon.favorited?(sam, scopes: [:friend])).to eq true
       end
@@ -181,12 +183,14 @@ RSpec.describe 'acts_as_favoritor' do
     before { jon.favorite(sam) }
 
     it 'cascades when destroying the favoritor' do
-      expect { jon.destroy }.to change(Favorite, :count).by(-1)
+      expect { jon.destroy }
+        .to  change(Favorite, :count).by(-1)
         .and change { jon.all_favorites.size }.by(-1)
     end
 
     it 'cascades when destroying the favoritable' do
-      expect { sam.destroy }.to change(Favorite, :count).by(-1)
+      expect { sam.destroy }
+        .to  change(Favorite, :count).by(-1)
         .and change { jon.all_favorites.size }.by(-1)
     end
   end

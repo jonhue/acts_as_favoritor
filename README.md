@@ -120,7 +120,7 @@ user.unblock(book)
 user.blocked?(book)
 
 # Returns an array including all blocked Favoritable records.
-user.blocks
+user.blocked
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
@@ -152,7 +152,7 @@ book.unblock(user)
 book.blocked?(user)
 
 # Returns an array including all blocked Favoritor records.
-book.blocks
+book.blocked
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
