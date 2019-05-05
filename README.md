@@ -90,7 +90,7 @@ user = User.find(1)
 user.favorite(book)
 
 # `user` removes `book` from favorites.
-user.remove_favorite(book)
+user.unfavorite(book)
 
 # Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
 user.favorited?(book)
@@ -187,10 +187,9 @@ So lets see how this works:
 
 ```ruby
 user.favorite(book, scopes: [:favorite, :watching])
-user.remove_favorite(book, scopes: [:watching])
+user.unfavorite(book, scopes: [:watching])
 second_user = User.find(2)
 user.favorite(second_user, scopes: [:follow])
-book.block(user, scopes: [:all]) # applies to all scopes
 ```
 
 That's simple!
@@ -199,7 +198,7 @@ When you call a method which returns something while specifying multiple scopes,
 
 ```ruby
 user.favorited?(book, scopes: [:favorite, :watching]) # => { favorite: true, watching: false }
-user.favorited?(book, scopes: [:all]) # => true
+user.favorited?(book, scopes: [:favorite]) # => true
 ```
 
 `acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
@@ -213,8 +212,6 @@ Favorite.send("#{my_scope}_list")
 Favorite.favorite_list
 ### Returns all `Favorite` records where `scope` is `watching`
 Favorite.watching_list
-### Very unnecessary, but `all_list` returns literally all `Favorite` records
-Favorite.all_list
 ```
 
 ### Caching

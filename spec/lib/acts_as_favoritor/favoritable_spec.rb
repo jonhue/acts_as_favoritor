@@ -99,7 +99,7 @@ RSpec.describe ActsAsFavoritor::Favoritable do
         expect { jon.foobar }.to raise_error(NoMethodError)
       end
 
-      it '*_favoritors returns favoritors of the given scope' do
+      it '*_favoritors returns favoritors of the given type' do
         expect(jon.user_favoritors).to eq [sam]
       end
     end

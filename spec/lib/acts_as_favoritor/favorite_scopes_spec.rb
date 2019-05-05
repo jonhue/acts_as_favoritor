@@ -16,16 +16,6 @@ RSpec.describe ActsAsFavoritor::FavoriteScopes do
     beethoven.favorite(jon)
   end
 
-  describe 'all_list' do
-    it 'returns all favorite records' do
-      expect(Favorite.all_list)
-        .to eq [Favorite.find_by(favoritor: sam, favoritable: jon),
-                Favorite.find_by(favoritor: sam, favoritable: beethoven),
-                Favorite.find_by(favoritor: jon, favoritable: sam),
-                Favorite.find_by(favoritor: beethoven, favoritable: jon)]
-    end
-  end
-
   describe 'for_favoritor' do
     it 'returns favorites of the given favoritor' do
       expect(Favorite.for_favoritor(sam))

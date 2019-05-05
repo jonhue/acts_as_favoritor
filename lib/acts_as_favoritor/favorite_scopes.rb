@@ -16,10 +16,6 @@ module ActsAsFavoritor
       super || method.to_s[/(.+)_list/]
     end
 
-    def all_list
-      all
-    end
-
     def for_favoritor(favoritor)
       where(
         favoritor_id: favoritor.id,

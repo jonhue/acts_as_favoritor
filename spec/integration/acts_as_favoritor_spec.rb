@@ -18,16 +18,14 @@ RSpec.describe 'acts_as_favoritor' do
 
     it 'responds to instance methods' do
       expect(sam).to respond_to(:favorite)
-      expect(sam).to respond_to(:remove_favorite)
+      expect(sam).to respond_to(:unfavorite)
       expect(sam).to respond_to(:favorited?)
       expect(sam).to respond_to(:all_favorites)
       expect(sam).to respond_to(:all_favorited)
       expect(sam).to respond_to(:favorites_by_type)
       expect(sam).to respond_to(:favorited_by_type)
-      expect(sam).to respond_to(:block)
-      expect(sam).to respond_to(:unblock)
-      expect(sam).to respond_to(:blocked?)
-      expect(sam).to respond_to(:blocked)
+      expect(sam).to respond_to(:blocked_by?)
+      expect(sam).to respond_to(:blocked_by)
     end
 
     describe 'favorite' do
@@ -45,9 +43,9 @@ RSpec.describe 'acts_as_favoritor' do
       end
     end
 
-    describe 'remove_favorite' do
+    describe 'unfavorite' do
       it 'allows removing favorites' do
-        expect { jon.remove_favorite(sam) }
+        expect { jon.unfavorite(sam) }
           .to  change(Favorite, :count).by(-1)
           .and change { jon.all_favorites.size }.by(-1)
           .and change { jon.favorited?(sam) }.from(true).to(false)
@@ -126,9 +124,9 @@ RSpec.describe 'acts_as_favoritor' do
       end
     end
 
-    describe 'remove_favorite' do
+    describe 'unfavorite' do
       it 'allows removing favorites by scope' do
-        expect { jon.remove_favorite(sam, scopes: [:favorite]) }
+        expect { jon.unfavorite(sam, scopes: [:favorite]) }
           .to  change(Favorite, :count).by(-1)
           .and change { jon.all_favorites(scopes: [:favorite]).size }.by(-1)
           .and change { jon.favorited?(sam, scopes: [:favorite]) }
@@ -138,7 +136,7 @@ RSpec.describe 'acts_as_favoritor' do
       end
 
       it 'allows removing multiple favorites at once' do
-        expect { jon.remove_favorite(sam, scopes: [:favorite, :friend]) }
+        expect { jon.unfavorite(sam, scopes: [:favorite, :friend]) }
           .to change(Favorite, :count).by(-2)
       end
     end
