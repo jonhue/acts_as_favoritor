@@ -110,17 +110,11 @@ user.favorited_by_type('Book')
 # Returns the exact same result as `user.favorited_by_type 'User'`.
 user.favorited_users
 
-# Block a favoritable
-user.block(book)
+# Whether `user` has been blocked by `book`. Returns `true` or `false`.
+user.blocked_by?(book)
 
-# Unblock a favoritable
-user.unblock(book)
-
-# Whether `user` has blocked `book`. Returns `true` or `false`.
-user.blocked?(book)
-
-# Returns an array including all blocked Favoritable records.
-user.blocked
+# Returns an array including all blocked Favorite records.
+user.blocked_by
 ```
 
 These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
