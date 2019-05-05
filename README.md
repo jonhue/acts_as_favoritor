@@ -162,17 +162,11 @@ These methods take an optional hash parameter of ActiveRecord options (`:limit`,
 ### `Favorite` model
 
 ```ruby
-# Scopes
-## Returns all `Favorite` records where `blocked` is `false`.
+# Returns all `Favorite` records where `blocked` is `false`.
 Favorite.unblocked
-## Returns all `Favorite` records where `blocked` is `true`.
-Favorite.blocked
-## Returns an ordered array of the latest create `Favorite` records.
-Favorite.descending
 
-# Returns all `Favorite` records in an array, which have been created in a specified timeframe. Default is 2 weeks.
-Favorite.recent
-Favorite.recent(1.month.ago)
+# Returns all `Favorite` records where `blocked` is `true`.
+Favorite.blocked
 
 # Returns all favorites of `user`, including those who were blocked.
 Favorite.for_favoritor(user)
