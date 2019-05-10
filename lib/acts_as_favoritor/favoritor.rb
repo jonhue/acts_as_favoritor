@@ -49,7 +49,7 @@ module ActsAsFavoritor
         self.class.build_result_for_scopes scopes do |scope|
           return nil if self == favoritable
 
-          inc_cache if ActsAsFavoritor.configuration.cache
+          inc_cache(scope) if ActsAsFavoritor.configuration.cache
 
           favorites.for_favoritable(favoritable).send("#{scope}_list")
                    .first_or_create!
@@ -62,7 +62,7 @@ module ActsAsFavoritor
           favorite_record = get_favorite(favoritable, scope)
           return nil unless favorite_record.present?
 
-          dec_cache if ActsAsFavoritor.configuration.cache
+          dec_cache(scope) if ActsAsFavoritor.configuration.cache
           favorite_record.destroy!
         end
       end
@@ -129,7 +129,7 @@ module ActsAsFavoritor
       end
 
       # rubocop:disable Metrics/AbcSize
-      def inc_cache
+      def inc_cache(scope)
         favoritor_score[scope] = (favoritor_score[scope] || 0) + 1
         favoritor_total[scope] = (favoritor_total[scope] || 0) + 1
         save!
@@ -141,7 +141,7 @@ module ActsAsFavoritor
         favoritable.save!
       end
 
-      def dec_cache
+      def dec_cache(scope)
         favoritor_score[scope] = (favoritor_score[scope] || 0) - 1
         favoritor_score.delete(scope) unless favoritor_score[scope].positive?
         save!
