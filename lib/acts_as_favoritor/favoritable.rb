@@ -55,8 +55,11 @@ module ActsAsFavoritor
                              scopes: [ActsAsFavoritor.configuration
                                                      .default_scope])
         self.class.build_result_for_scopes scopes do |scope|
-          favorited.unblocked.send("#{scope}_list")
-                   .for_favoritor_type(favoritor_type).map(&:favoritor)
+          favoritor_type.constantize.includes(:favorites)
+                        .where(favorites: {
+                                 blocked: false, favoritable_id: id,
+                                 favoritable_type: self.class.name, scope: scope
+                               })
         end
       end
 
