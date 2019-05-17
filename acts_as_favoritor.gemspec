@@ -36,6 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activerecord', '>= 5.0'
 
   gem.add_development_dependency 'factory_bot'
+  gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rails'
   gem.add_development_dependency 'rspec-rails'
   gem.add_development_dependency 'rubocop'

@@ -109,6 +109,8 @@ RSpec.describe ActsAsFavoritor::Favoritor do
       before { beethoven.block(sam) }
 
       it 'returns all unblocked favorite records of the given instance' do
+        expect(sam.all_favorites).not_to be_a Array
+
         expect(sam.all_favorites)
           .to eq [Favorite.find_by(favoritor: sam, favoritable: jon)]
       end
@@ -125,6 +127,8 @@ RSpec.describe ActsAsFavoritor::Favoritor do
     describe 'favorites_by_type' do
       it 'all unblocked favorite records of the current instance where ' \
          'the favoritable is of the given type' do
+        expect(sam.favorites_by_type('User')).not_to be_a Array
+
         expect(sam.favorites_by_type('User'))
           .to eq [Favorite.find_by(favoritor: sam, favoritable: jon)]
         expect(sam.favorites_by_type('Composer'))
@@ -135,6 +139,8 @@ RSpec.describe ActsAsFavoritor::Favoritor do
     describe 'favorited_by_type' do
       it 'all unblocked favorites of the current instance where ' \
          'the favoritable is of the given type' do
+        expect(sam.favorited_by_type('User')).not_to be_a Array
+
         expect(sam.favorited_by_type('User')).to eq [jon]
         expect(sam.favorited_by_type('Composer')).to eq [beethoven]
       end

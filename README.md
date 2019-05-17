@@ -92,28 +92,28 @@ user.favorite(book)
 # `user` removes `book` from favorites.
 user.unfavorite(book)
 
-# Whether `user` has marked `book` as his favorite. Returns `true` or `false`.
+# Whether `user` has marked `book` as his favorite.
 user.favorited?(book)
 
-# Returnes `user`'s favorites that have not been blocked as an array of `Favorite` records.
+# Returns an Active Record relation of `user`'s `Favorite` records that have not been blocked.
 user.all_favorites
 
-# Returns all favorited objects of `user` as an array (unblocked). This can be a collection of different object types, e.g.: `User`, `Book`.
+# Returns an array of all unblocked favorited objects of `user`. This can be a collection of different object types, e.g.: `User`, `Book`.
 user.all_favorited
 
-# Returns an array of `Favorite` records where the `favoritable_type` is `Book`.
+# Returns an Active Record relation of `Favorite` records where the `favoritable_type` is `Book`.
 user.favorites_by_type('Book')
 
-# Returns an array of all favorited objects of `user` where `favoritable_type` is 'Book', this can be a collection of different object types, e.g.: `User`, `Book`.
+# Returns an Active Record relation of all favorited objects of `user` where `favoritable_type` is 'Book'.
 user.favorited_by_type('Book')
 
-# Returns the exact same result as `user.favorited_by_type 'User'`.
+# Returns the exact same as `user.favorited_by_type('User')`.
 user.favorited_users
 
-# Whether `user` has been blocked by `book`. Returns `true` or `false`.
+# Whether `user` has been blocked by `book`.
 user.blocked_by?(book)
 
-# Returns an array including all blocked Favorite records.
+# Returns an array of all favoritables that blocked `user`.
 user.blocked_by
 ```
 
@@ -123,13 +123,13 @@ user.blocked_by
 # Returns all favoritors of a model that `acts_as_favoritable`
 book.favoritors
 
-# Returns an array of records with type `User` following `book`.
+# Returns an Active Record relation of records with type `User` following `book`.
 book.favoritors_by_type('User')
 
-# Returns the exact same as `book.favoritors_by_type 'User'`.
+# Returns the exact same as `book.favoritors_by_type('User')`.
 book.user_favoritors
 
-# Whether `book` has been favorited by `user`. Returns `true` or `false`.
+# Whether `book` has been favorited by `user`.
 book.favorited_by?(user)
 
 # Block a favoritor
@@ -138,26 +138,26 @@ book.block(user)
 # Unblock a favoritor
 book.unblock(user)
 
-# Whether `book` has blocked `user` as favoritor. Returns `true` or `false`.
+# Whether `book` has blocked `user` as favoritor.
 book.blocked?(user)
 
-# Returns an array including all blocked Favoritor records.
+# Returns an array of all blocked favoritors.
 book.blocked
 ```
 
 ### `Favorite` model
 
 ```ruby
-# Returns all `Favorite` records where `blocked` is `false`.
+# Returns an Active Record relation of all `Favorite` records where `blocked` is `false`.
 Favorite.unblocked
 
-# Returns all `Favorite` records where `blocked` is `true`.
+# Returns an Active Record relation of all `Favorite` records where `blocked` is `true`.
 Favorite.blocked
 
-# Returns all favorites of `user`, including those who were blocked.
+# Returns an Active Record relation of all favorites of `user`, including those who were blocked.
 Favorite.for_favoritor(user)
 
-# Returns all favoritors of `book`, including those who were blocked.
+# Returns an Active Record relation of all favoritors of `book`, including those who were blocked.
 Favorite.for_favoritable(book)
 ```
 

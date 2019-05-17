@@ -39,6 +39,8 @@ RSpec.describe ActsAsFavoritor::Favoritable do
     describe 'favoritors_by_type' do
       it 'returns favoritors who favorited the given instance ' \
          'and are of a specific type' do
+        expect(jon.favoritors_by_type('User')).not_to be_a Array
+
         expect(jon.favoritors_by_type('User')).to eq [sam]
         expect(jon.favoritors_by_type('Composer')).to eq [beethoven]
       end
