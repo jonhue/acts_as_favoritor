@@ -117,10 +117,6 @@ user.blocked_by?(book)
 user.blocked_by
 ```
 
-These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
-
-    favorites_by_type, all_favorites, all_favorited, favorited_by_type
-
 ### `acts_as_favoritable` methods
 
 ```ruby
@@ -148,10 +144,6 @@ book.blocked?(user)
 # Returns an array including all blocked Favoritor records.
 book.blocked
 ```
-
-These methods take an optional hash parameter of ActiveRecord options (`:limit`, `:order`, etc...)
-
-    favoritors_by_type, favoritors, blocks
 
 ### `Favorite` model
 
