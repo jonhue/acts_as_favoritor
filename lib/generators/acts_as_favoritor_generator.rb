@@ -13,7 +13,8 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
     if ActiveRecord::Base.timestamped_migrations
       Time.now.utc.strftime('%Y%m%d%H%M%S')
     else
-      format('%.3d', current_migration_number(dirname) + 1)
+      format('%<migration_number>.3d',
+             migration_number: current_migration_number(dirname) + 1)
     end
   end
 
