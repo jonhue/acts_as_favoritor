@@ -1,7 +1,3 @@
-minApprovals:
-  OWNER: 1
-  MEMBER: 1
-  COLLABORATOR: 1
 requiredLabels:
   - merge
 reportStatus: true

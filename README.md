@@ -1,7 +1,5 @@
 # acts_as_favoritor
 
-[![Gem Version](https://badge.fury.io/rb/acts_as_favoritor.svg)](https://badge.fury.io/rb/acts_as_favoritor) ![Travis](https://travis-ci.org/jonhue/acts_as_favoritor.svg?branch=master)
-
 acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any other model including the option for multiple relationships per association with scopes.
 
 You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records as well as caching.
@@ -20,6 +18,7 @@ You are able to differentiate followers, favorites, watchers, votes and whatever
   * [Caching](#caching)
 * [Configuration](#configuration)
 * [Testing](#testing)
+* [Release](#release)
 * [To do](#to-do)
 * [Contributing](#contributing)
   * [Semantic versioning](#semantic-versioning)
@@ -276,6 +275,17 @@ end
 5. Run RuboCop
 
     `$ bundle exec rubocop`
+
+---
+
+## Release
+
+1. Review breaking changes and deprecations in `CHANGELOG.md`
+2. Change the gem version in `acts_as_favoritor.gemspec`
+3. Reset `CHANGELOG.md`
+4. Create a pull request to merge the changes into `master`
+5. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
+6. The release workflow will publish the gems to RubyGems and the GitHub Package Registry
 
 ---
 
