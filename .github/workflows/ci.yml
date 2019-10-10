@@ -1,0 +1,29 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+        - '2.5.x'
+        - '2.6.x'
+
+    name: Ruby ${{ matrix.ruby }}
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Install dependencies
+      run: |
+        sudo apt-get install libsqlite3-dev
+        gem update --system
+        bundle install --jobs 4 --retry 3
+    - name: Run RuboCop
+      run: bundle exec rubocop
+    - name: Run RSpec specs
+      run: bundle exec rspec
