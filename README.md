@@ -263,8 +263,6 @@ end
 
 ## Testing
 
-Tests are written with Shoulda on top of `Test::Unit` with Factory Girl being used instead of fixtures. Tests are run using rake.
-
 1. Fork this repository
 2. Clone your forked git locally
 3. Install dependencies
