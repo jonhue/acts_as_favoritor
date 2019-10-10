@@ -281,7 +281,7 @@ end
 ## Release
 
 1. Review breaking changes and deprecations in `CHANGELOG.md`
-2. Change the gem version in `acts_as_favoritor.gemspec`
+2. Change the gem version in `lib/acts_as_favoritor/version.rb`
 3. Reset `CHANGELOG.md`
 4. Create a pull request to merge the changes into `master`
 5. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
