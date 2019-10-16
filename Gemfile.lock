@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_favoritor (4.0.2)
+    acts_as_favoritor (4.0.3)
       activerecord (>= 5.0)
 
 GEM
@@ -91,8 +91,8 @@ GEM
     nio4r (2.4.0)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
-    parallel (1.17.0)
-    parser (2.6.4.1)
+    parallel (1.18.0)
+    parser (2.6.5.0)
       ast (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -145,7 +145,7 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
-    rubocop (0.75.0)
+    rubocop (0.75.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
