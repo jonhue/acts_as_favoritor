@@ -3,14 +3,10 @@
 module ActsAsFavoritor
   module FavoritorLib
     def build_result_for_scopes(scopes)
+      return yield(scopes) unless scopes.is_a?(Array)
       return if scopes.empty?
 
-      scopes = sanitized_scopes(scopes)
-      result = scopes.map { |scope| [scope, yield(scope)] }.to_h
-
-      return result[scopes.first] if scopes.size == 1
-
-      result
+      sanitized_scopes(scopes).map { |scope| [scope, yield(scope)] }.to_h
     end
 
     private

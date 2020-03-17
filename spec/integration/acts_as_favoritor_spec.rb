@@ -114,25 +114,25 @@ RSpec.describe 'acts_as_favoritor' do
 
     describe 'favorite' do
       it 'allows favoriting objects with scope' do
-        expect { jon.favorite(beethoven, scopes: [:friend]) }
+        expect { jon.favorite(beethoven, scope: :friend) }
           .to  change(Favorite, :count).by(1)
-          .and change { jon.all_favorites(scopes: [:friend]).size }.by(1)
-          .and change { jon.favorited?(beethoven, scopes: [:friend]) }
+          .and change { jon.all_favorites(scope: :friend).size }.by(1)
+          .and change { jon.favorited?(beethoven, scope: :friend) }
             .from(false).to(true)
 
-        expect(jon.favorited?(beethoven, scopes: [:favorite])).to eq false
+        expect(jon.favorited?(beethoven, scope: :favorite)).to eq false
       end
     end
 
     describe 'unfavorite' do
       it 'allows removing favorites by scope' do
-        expect { jon.unfavorite(sam, scopes: [:favorite]) }
+        expect { jon.unfavorite(sam, scope: :favorite) }
           .to  change(Favorite, :count).by(-1)
-          .and change { jon.all_favorites(scopes: [:favorite]).size }.by(-1)
-          .and change { jon.favorited?(sam, scopes: [:favorite]) }
+          .and change { jon.all_favorites(scope: :favorite).size }.by(-1)
+          .and change { jon.favorited?(sam, scope: :favorite) }
             .from(true).to(false)
 
-        expect(jon.favorited?(sam, scopes: [:friend])).to eq true
+        expect(jon.favorited?(sam, scope: :friend)).to eq true
       end
 
       it 'allows removing multiple favorites at once' do
@@ -143,8 +143,8 @@ RSpec.describe 'acts_as_favoritor' do
 
     describe 'favorites_by_type' do
       it 'only returns favorites of a given type by scope' do
-        expect(sam.favorites_by_type('User', scopes: [:favorite])).to eq []
-        expect(sam.favorites_by_type('Composer', scopes: [:favorite]))
+        expect(sam.favorites_by_type('User', scope: :favorite)).to eq []
+        expect(sam.favorites_by_type('Composer', scope: :favorite))
           .to eq [Favorite.find_by(favoritor: sam, favoritable: beethoven),
                   Favorite.find_by(favoritor: sam, favoritable: rossini)]
       end
@@ -152,9 +152,9 @@ RSpec.describe 'acts_as_favoritor' do
 
     describe 'all_favorites' do
       it 'returns all favorites by scope' do
-        expect(jon.all_favorites(scopes: [:favorite]))
+        expect(jon.all_favorites(scope: :favorite))
           .to eq [Favorite.find_by(favoritor: jon, favoritable: sam)]
-        expect(sam.all_favorites(scopes: [:favorite]))
+        expect(sam.all_favorites(scope: :favorite))
           .to eq [Favorite.find_by(favoritor: sam, favoritable: beethoven),
                   Favorite.find_by(favoritor: sam, favoritable: rossini)]
       end
@@ -162,16 +162,16 @@ RSpec.describe 'acts_as_favoritor' do
 
     describe 'favorited_by_type' do
       it 'only returns favorited objects of a given type' do
-        expect(sam.favorited_by_type('User', scopes: [:favorite])).to eq []
-        expect(sam.favorited_by_type('Composer', scopes: [:favorite]))
+        expect(sam.favorited_by_type('User', scope: :favorite)).to eq []
+        expect(sam.favorited_by_type('Composer', scope: :favorite))
           .to eq [beethoven, rossini]
       end
     end
 
     describe 'all_favorited' do
       it 'returns favorited objects' do
-        expect(jon.all_favorited(scopes: [:favorite])).to eq [sam]
-        expect(sam.all_favorited(scopes: [:favorite]))
+        expect(jon.all_favorited(scope: :favorite)).to eq [sam]
+        expect(sam.all_favorited(scope: :favorite))
           .to eq [beethoven, rossini]
       end
     end

@@ -191,48 +191,48 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
     describe 'favorite' do
       it 'creates a favorite record with the given scopes' do
-        expect { beethoven.favorite(jon, scopes: [:friend]) }
-          .to  change { beethoven.all_favorites(scopes: [:friend]).size }.by(1)
-          .and change { beethoven.all_favorites(scopes: [:favorite]).size }
+        expect { beethoven.favorite(jon, scope: :friend) }
+          .to  change { beethoven.all_favorites(scope: :friend).size }.by(1)
+          .and change { beethoven.all_favorites(scope: :favorite).size }
             .by(0)
       end
     end
 
     describe 'unfavorite' do
       it 'deletes favorite records with the given scopes' do
-        expect { sam.unfavorite(beethoven, scopes: [:friend]) }
-          .to  change { sam.all_favorites(scopes: [:friend]).size }.by(-1)
-          .and change { sam.all_favorites(scopes: [:favorite]).size }.by(0)
+        expect { sam.unfavorite(beethoven, scope: :friend) }
+          .to  change { sam.all_favorites(scope: :friend).size }.by(-1)
+          .and change { sam.all_favorites(scope: :favorite).size }.by(0)
       end
     end
 
     describe 'favorited?' do
       it 'returns true if the instance favorited the given record' do
-        expect(beethoven.favorited?(jon, scopes: [:favorite])).to eq true
+        expect(beethoven.favorited?(jon, scope: :favorite)).to eq true
       end
 
       it 'returns false if the instance did not favorite the given record' do
-        expect(beethoven.favorited?(jon, scopes: [:friend])).to eq false
+        expect(beethoven.favorited?(jon, scope: :friend)).to eq false
       end
     end
 
     describe 'all_favorites' do
       it 'returns all unblocked favorite records of the given instance' do
-        expect(sam.all_favorites(scopes: [:favorite]))
+        expect(sam.all_favorites(scope: :favorite))
           .to eq [Favorite.find_by(favoritor: sam, favoritable: beethoven)]
       end
     end
 
     describe 'all_favorited' do
       it 'returns all unblocked favorites of the given instance' do
-        expect(sam.all_favorited(scopes: [:favorite])).to eq [beethoven]
+        expect(sam.all_favorited(scope: :favorite)).to eq [beethoven]
       end
     end
 
     describe 'favorites_by_type' do
       it 'all unblocked favorite records of the current instance ' \
          'where the favoritable is of the given type' do
-        expect(sam.favorites_by_type('User', scopes: [:favorite])).to eq []
+        expect(sam.favorites_by_type('User', scope: :favorite)).to eq []
         expect(sam.favorites_by_type('Composer', scopes: [:favorite, :friend]))
           .to eq(
             favorite: [Favorite.find_by(favoritor: sam, favoritable: beethoven,
@@ -246,7 +246,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
     describe 'favorited_by_type' do
       it 'all unblocked favorites of the current instance ' \
          'where the favoritable is of the given type' do
-        expect(sam.favorited_by_type('User', scopes: [:favorite])).to eq []
+        expect(sam.favorited_by_type('User', scope: :favorite)).to eq []
         expect(sam.favorited_by_type('Composer', scopes: [:favorite, :friend]))
           .to eq favorite: [beethoven], friend: [beethoven]
       end
@@ -254,26 +254,26 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
     describe 'blocked_by?' do
       it 'returns true if the given instance blocked this object' do
-        jon.block(beethoven, scopes: [:favorite])
+        jon.block(beethoven, scope: :favorite)
 
-        expect(beethoven.blocked_by?(jon, scopes: [:favorite])).to eq true
+        expect(beethoven.blocked_by?(jon, scope: :favorite)).to eq true
       end
 
       it 'returns false if the given instance did not block this object' do
-        jon.block(beethoven, scopes: [:friend])
+        jon.block(beethoven, scope: :friend)
 
-        expect(beethoven.blocked_by?(jon, scopes: [:favorite])).to eq false
+        expect(beethoven.blocked_by?(jon, scope: :favorite)).to eq false
       end
     end
 
     describe 'blocked_by' do
       before do
-        jon.block(beethoven, scopes: [:friend])
-        jon.block(sam, scopes: [:favorite])
+        jon.block(beethoven, scope: :friend)
+        jon.block(sam, scope: :favorite)
       end
 
       it 'returns blocked favoritors' do
-        expect(beethoven.blocked_by(scopes: [:friend])).to eq [jon]
+        expect(beethoven.blocked_by(scope: :friend)).to eq [jon]
       end
     end
   end

@@ -117,66 +117,66 @@ RSpec.describe ActsAsFavoritor::Favoritable do
 
     describe 'favoritors' do
       it 'returns favoritors who favorited the given instance' do
-        expect(jon.favoritors(scopes: [:friend])).to eq [sam]
+        expect(jon.favoritors(scope: :friend)).to eq [sam]
       end
     end
 
     describe 'favoritors_by_type' do
       it 'returns favoritors who favorited the given instance ' \
          'and are of a specific type' do
-        expect(jon.favoritors_by_type('User', scopes: [:friend])).to eq [sam]
-        expect(jon.favoritors_by_type('Composer', scopes: [:friend])).to eq []
+        expect(jon.favoritors_by_type('User', scope: :friend)).to eq [sam]
+        expect(jon.favoritors_by_type('Composer', scope: :friend)).to eq []
       end
     end
 
     describe 'favorited_by?' do
       it 'returns true if the instance was favorited by the given record' do
-        expect(jon.favorited_by?(beethoven, scopes: [:favorite])).to eq true
+        expect(jon.favorited_by?(beethoven, scope: :favorite)).to eq true
       end
 
       it 'returns false if the instance was not favorited ' \
          'by the given record' do
-        expect(jon.favorited_by?(beethoven, scopes: [:friend])).to eq false
+        expect(jon.favorited_by?(beethoven, scope: :friend)).to eq false
       end
     end
 
     describe 'block' do
       it 'blocks the given favoritor' do
-        beethoven.favorite(jon, scopes: [:friend])
+        beethoven.favorite(jon, scope: :friend)
 
-        expect { jon.block(beethoven, scopes: [:friend]) }
-          .to  change { jon.favoritors(scopes: [:friend]).size }.by(-1)
-          .and change { jon.favoritors(scopes: [:favorite]).size }.by(0)
+        expect { jon.block(beethoven, scope: :friend) }
+          .to  change { jon.favoritors(scope: :friend).size }.by(-1)
+          .and change { jon.favoritors(scope: :favorite).size }.by(0)
       end
     end
 
     describe 'unblock' do
-      before { jon.block(beethoven, scopes: [:favorite]) }
+      before { jon.block(beethoven, scope: :favorite) }
 
       it 'unblocks the given favoritor' do
-        expect { jon.unblock(beethoven, scopes: [:favorite]) }
-          .to change { jon.favoritors(scopes: [:favorite]).size }.by(1)
+        expect { jon.unblock(beethoven, scope: :favorite) }
+          .to change { jon.favoritors(scope: :favorite).size }.by(1)
       end
     end
 
     describe 'blocked?' do
-      before { jon.block(beethoven, scopes: [:friend]) }
+      before { jon.block(beethoven, scope: :friend) }
 
       it 'returns true if the given instance was blocked' do
-        expect(jon.blocked?(beethoven, scopes: [:friend])).to eq true
+        expect(jon.blocked?(beethoven, scope: :friend)).to eq true
       end
 
       it 'returns false if the given instance was not blocked' do
-        expect(jon.blocked?(beethoven, scopes: [:favorite])).to eq false
+        expect(jon.blocked?(beethoven, scope: :favorite)).to eq false
       end
     end
 
     describe 'blocked' do
-      before { jon.block(beethoven, scopes: [:friend]) }
+      before { jon.block(beethoven, scope: :friend) }
 
       it 'returns blocked favoritors' do
-        expect(jon.blocked(scopes: [:friend])).to eq [beethoven]
-        expect(jon.blocked(scopes: [:favorite])).to eq []
+        expect(jon.blocked(scope: :friend)).to eq [beethoven]
+        expect(jon.blocked(scope: :favorite)).to eq []
       end
     end
   end

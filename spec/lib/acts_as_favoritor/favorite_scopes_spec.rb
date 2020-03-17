@@ -79,7 +79,7 @@ RSpec.describe ActsAsFavoritor::FavoriteScopes do
     end
 
     it '*_list returns favorites with the given scope' do
-      jon.favorite(sam, scopes: [:friend])
+      jon.favorite(sam, scope: :friend)
 
       expect(Favorite.friend_list)
         .to eq [Favorite.find_by(favoritor: jon, favoritable: sam,

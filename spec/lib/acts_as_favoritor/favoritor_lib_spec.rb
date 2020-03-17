@@ -6,8 +6,8 @@ RSpec.describe ActsAsFavoritor::FavoritorLib do
       expect(Dummy.build_result_for_scopes([])).to eq nil
     end
 
-    it 'returns result of the block when scopes has the size one' do
-      expect(Dummy.build_result_for_scopes([:favorite]) do |scope|
+    it 'returns result of the block when a single scope is given' do
+      expect(Dummy.build_result_for_scopes(:favorite) do |scope|
         scope.to_s.upcase
       end).to eq 'FAVORITE'
     end

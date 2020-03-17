@@ -86,25 +86,25 @@ RSpec.describe 'acts_as_favoritable' do
 
     describe 'favoritors' do
       it 'returns favorited objects by scope' do
-        expect(jon.favoritors(scopes: [:favorite])).to eq [sam]
-        expect(sam.favoritors(scopes: [:favorite])).to eq [jon]
+        expect(jon.favoritors(scope: :favorite)).to eq [sam]
+        expect(sam.favoritors(scope: :favorite)).to eq [jon]
       end
     end
 
     describe 'favorited_by?' do
       it 'returns true when an instance was favorited by the given object' do
-        expect(sam.favorited_by?(jon, scopes: [:favorite])).to eq true
+        expect(sam.favorited_by?(jon, scope: :favorite)).to eq true
       end
 
       it 'returns false when an instance was not favorited ' \
          'by the given object' do
-        expect(sam.favorited_by?(bob, scopes: [:favorite])).to eq false
+        expect(sam.favorited_by?(bob, scope: :favorite)).to eq false
       end
     end
 
     describe 'favoritors_by_type' do
       it 'only returns favoritors of a given type by scope' do
-        expect(sam.favoritors_by_type('User', scopes: [:favorite])).to eq [jon]
+        expect(sam.favoritors_by_type('User', scope: :favorite)).to eq [jon]
       end
     end
   end
