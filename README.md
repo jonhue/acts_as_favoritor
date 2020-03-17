@@ -8,20 +8,22 @@ You are able to differentiate followers, favorites, watchers, votes and whatever
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Usage](#usage)
-  * [Setup](#setup)
-  * [`acts_as_favoritor` methods](#acts_as_favoritor-methods)
-  * [`acts_as_favoritable` methods](#acts_as_favoritable-methods)
-  * [`Favorite` model](#favorite-model)
-  * [Scopes](#scopes)
-  * [Caching](#caching)
-* [Configuration](#configuration)
-* [Testing](#testing)
-* [Release](#release)
-* [To do](#to-do)
-* [Contributing](#contributing)
-  * [Semantic versioning](#semantic-versioning)
+- [acts_as_favoritor](#actsasfavoritor)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Setup](#setup)
+    - [`acts_as_favoritor` methods](#actsasfavoritor-methods)
+    - [`acts_as_favoritable` methods](#actsasfavoritable-methods)
+    - [`Favorite` model](#favorite-model)
+    - [Scopes](#scopes)
+    - [Caching](#caching)
+  - [Configuration](#configuration)
+  - [Testing](#testing)
+  - [Release](#release)
+  - [To do](#to-do)
+  - [Contributing](#contributing)
+    - [Semantic Versioning](#semantic-versioning)
 
 ---
 
@@ -166,24 +168,25 @@ Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [.
 
 By default all of your favorites are scoped to `'favorite'`.
 
-You can create new scopes on the fly. Every single method takes `scope` as an option which expexts an array containing your scopes as strings.
+You can create new scopes on the fly. Every single method takes `scope`/`scopes` as an option which expexts a symbol or an array of symbols containing your scopes.
 
 So lets see how this works:
 
 ```ruby
 user.favorite(book, scopes: [:favorite, :watching])
-user.unfavorite(book, scopes: [:watching])
+user.unfavorite(book, scope: :watching)
 second_user = User.find(2)
-user.favorite(second_user, scopes: [:follow])
+user.favorite(second_user, scope: :follow)
 ```
 
 That's simple!
 
-When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys:
+When you call a method which returns something while specifying multiple scopes, the method returns the results in a hash with the scopes as keys when scopes are given as an array:
 
 ```ruby
 user.favorited?(book, scopes: [:favorite, :watching]) # => { favorite: true, watching: false }
-user.favorited?(book, scopes: [:favorite]) # => true
+user.favorited?(book, scopes: [:favorite]) # => { favorite: true }
+user.favorited?(book, scope: :favorite) # => true
 ```
 
 `acts_as_favoritor` also provides some handy scopes for you to call on the `Favorite` model:
