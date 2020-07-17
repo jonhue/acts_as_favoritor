@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - spec/support/rails_app/db/schema.rb
     - vendor/**/*
+  NewCops: enable
   TargetRubyVersion: 2.5
 
 Gemspec/RequiredRubyVersion:
@@ -33,15 +34,6 @@ RSpec/MultipleExpectations:
 
 Style/Documentation:
   Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
 
 Style/PerlBackrefs:
   Enabled: false
