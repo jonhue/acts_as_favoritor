@@ -14,8 +14,7 @@ module ActsAsFavoritor
     DEFAULT_SCOPE = :favorite
     DEFAULT_CACHE = false
 
-    attr_accessor :default_scope
-    attr_accessor :cache
+    attr_accessor :cache, :default_scope
 
     def initialize
       @default_scope = DEFAULT_SCOPE
