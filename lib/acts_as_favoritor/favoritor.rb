@@ -158,9 +158,7 @@ module ActsAsFavoritor
 
         favoritable.favoritable_score[scope] =
           (favoritable.favoritable_score[scope] || 0) - 1
-        unless favoritable.favoritable_score[scope].positive?
-          favoritable.favoritable_score.delete(scope)
-        end
+        favoritable.favoritable_score.delete(scope) unless favoritable.favoritable_score[scope].positive?
         favoritable.save!
       end
       # rubocop:enable Metrics/AbcSize
