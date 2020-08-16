@@ -38,11 +38,13 @@ module ActsAsFavoritor
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
+      # rubocop:disable Style/OptionalBooleanParameter
       def respond_to_missing?(method, include_private = false)
         super || method.to_s[/favorited_(.+)/] ||
           method.to_s[/favoritor_(.+)_score/] ||
           method.to_s[/favoritor_(.+)_total/]
       end
+      # rubocop:enable Style/OptionalBooleanParameter
 
       def favorite(favoritable,
                    scope: ActsAsFavoritor.configuration.default_scope,

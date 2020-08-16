@@ -12,9 +12,11 @@ module ActsAsFavoritor
       end
     end
 
+    # rubocop:disable Style/OptionalBooleanParameter
     def respond_to_missing?(method, include_private = false)
       super || method.to_s[/(.+)_list/]
     end
+    # rubocop:enable Style/OptionalBooleanParameter
 
     def for_favoritor(favoritor)
       where(
