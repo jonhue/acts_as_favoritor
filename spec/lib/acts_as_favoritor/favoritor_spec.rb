@@ -47,6 +47,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
         end
       end
 
+      # rubocop:disable RSpec/EmptyExampleGroup
       context 'when caching is enabled' do
         it 'updates the favoritor cache'
 
@@ -54,6 +55,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
         it 'does not update the cache when there was an early return'
       end
+      # rubocop:enable RSpec/EmptyExampleGroup
       # rubocop:enable RSpec/NestedGroups
     end
 
@@ -85,6 +87,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
         end
       end
 
+      # rubocop:disable RSpec/EmptyExampleGroup
       context 'when caching is enabled' do
         it 'updates the favoritor cache'
 
@@ -92,6 +95,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
         it 'does not update the cache when there was an early return'
       end
+      # rubocop:enable RSpec/EmptyExampleGroup
       # rubocop:enable RSpec/NestedGroups
     end
 
