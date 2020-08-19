@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-ruby@v1
+    - uses: actions/setup-ruby@v1.1.1
       with:
         version: 2.6.x
 
