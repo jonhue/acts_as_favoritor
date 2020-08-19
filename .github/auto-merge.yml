@@ -1,6 +1,0 @@
-requiredLabels:
-  - merge
-reportStatus: true
-updateBranch: false
-deleteBranchAfterMerge: true
-mergeMethod: squash
