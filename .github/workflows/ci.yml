@@ -15,7 +15,7 @@ jobs:
     name: Ruby ${{ matrix.ruby }}
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-ruby@v1
+    - uses: actions/setup-ruby@v1.1.1
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: Install dependencies
