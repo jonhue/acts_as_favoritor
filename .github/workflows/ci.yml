@@ -11,6 +11,7 @@ jobs:
         ruby:
         - '2.5.x'
         - '2.6.x'
+        - '2.7.x'
 
     name: Ruby ${{ matrix.ruby }}
     steps:
