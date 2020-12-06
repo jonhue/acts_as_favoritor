@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path(
-  File.join('..', 'lib', 'acts_as_favoritor', 'version'),
-  __FILE__
-)
+require File.expand_path(File.join('..', 'lib', 'acts_as_favoritor', 'version'), __FILE__)
 
 # rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |gem|
@@ -24,7 +21,7 @@ Gem::Specification.new do |gem|
                               'also built in support for blocking/un-blocking '\
                               'favorite records as well as caching.'
   gem.authors               = 'Jonas Hübotter'
-  gem.email                 = 'me@jonhue.me'
+  gem.email                 = 'jonas.huebotter@gmail.com'
   gem.homepage              = 'https://github.com/jonhue/acts_as_favoritor'
   gem.license               = 'MIT'
 
