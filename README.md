@@ -264,7 +264,7 @@ We warmly welcome everyone who is intersted in contributing. Please reference ou
 
 [Here](https://github.com/jonhue/acts_as_favoritor/releases) you can find details on all past releases. Unreleased breaking changes that are on the current master can be found [here](CHANGELOG.md).
 
-acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org.
+acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org. Reference our [security policy](SECURITY.md).
 
 ### Publishing
 
