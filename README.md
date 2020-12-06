@@ -4,40 +4,17 @@ acts_as_favoritor is a Rubygem to allow any ActiveRecord model to associate any 
 
 You are able to differentiate followers, favorites, watchers, votes and whatever else you can imagine through a single relationship. This is accomplished by a double polymorphic relationship on the Favorite model. There is also built in support for blocking/un-blocking favorite records as well as caching.
 
----
-
-## Table of Contents
-
-- [acts_as_favoritor](#actsasfavoritor)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Setup](#setup)
-    - [`acts_as_favoritor` methods](#actsasfavoritor-methods)
-    - [`acts_as_favoritable` methods](#actsasfavoritable-methods)
-    - [`Favorite` model](#favorite-model)
-    - [Scopes](#scopes)
-    - [Caching](#caching)
-  - [Configuration](#configuration)
-  - [Testing](#testing)
-  - [Release](#release)
-  - [To do](#to-do)
-  - [Contributing](#contributing)
-    - [Semantic Versioning](#semantic-versioning)
-
----
-
 ## Installation
 
-acts_as_favoritor works with Rails 5.0 onwards. You can add it to your `Gemfile` with:
+You can add acts_as_favoritor to your `Gemfile` with:
 
 ```ruby
 gem 'acts_as_favoritor'
 ```
 
-And then execute:
+And then run:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -245,8 +222,6 @@ book.favoritable_favorite_cache # => 1
 
 **Note:** These methods are available for every scope you are using.
 
----
-
 ## Configuration
 
 You can configure acts_as_favoritor by passing a block to `configure`. This can be done in `config/initializers/acts_as_favoritor.rb`:
@@ -261,51 +236,41 @@ end
 
 **`cache`** Whether `acts_as_favoritor` uses caching or not. Takes a boolean. Defaults to `false`. Learn more about caching [here](#caching).
 
----
+## Development
 
-## Testing
+To start development you first have to fork this repository and locally clone your fork.
 
-1. Fork this repository
-2. Clone your forked git locally
-3. Install dependencies
+Install the projects dependencies by running:
 
-    `$ bundle install`
+    $ bundle install
 
-4. Run tests
+### Testing
 
-    `$ bundle exec rspec`
+Tests are written with RSpec and can be found in `/spec`.
 
-5. Run RuboCop
+To run tests:
 
-    `$ bundle exec rubocop`
+    $ bundle exec rspec
 
----
+To run RuboCop:
 
-## Release
-
-1. Review breaking changes and deprecations in `CHANGELOG.md`
-2. Change the gem version in `lib/acts_as_favoritor/version.rb`
-3. Reset `CHANGELOG.md`
-4. Create a pull request to merge the changes into `master`
-5. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
-6. The release workflow will publish the gems to RubyGems and the GitHub Package Registry
-
----
-
-## To do
-
-We use [GitHub projects](https://github.com/jonhue/acts_as_favoritor/projects/1) to coordinate the work on this project.
-
-To propose your ideas, initiate the discussion by adding a [new issue](https://github.com/jonhue/acts_as_favoritor/issues/new).
-
----
+    $ bundle exec rubocop
 
 ## Contributing
 
-We hope that you will consider contributing to acts_as_favoritor. Please read this short overview for some information about how to get started:
+We warmly welcome everyone who is intersted in contributing. Please reference our [contributing guidelines](CONTRIBUTING.md) and our [Code of Conduct](CODE_OF_CONDUCT.md).
 
-[Learn more about contributing to this repository](CONTRIBUTING.md), [Code of Conduct](CODE_OF_CONDUCT.md)
+## Releases
 
-### Semantic Versioning
+[Here](https://github.com/jonhue/acts_as_favoritor/releases) you can find details on all past releases. Unreleased breaking changes that are on the current master can be found [here](CHANGELOG.md).
 
 acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org.
+
+### Publishing
+
+1. Review breaking changes and deprecations in `CHANGELOG.md`.
+1. Change the gem version in `lib/acts_as_favoritor/version.rb`.
+1. Reset `CHANGELOG.md`.
+1. Create a pull request to merge the changes into `master`.
+1. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
+2. The release workflow will publish the gem to RubyGems.
