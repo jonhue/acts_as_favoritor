@@ -222,6 +222,8 @@ book.favoritable_favorite_cache # => 1
 
 **Note:** These methods are available for every scope you are using.
 
+The total counts all favorites that were recorded, while the score factors in favorites that were removed. In most use cases the score is the most useful.
+
 ## Configuration
 
 You can configure acts_as_favoritor by passing a block to `configure`. This can be done in `config/initializers/acts_as_favoritor.rb`:
