@@ -18,6 +18,9 @@ class ActsAsFavoritorMigration < ActiveRecord::Migration<%= migration_version %>
     add_index :favorites,
               ['favoritable_id', 'favoritable_type'],
               name: 'fk_favoritables'
+    add_index :favorites,
+              ['favoritable_id', 'favoritor_id', 'favoritable_type'],
+              name: 'uniq_favorites__and_favoritables', unique: true
   end
 
   def self.down
