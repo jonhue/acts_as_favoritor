@@ -266,7 +266,7 @@ We warmly welcome everyone who is intersted in contributing. Please reference ou
 
 ## Releases
 
-[Here](https://github.com/jonhue/acts_as_favoritor/releases) you can find details on all past releases. Unreleased breaking changes that are on the current master can be found [here](CHANGELOG.md).
+[Here](https://github.com/jonhue/acts_as_favoritor/releases) you can find details on all past releases. Unreleased breaking changes that are on the current `main` can be found [here](CHANGELOG.md).
 
 acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.org. Reference our [security policy](SECURITY.md).
 
@@ -275,6 +275,6 @@ acts_as_favoritor follows Semantic Versioning 2.0 as defined at http://semver.or
 1. Review breaking changes and deprecations in `CHANGELOG.md`.
 1. Change the gem version in `lib/acts_as_favoritor/version.rb`.
 1. Reset `CHANGELOG.md`.
-1. Create a pull request to merge the changes into `master`.
-1. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
+1. Create a pull request to merge the changes into `main`.
+1. After the pull request was merged, create a new release listing the breaking changes and commits on `main` since the last release.
 2. The release workflow will publish the gem to RubyGems.
