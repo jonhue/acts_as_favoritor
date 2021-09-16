@@ -50,10 +50,11 @@ module ActsAsFavoritor
         self.class.build_result_for_scopes(scopes || scope) do |s|
           return nil if self == favoritable
 
-          result = favorites.for_favoritable(favoritable).send("#{s}_list")
-                            .first_or_create!
-          inc_cache(favoritable, s) if ActsAsFavoritor.configuration.cache
-          result
+          favorites.for_favoritable(favoritable).send("#{s}_list")
+                   .first_or_create! do |new_record|
+            inc_cache(favoritable, s) if ActsAsFavoritor.configuration.cache
+            new_record
+          end
         end
       end
 
@@ -65,7 +66,7 @@ module ActsAsFavoritor
           return nil unless favorite_record.present?
 
           result = favorite_record.destroy!
-          dec_cache(favoritable, s) if ActsAsFavoritor.configuration.cache
+          dec_cache(favoritable, s) if ActsAsFavoritor.configuration.cache && result.destroyed?
           result
         end
       end
