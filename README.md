@@ -147,7 +147,7 @@ Using scopes with `acts_as_favoritor` enables you to Follow, Watch, Favorite, [.
 
 By default all of your favorites are scoped to `'favorite'`.
 
-You can create new scopes on the fly. Every single method takes `scope`/`scopes` as an option which expexts a symbol or an array of symbols containing your scopes.
+You can create new scopes on the fly. Every single method takes `scope`/`scopes` as an option which expects a symbol or an array of symbols containing your scopes.
 
 So lets see how this works:
 
