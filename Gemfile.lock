@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_favoritor (5.0.1)
+    acts_as_favoritor (5.0.3)
       activerecord (>= 5.0)
 
 GEM
@@ -77,7 +77,7 @@ GEM
       activesupport (>= 5.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.9.0)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     loofah (2.13.0)
       crass (~> 1.0.2)
