@@ -18,6 +18,8 @@ jobs:
     name: Ruby ${{ matrix.ruby }}
     steps:
     - uses: actions/checkout@master
+    - name: Remove Gemfile.lock
+      run: rm Gemfile.lock
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
