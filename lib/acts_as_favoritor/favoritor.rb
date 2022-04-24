@@ -63,7 +63,7 @@ module ActsAsFavoritor
                      scopes: nil)
         self.class.build_result_for_scopes(scopes || scope) do |s|
           favorite_record = get_favorite(favoritable, s)
-          return nil unless favorite_record.present?
+          return nil if favorite_record.blank?
 
           result = favorite_record.destroy!
           dec_cache(favoritable, s) if ActsAsFavoritor.configuration.cache && result.destroyed?
