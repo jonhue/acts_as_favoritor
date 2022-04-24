@@ -6,7 +6,7 @@ module ActsAsFavoritor
       return yield(scopes) unless scopes.is_a?(Array)
       return if scopes.empty?
 
-      sanitized_scopes(scopes).map { |scope| [scope, yield(scope)] }.to_h
+      sanitized_scopes(scopes).to_h { |scope| [scope, yield(scope)] }
     end
 
     private
