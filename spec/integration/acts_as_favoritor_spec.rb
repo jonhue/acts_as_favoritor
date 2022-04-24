@@ -39,7 +39,7 @@ RSpec.describe 'acts_as_favoritor' do
       it 'cannot favorite itself' do
         expect { jon.favorite(jon) }.to change(Favorite, :count).by(0)
           .and change { jon.all_favorites.size }.by(0)
-        expect(jon.favorited?(jon)).to eq false
+        expect(jon.favorited?(jon)).to be false
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe 'acts_as_favoritor' do
           .and change { jon.favorited?(beethoven, scope: :friend) }
             .from(false).to(true)
 
-        expect(jon.favorited?(beethoven, scope: :favorite)).to eq false
+        expect(jon.favorited?(beethoven, scope: :favorite)).to be false
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe 'acts_as_favoritor' do
           .and change { jon.favorited?(sam, scope: :favorite) }
             .from(true).to(false)
 
-        expect(jon.favorited?(sam, scope: :friend)).to eq true
+        expect(jon.favorited?(sam, scope: :friend)).to be true
       end
 
       it 'allows removing multiple favorites at once' do

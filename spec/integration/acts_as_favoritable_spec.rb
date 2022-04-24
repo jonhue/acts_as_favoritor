@@ -33,12 +33,12 @@ RSpec.describe 'acts_as_favoritable' do
 
     describe 'favorited_by?' do
       it 'returns true when an instance was favorited by the given object' do
-        expect(sam.favorited_by?(jon)).to eq true
+        expect(sam.favorited_by?(jon)).to be true
       end
 
       it 'returns false when an instance was not favorited ' \
          'by the given object' do
-        expect(bob.favorited_by?(jon)).to eq false
+        expect(bob.favorited_by?(jon)).to be false
       end
     end
 
@@ -93,12 +93,12 @@ RSpec.describe 'acts_as_favoritable' do
 
     describe 'favorited_by?' do
       it 'returns true when an instance was favorited by the given object' do
-        expect(sam.favorited_by?(jon, scope: :favorite)).to eq true
+        expect(sam.favorited_by?(jon, scope: :favorite)).to be true
       end
 
       it 'returns false when an instance was not favorited ' \
          'by the given object' do
-        expect(sam.favorited_by?(bob, scope: :favorite)).to eq false
+        expect(sam.favorited_by?(bob, scope: :favorite)).to be false
       end
     end
 

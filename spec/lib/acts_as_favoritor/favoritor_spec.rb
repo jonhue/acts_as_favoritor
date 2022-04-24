@@ -27,7 +27,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
       # rubocop:disable RSpec/NestedGroups
       context 'when the given instance is the current object' do
         it 'returns nil' do
-          expect(jon.favorite(jon)).to eq nil
+          expect(jon.favorite(jon)).to be_nil
         end
 
         it 'does not create a favorite record' do
@@ -61,7 +61,7 @@ RSpec.describe ActsAsFavoritor::Favoritor do
       # rubocop:disable RSpec/NestedGroups
       context 'when the given instance has not been favorited' do
         it 'returns nil' do
-          expect(beethoven.unfavorite(sam)).to eq nil
+          expect(beethoven.unfavorite(sam)).to be_nil
         end
 
         it 'does not delete a favorite record' do
@@ -97,11 +97,11 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
     describe 'favorited?' do
       it 'returns true if the instance favorited the given record' do
-        expect(beethoven.favorited?(jon)).to eq true
+        expect(beethoven.favorited?(jon)).to be true
       end
 
       it 'returns false if the instance did not favorite the given record' do
-        expect(jon.favorited?(beethoven)).to eq false
+        expect(jon.favorited?(beethoven)).to be false
       end
     end
 
@@ -150,11 +150,11 @@ RSpec.describe ActsAsFavoritor::Favoritor do
       it 'returns true if the given instance blocked this object' do
         jon.block(beethoven)
 
-        expect(beethoven.blocked_by?(jon)).to eq true
+        expect(beethoven.blocked_by?(jon)).to be true
       end
 
       it 'returns false if the given instance did not block this object' do
-        expect(jon.blocked_by?(beethoven)).to eq false
+        expect(jon.blocked_by?(beethoven)).to be false
       end
     end
 
@@ -208,11 +208,11 @@ RSpec.describe ActsAsFavoritor::Favoritor do
 
     describe 'favorited?' do
       it 'returns true if the instance favorited the given record' do
-        expect(beethoven.favorited?(jon, scope: :favorite)).to eq true
+        expect(beethoven.favorited?(jon, scope: :favorite)).to be true
       end
 
       it 'returns false if the instance did not favorite the given record' do
-        expect(beethoven.favorited?(jon, scope: :friend)).to eq false
+        expect(beethoven.favorited?(jon, scope: :friend)).to be false
       end
     end
 
@@ -256,13 +256,13 @@ RSpec.describe ActsAsFavoritor::Favoritor do
       it 'returns true if the given instance blocked this object' do
         jon.block(beethoven, scope: :favorite)
 
-        expect(beethoven.blocked_by?(jon, scope: :favorite)).to eq true
+        expect(beethoven.blocked_by?(jon, scope: :favorite)).to be true
       end
 
       it 'returns false if the given instance did not block this object' do
         jon.block(beethoven, scope: :friend)
 
-        expect(beethoven.blocked_by?(jon, scope: :favorite)).to eq false
+        expect(beethoven.blocked_by?(jon, scope: :favorite)).to be false
       end
     end
 

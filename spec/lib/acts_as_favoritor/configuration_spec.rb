@@ -12,7 +12,7 @@ RSpec.describe ActsAsFavoritor::Configuration do
 
   it 'has defaults set for the configuration options' do
     expect(config.default_scope).to eq :favorite
-    expect(config.cache).to         eq false
+    expect(config.cache).to         be false
   end
 
   it 'allows configuring the gem' do
@@ -22,6 +22,6 @@ RSpec.describe ActsAsFavoritor::Configuration do
     end
 
     expect(config.default_scope).to eq :friend
-    expect(config.cache).to         eq true
+    expect(config.cache).to         be true
   end
 end

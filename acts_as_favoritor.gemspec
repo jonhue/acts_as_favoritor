@@ -28,7 +28,7 @@ Gem::Specification.new do |gem|
   gem.files                 = Dir['README.md', 'LICENSE', 'lib/**/*']
   gem.require_paths         = ['lib']
 
-  gem.required_ruby_version = '>= 2.5'
+  gem.required_ruby_version = '>= 2.7'
 
   gem.add_dependency 'activerecord', '>= 5.0'
 
@@ -39,5 +39,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubocop'
   gem.add_development_dependency 'rubocop-rspec'
   gem.add_development_dependency 'sqlite3'
+  gem.metadata['rubygems_mfa_required'] = 'true'
 end
 # rubocop:enable Metrics/BlockLength

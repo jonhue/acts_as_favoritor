@@ -5,7 +5,7 @@ AllCops:
     - spec/support/rails_app/db/schema.rb
     - vendor/**/*
   NewCops: enable
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
