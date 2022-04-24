@@ -3,7 +3,7 @@
 RSpec.describe ActsAsFavoritor::FavoritorLib do
   describe 'build_result_for_scopes' do
     it 'returns nil when scopes is empty' do
-      expect(Dummy.build_result_for_scopes([])).to eq nil
+      expect(Dummy.build_result_for_scopes([])).to be_nil
     end
 
     it 'returns result of the block when a single scope is given' do

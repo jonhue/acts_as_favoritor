@@ -48,12 +48,12 @@ RSpec.describe ActsAsFavoritor::Favoritable do
 
     describe 'favorited_by?' do
       it 'returns true if the instance was favorited by the given record' do
-        expect(jon.favorited_by?(beethoven)).to eq true
+        expect(jon.favorited_by?(beethoven)).to be true
       end
 
       it 'returns false if the instance was not favorited ' \
          'by the given record' do
-        expect(beethoven.favorited_by?(jon)).to eq false
+        expect(beethoven.favorited_by?(jon)).to be false
       end
     end
 
@@ -76,11 +76,11 @@ RSpec.describe ActsAsFavoritor::Favoritable do
       it 'returns true if the given instance was blocked' do
         jon.block(beethoven)
 
-        expect(jon.blocked?(beethoven)).to eq true
+        expect(jon.blocked?(beethoven)).to be true
       end
 
       it 'returns false if the given instance was not blocked' do
-        expect(jon.blocked?(beethoven)).to eq false
+        expect(jon.blocked?(beethoven)).to be false
       end
     end
 
@@ -131,12 +131,12 @@ RSpec.describe ActsAsFavoritor::Favoritable do
 
     describe 'favorited_by?' do
       it 'returns true if the instance was favorited by the given record' do
-        expect(jon.favorited_by?(beethoven, scope: :favorite)).to eq true
+        expect(jon.favorited_by?(beethoven, scope: :favorite)).to be true
       end
 
       it 'returns false if the instance was not favorited ' \
          'by the given record' do
-        expect(jon.favorited_by?(beethoven, scope: :friend)).to eq false
+        expect(jon.favorited_by?(beethoven, scope: :friend)).to be false
       end
     end
 
@@ -163,11 +163,11 @@ RSpec.describe ActsAsFavoritor::Favoritable do
       before { jon.block(beethoven, scope: :friend) }
 
       it 'returns true if the given instance was blocked' do
-        expect(jon.blocked?(beethoven, scope: :friend)).to eq true
+        expect(jon.blocked?(beethoven, scope: :friend)).to be true
       end
 
       it 'returns false if the given instance was not blocked' do
-        expect(jon.blocked?(beethoven, scope: :favorite)).to eq false
+        expect(jon.blocked?(beethoven, scope: :favorite)).to be false
       end
     end
 

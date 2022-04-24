@@ -4,4 +4,4 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'activesupport', ENV['RAILS_VERSION'] if ENV['RAILS_VERSION']
+gem 'activesupport', ENV.fetch('RAILS_VERSION', nil) if ENV['RAILS_VERSION']
