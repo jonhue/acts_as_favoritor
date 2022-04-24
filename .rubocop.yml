@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -6,6 +8,9 @@ AllCops:
     - vendor/**/*
   NewCops: enable
   TargetRubyVersion: 2.7
+
+Gemspec/RequireMFA:
+  Enabled: false
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
