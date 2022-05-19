@@ -27,6 +27,9 @@ Metrics/MethodLength:
   Exclude:
     - spec/support/rails_app/db/migrate/**.rb
 
+RSpec/ChangeByZero:
+  Enabled: false
+
 RSpec/DescribeClass:
   Exclude:
     - spec/integration/**/*_spec.rb
