@@ -187,7 +187,7 @@ GEM
     rubocop-rspec (2.11.1)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.4.3)
     strscan (3.0.2)
     thor (1.2.1)
     timeout (0.2.0)
