@@ -3,9 +3,9 @@
 require_relative '../rails_helper'
 
 RSpec.describe 'acts_as_favoritable' do
-  let(:sam) { create :sam }
-  let(:jon) { create :jon }
-  let(:bob) { create :bob }
+  let(:sam) { create(:sam) }
+  let(:jon) { create(:jon) }
+  let(:bob) { create(:bob) }
 
   context 'without scopes' do
     before do

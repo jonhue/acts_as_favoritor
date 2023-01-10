@@ -3,10 +3,10 @@
 require_relative '../rails_helper'
 
 RSpec.describe 'acts_as_favoritor' do
-  let(:sam)       { create :sam }
-  let(:jon)       { create :jon }
-  let(:beethoven) { create :beethoven }
-  let(:rossini)   { create :rossini }
+  let(:sam)       { create(:sam) }
+  let(:jon)       { create(:jon) }
+  let(:beethoven) { create(:beethoven) }
+  let(:rossini)   { create(:rossini) }
 
   context 'without scopes' do
     before do
