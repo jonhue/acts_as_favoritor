@@ -30,13 +30,4 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.7'
 
   gem.add_dependency 'activerecord', '>= 5.0'
-
-  gem.add_development_dependency 'factory_bot'
-  gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'rails'
-  gem.add_development_dependency 'rspec-rails'
-  gem.add_development_dependency 'rubocop'
-  gem.add_development_dependency 'rubocop-rails'
-  gem.add_development_dependency 'rubocop-rspec'
-  gem.add_development_dependency 'sqlite3'
 end
