@@ -138,7 +138,7 @@ GEM
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     public_suffix (5.0.1)
-    puma (6.3.1)
+    puma (6.4.0)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
@@ -239,7 +239,7 @@ DEPENDENCIES
   coffee-rails (~> 5.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.9)
-  puma (~> 6.3)
+  puma (~> 6.4)
   rails (~> 7.0.8)
   sass-rails (~> 6.0)
   selenium-webdriver
