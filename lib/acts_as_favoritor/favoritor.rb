@@ -9,8 +9,8 @@ module ActsAsFavoritor
     module ClassMethods
       def acts_as_favoritor
         if ActsAsFavoritor.configuration&.cache
-          serialize :favoritor_score, Hash
-          serialize :favoritor_total, Hash
+          serialize :favoritor_score, type: Hash
+          serialize :favoritor_total, type: Hash
         end
 
         has_many :favorites, as: :favoritor, dependent: :destroy
