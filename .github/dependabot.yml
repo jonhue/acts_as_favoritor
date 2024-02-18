@@ -8,12 +8,12 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
   - package-ecosystem: "bundler"
     directory: "/spec/support/rails_app"
     schedule:
-      interval: "daily"
+      interval: "monthly"
