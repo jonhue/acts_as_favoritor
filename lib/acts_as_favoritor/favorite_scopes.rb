@@ -31,11 +31,11 @@ module ActsAsFavoritor
     end
 
     def for_favoritor_type(favoritor_type)
-      where(favoritor_type: favoritor_type)
+      where(favoritor_type:)
     end
 
     def for_favoritable_type(favoritable_type)
-      where(favoritable_type: favoritable_type)
+      where(favoritable_type:)
     end
 
     def unblocked

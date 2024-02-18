@@ -2,11 +2,11 @@
 
 module ActsAsFavoritor
   module FavoritorLib
-    def build_result_for_scopes(scopes, &block)
+    def build_result_for_scopes(scopes, &)
       return yield(scopes) unless scopes.is_a?(Array)
       return if scopes.empty?
 
-      sanitized_scopes(scopes).index_with(&block)
+      sanitized_scopes(scopes).index_with(&)
     end
 
     private
