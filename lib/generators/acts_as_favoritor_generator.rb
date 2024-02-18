@@ -9,8 +9,16 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
   source_root(File.join(File.dirname(__FILE__), 'templates'))
   desc 'Install acts_as_favoritor'
 
+  def self.timestamped_migrations
+    if ActiveRecord::Base.respond_to?(:timestamped_migrations)
+      ActiveRecord::Base.timestamped_migrations
+    elsif ActiveRecord.respond_to?(:timestamped_migrations)
+      ActiveRecord.timestamped_migrations
+    end
+  end
+
   def self.next_migration_number(dirname)
-    if ActiveRecord::Base.timestamped_migrations
+    if timestamped_migrations
       Time.now.utc.strftime('%Y%m%d%H%M%S')
     else
       format('%<migration_number>.3d',
