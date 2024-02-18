@@ -78,9 +78,9 @@ module ActsAsFavoritor
         self.class.build_result_for_scopes(scopes || scope) do |s|
           get_favorite_for(favoritor, s)&.block! || Favorite.create(
             favoritable: self,
-            favoritor:,
+            favoritor: favoritor,
             blocked: true,
-            scope:
+            scope: scope
           )
         end
       end

@@ -26,7 +26,7 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
     migration_template(
       'migration.rb.erb',
       'db/migrate/acts_as_favoritor_migration.rb',
-      migration_version:
+      migration_version: migration_version
     )
   end
 
