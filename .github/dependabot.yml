@@ -8,12 +8,16 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "daily"
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "daily"
+    ignore:
+      - update-types: ["version-update:semver-patch"]
   - package-ecosystem: "bundler"
     directory: "/spec/support/rails_app"
     schedule:
-      interval: "monthly"
+      interval: "daily"
+    ignore:
+      - update-types: ["version-update:semver-patch"]
