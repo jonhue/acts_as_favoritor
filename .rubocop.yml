@@ -1,7 +1,8 @@
 require:
+  - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rspec
-  - rubocop-factory_bot
+  - rubocop-rspec_rails
 
 AllCops:
   Exclude:
