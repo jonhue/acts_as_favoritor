@@ -10,10 +10,10 @@ class ActsAsFavoritorGenerator < Rails::Generators::Base
   desc 'Install acts_as_favoritor'
 
   def self.timestamped_migrations
-    if ActiveRecord::Base.respond_to?(:timestamped_migrations)
-      ActiveRecord::Base.timestamped_migrations
-    elsif ActiveRecord.respond_to?(:timestamped_migrations)
+    if ActiveRecord.respond_to?(:timestamped_migrations)
       ActiveRecord.timestamped_migrations
+    elsif ActiveRecord::Base.respond_to?(:timestamped_migrations)
+      ActiveRecord::Base.timestamped_migrations
     end
   end
 
