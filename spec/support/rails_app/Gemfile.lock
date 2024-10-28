@@ -207,7 +207,7 @@ GEM
     regexp_parser (2.9.0)
     reline (0.5.10)
       io-console (~> 0.5)
-    rexml (3.3.7)
+    rexml (3.3.9)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
