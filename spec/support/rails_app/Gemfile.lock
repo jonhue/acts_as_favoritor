@@ -162,7 +162,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
-    puma (6.4.3)
+    puma (6.5.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.10)
@@ -278,7 +278,7 @@ DEPENDENCIES
   coffee-rails (~> 5.0)
   jbuilder (~> 2.13)
   listen (>= 3.0.5, < 3.10)
-  puma (~> 6.4)
+  puma (~> 6.5)
   rails (~> 7.1.5)
   sass-rails (~> 6.0)
   selenium-webdriver
